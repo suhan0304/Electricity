@@ -8,6 +8,7 @@ public class Node : MonoBehaviour
     private Renderer rend; // renderer component
     private Color startColor;  // start color
 
+
     private void Start()
     {
         rend = GetComponent<Renderer>(); // call renderer component
@@ -19,9 +20,23 @@ public class Node : MonoBehaviour
         rend.material.color = hoverColor; // change color to hoverColor
     }
 
-    private void OnMouseExit() //
+    private void OnMouseExit() // When the mouse leaves the object collider
     {
         rend.material.color = startColor; // return color to startColor
     }
 
+    private void OnMouseDown() //When the mouse click the object collider
+    {
+        if(chooseBlock != null)
+        {
+            Debug.Log("Can't build there - TODO : Display on screen.");
+            return;
+        }
+
+        // Build a Block
+        GameObject blockBuild = BuildManager.GetBlockToBuild();
+
+        block = (GameObject)Instantiate(blockBuild, transform.position + positionOffset, transform.rotation);
+
+    }
 }
