@@ -4,7 +4,7 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance; // Singleton Pattern
 
-    private void Awake() // For singleton 
+    private void Awake() // For singleton Ma
     {
         if (instance != null)
         {
