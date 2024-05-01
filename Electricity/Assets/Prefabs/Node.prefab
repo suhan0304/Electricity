@@ -119,5 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeHeight: 0
-  hoverColor: {r: 0.19839332, g: 0.18565324, b: 0.26415092, a: 0}
+  hoverColor: {r: 0.18013525, g: 0.1709238, b: 0.21698111, a: 0}
   blockOnNode: {fileID: 0}
