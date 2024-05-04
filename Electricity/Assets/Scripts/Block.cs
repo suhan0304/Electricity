@@ -15,7 +15,6 @@ public class Block : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        Debug.Log("!!");
         if ( node != null)
             node.OnMouseEnter();
     }
