@@ -22,7 +22,7 @@ public class Node : MonoBehaviour
     [Space(5)]
     [Header("Node Settings")]
     [SerializeField]
-    public bool isBuilable = true;
+    public bool isBuildable = true;
 
     // Renderer and Color
     private Renderer rend; // renderer component
@@ -38,18 +38,21 @@ public class Node : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        rend.material.color = hoverColor; // change color to hoverColor
+        if(isBuildable)
+            rend.material.color = hoverColor; // change color to hoverColor
     }
 
     public void OnMouseExit() // When the mouse leaves the object collider
     {
-        rend.material.color = startColor; // return color to startColor
+        if(isBuildable)
+            rend.material.color = startColor; // return color to startColor
     }
 
     public void OnMouseDown() //When the mouse click the object collider
     {
         // Build a Block
-        BuildBlockOnNode();
+        if(isBuildable)
+            BuildBlockOnNode();
     }
 
 
