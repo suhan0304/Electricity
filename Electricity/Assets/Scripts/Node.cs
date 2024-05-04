@@ -14,13 +14,20 @@ public class Node : MonoBehaviour
     [SerializeField]
     public Color hoverColor; // color changes when mouse is hovered over
 
-    private Renderer rend; // renderer component
-    private Color startColor;  // start color
-
     [Space(5)]
     [Header("Block On Node")]
     [SerializeField]
     private GameObject blockOnNode; // Block Object ( built on node )
+
+    [Space(5)]
+    [Header("Node Settings")]
+    [SerializeField]
+    public bool isBuilable = true;
+
+    // Renderer and Color
+    private Renderer rend; // renderer component
+    private Color startColor;  // start color
+
 
     private void Start()
     {
