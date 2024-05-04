@@ -29,17 +29,17 @@ public class Node : MonoBehaviour
         startColor = rend.material.color; // remember start color
     }
 
-    private void OnMouseEnter() // When the mouse passes or enters an object collider
+    public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
         rend.material.color = hoverColor; // change color to hoverColor
     }
 
-    private void OnMouseExit() // When the mouse leaves the object collider
+    public void OnMouseExit() // When the mouse leaves the object collider
     {
         rend.material.color = startColor; // return color to startColor
     }
 
-    private void OnMouseDown() //When the mouse click the object collider
+    public void OnMouseDown() //When the mouse click the object collider
     {
         // Build a Block
         BuildBlockOnNode();
