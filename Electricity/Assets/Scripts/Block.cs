@@ -8,40 +8,20 @@ public class Block : MonoBehaviour
 {
 
     [SerializeField]
-    Node node; // Node where the block was constructed
+    public Node node; // Node where the block was constructed
     public BlockState currentState; 
     public List<Block> AdjacentBlocks = new List<Block>();  // Blocks adjacent to me
 
     private BoxCollider[] colliders; // For Check Blocks in Contact
 
+
     private void Start()
     {
-        // Initialize
+        // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
+        InitializeColliders();
         node = GetComponentInParent<Node>();
-        InitializeColliders(); 
-
-        // 
         UpdateBlockState();
-    }
-
-    public void OnMouseEnter() // When the mouse passes or enters an object collider
-    {
-        if ( node != null)
-            node.OnMouseEnter();
-    }
-
-    public void OnMouseExit() // When the mouse leaves the object collider
-    {
-        if (node != null)
-            node.OnMouseExit();
-    }
-
-    public void OnMouseDown() //When the mouse click the object collider
-    {
-        if (node != null)
-            // Build a Block
-            node.OnMouseDown();
     }
 
     /// <summary>
@@ -50,6 +30,10 @@ public class Block : MonoBehaviour
     public void UpdateBlockState()
     {
         AdjacentBlocks = GetBlockInColliders();
+        foreach (var adjacentBlock in AdjacentBlocks)
+        {
+            adjacentBlock.AddBlockToAdjacentBlock(this);
+        }
     }
 
     /// <summary>
@@ -59,9 +43,9 @@ public class Block : MonoBehaviour
     {
         colliders = GetComponents<BoxCollider>();
 
-        if (colliders.Length != 3)
+        if (colliders.Length < 3)
         {
-            Debug.LogError("Error 01 - 3 BoxColliders are required per block.");
+            Debug.LogError("Error 01 - more than 3 BoxColliders are required per block.");
             return;
         }
     }
@@ -87,5 +71,14 @@ public class Block : MonoBehaviour
         }
 
         return blocksInColliders;
+    }
+
+    /// <summary>
+    /// Add the parameter Block to the AdjacentBlock list.
+    /// </summary>
+    public void AddBlockToAdjacentBlock(Block block)
+    {
+        if (block != null && !AdjacentBlocks.Contains(block))
+            AdjacentBlocks.Add(block);
     }
 }
