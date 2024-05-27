@@ -14,13 +14,20 @@ public class Node : MonoBehaviour
     [SerializeField]
     public Color hoverColor; // color changes when mouse is hovered over
 
-    private Renderer rend; // renderer component
-    private Color startColor;  // start color
-
     [Space(5)]
     [Header("Block On Node")]
     [SerializeField]
     private GameObject blockOnNode; // Block Object ( built on node )
+
+    [Space(5)]
+    [Header("Node Settings")]
+    [SerializeField]
+    public bool isBuildable = true;
+
+    // Renderer and Color
+    private Renderer rend; // renderer component
+    private Color startColor;  // start color
+
 
     private void Start()
     {
@@ -29,20 +36,23 @@ public class Node : MonoBehaviour
         startColor = rend.material.color; // remember start color
     }
 
-    private void OnMouseEnter() // When the mouse passes or enters an object collider
+    public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        rend.material.color = hoverColor; // change color to hoverColor
+        if(isBuildable)
+            rend.material.color = hoverColor; // change color to hoverColor
     }
 
-    private void OnMouseExit() // When the mouse leaves the object collider
+    public void OnMouseExit() // When the mouse leaves the object collider
     {
-        rend.material.color = startColor; // return color to startColor
+        if(isBuildable)
+            rend.material.color = startColor; // return color to startColor
     }
 
-    private void OnMouseDown() //When the mouse click the object collider
+    public void OnMouseDown() //When the mouse click the object collider
     {
         // Build a Block
-        BuildBlockOnNode();
+        if(isBuildable)
+            BuildBlockOnNode();
     }
 
 
