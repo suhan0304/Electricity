@@ -19,42 +19,63 @@ public class Block : MonoBehaviour
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
-        InitializeColliders();
         node = GetComponentInParent<Node>();
+        AdjacentBlocks = GetBlockAdjacentBlocks();
+
         UpdateBlockState();
     }
+
+    public void OnMouseEnter() // When the mouse leaves the object collider
+    {
+        if (node != null)
+        {
+            node.OnMouseEnter();
+        }
+    }
+
+    public void OnMouseExit() // When the mouse leaves the object collider
+    {
+        if (node != null)
+        {
+            node.OnMouseExit();
+        }
+    }
+
+    public void OnMouseDown() //When the mouse click the object collider
+    {
+        if (node != null)
+        {
+            // Build a Block
+        }
+        node.OnMouseDown();
+    }
+
+
 
     /// <summary>
     /// Update Block State (After updating adjacent blocks, it retrieves their states and updates its own state.)
     /// </summary>
     public void UpdateBlockState()
     {
-        AdjacentBlocks = GetBlockInColliders();
-        foreach (var adjacentBlock in AdjacentBlocks)
-        {
-            adjacentBlock.AddBlockToAdjacentBlock(this);
-        }
-    }
-
-    /// <summary>
-    /// Check initial Collider Components
-    /// </summary>
-    private void InitializeColliders() 
-    {
-        colliders = GetComponents<BoxCollider>();
-
-        if (colliders.Length < 3)
-        {
-            Debug.LogError("Error 01 - more than 3 BoxColliders are required per block.");
-            return;
-        }
+        Debug.Log("TODO - UpdateBlockSate!");
     }
 
     /// <summary>
     /// Get Block in Colliders
     /// </summary>
-    public List<Block> GetBlockInColliders()
+    public List<Block> GetBlockAdjacentBlocks()
     {
+        Vector3[] directions = {
+            Vector3.up,
+            Vector3.down,
+            Vector3.left,
+            Vector3.right,
+            Vector3.forward,
+            Vector3.back
+        };
+
+        List<Block> blocksInRaycast = new List<Block>();
+        /*
         List<Block> blocksInColliders = new List<Block>();
 
         foreach (var collider in  colliders)
@@ -71,6 +92,9 @@ public class Block : MonoBehaviour
         }
 
         return blocksInColliders;
+
+        */
+
     }
 
     /// <summary>
