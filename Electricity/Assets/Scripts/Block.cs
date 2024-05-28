@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 using static UnityEditor.VersionControl.Asset;
 
 public class Block : MonoBehaviour
@@ -21,6 +22,7 @@ public class Block : MonoBehaviour
         currentState = BlockState.OFF;
         node = GetComponentInParent<Node>();
         AdjacentBlocks = GetBlockAdjacentBlocks();
+        UpdateAdjacentBlockList();
 
         UpdateBlockState();
     }
@@ -50,16 +52,6 @@ public class Block : MonoBehaviour
         }
     }
 
-
-
-    /// <summary>
-    /// Update Block State (After updating adjacent blocks, it retrieves their states and updates its own state.)
-    /// </summary>
-    public void UpdateBlockState()
-    {
-        Debug.Log("TODO - UpdateBlockSate!");
-    }
-
     /// <summary>
     /// Get Block in Colliders
     /// </summary>
@@ -77,62 +69,71 @@ public class Block : MonoBehaviour
         List<Block> blocksInRaycast = new List<Block>();
         LayerMask blockLayer = LayerMask.GetMask("Block");
 
-        float rayDistance = 1f;
+        float rayDistance = 0f;
         
         foreach (Vector3 direction in directions) {
+            if (direction == Vector3.up || direction == Vector3.down) 
+                rayDistance = 1f;
+            else 
+                rayDistance = 4f;
+
             RaycastHit[] hitData = Physics.RaycastAll(transform.position, direction, rayDistance, blockLayer);
             foreach(RaycastHit hit in hitData) {
                 Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
                 Debug.Log(hit.collider.name);
-                //if (hitBlock != this)
-                    //blocksInRaycast.Add(hitBlock);
+
+                blocksInRaycast.Add(hitBlock);
+        
             }
         }
 
         return blocksInRaycast;
-        /*
-        List<Block> blocksInColliders = new List<Block>();
+    }
 
-        foreach (var collider in  colliders)
-        {
-            Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation);
-            foreach (var hitCollider in hitColliders)
-            {
-                Block hitBlock = hitCollider.GetComponent<Block>();
-                if (hitBlock != null && hitBlock != this && !blocksInColliders.Contains(hitBlock)) 
-                { 
-                    blocksInColliders.Add(hitBlock);
-                }
-            }
+    /// <summary>
+    /// Add me(block) where adjacent block's list
+    /// </summary>
+    /// <param name="adjBlocks"></param>
+    public void UpdateAdjacentBlockList() 
+    {
+        foreach (Block block in AdjacentBlocks) {
+            block.AddBlockToAdjacentBlock(this);
         }
-
-        return blocksInColliders;
-
-        */
-
     }
 
     /// <summary>
     /// Add the parameter Block to the AdjacentBlock list.
     /// </summary>
-    public void AddBlockToAdjacentBlock(Block block)
+    public void AddBlockToAdjacentBlock(Block block) 
     {
         if (block != null && !AdjacentBlocks.Contains(block))
             AdjacentBlocks.Add(block);
     }
 
-    private void updates() {
-        Vector3[] directions = {
-            Vector3.up,
-            Vector3.down,
-            Vector3.left,
-            Vector3.right,
-            Vector3.forward,
-            Vector3.back
-        };
-        
-        foreach (Vector3 direction in directions) {
-            Debug.DrawRay(transform.position, direction, new Color(1, 0, 0));
+    /// <summary>
+    /// Update Block State (After updating adjacent blocks, it retrieves their states and updates its own state.)
+    /// </summary>
+    public void UpdateBlockState()
+    {
+        foreach (Block block in AdjacentBlocks) 
+        {
+            if (block.currentState == BlockState.ON) {
+                ChangeOnState(); // 
+                continue; // There is no need to check other blocks anymore.
+            }
+        }
+    }
+
+    /// <summary>
+    /// Block State change to ON ( befor : OFF )
+    /// Need to notify adjacent blocks that I have changed to the On state.
+    /// </summary>
+    public void ChangeOnState() {
+        currentState = BlockState.ON;
+        foreach (Block block in AdjacentBlocks) {
+            if (block.currentState == BlockState.OFF) {
+                block.ChangeOnState();
+            }
         }
     }
 }
