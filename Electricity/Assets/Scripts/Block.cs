@@ -46,8 +46,8 @@ public class Block : MonoBehaviour
         if (node != null)
         {
             // Build a Block
+            node.OnMouseDown();
         }
-        node.OnMouseDown();
     }
 
 
@@ -75,6 +75,20 @@ public class Block : MonoBehaviour
         };
 
         List<Block> blocksInRaycast = new List<Block>();
+        LayerMask blockLayer = LayerMask.GetMask("Block");
+
+        float rayDistance = 1f;
+        
+        foreach (Vector3 direction in directions) {
+            RaycastHit[] hitData = Physics.RaycastAll(transform.position, direction, rayDistance, blockLayer);
+            foreach(RaycastHit hit in hitData) {
+                Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
+                //if (hitBlock != this)
+                    //blocksInRaycast.Add(hitBlock);
+            }
+        }
+
+        return blocksInRaycast;
         /*
         List<Block> blocksInColliders = new List<Block>();
 
@@ -104,5 +118,20 @@ public class Block : MonoBehaviour
     {
         if (block != null && !AdjacentBlocks.Contains(block))
             AdjacentBlocks.Add(block);
+    }
+
+    private void updates() {
+        Vector3[] directions = {
+            Vector3.up,
+            Vector3.down,
+            Vector3.left,
+            Vector3.right,
+            Vector3.forward,
+            Vector3.back
+        };
+        
+        foreach (Vector3 direction in directions) {
+            Debug.DrawRay(transform.position, direction, new Color(1, 0, 0));
+        }
     }
 }
