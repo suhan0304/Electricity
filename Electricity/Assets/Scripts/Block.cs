@@ -99,7 +99,6 @@ public class Block : MonoBehaviour
     /// <summary>
     /// Add me(block) where adjacent block's list
     /// </summary>
-    /// <param name="adjBlocks"></param>
     public void UpdateAdjacentBlockList() 
     {
         foreach (Block block in AdjacentBlocks) {
