@@ -1,16 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Start")]
-    public GameObject startObject;
-    public StartPoint startPoint;
-
     [Space(5)]
     [Header("Manager")]
     public BuildManager buildManager;
+
+    [Space(5)]
+    [Header("Tag")]
+    public String startTag = "startPoint";
 
     public static GameManager Instance { get; private set; }
 
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
 
     void Start() 
     {
-        startPoint = startObject.GetComponent<StartPoint>();
         buildManager = GetComponent<BuildManager>();
     }
 }

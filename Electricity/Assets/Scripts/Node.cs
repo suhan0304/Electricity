@@ -53,7 +53,6 @@ public class Node : MonoBehaviour
         // Build a Block
         if(isBuildable) {
             GameManager.Instance.buildManager.BuildBlockOnNode(this);
-            GameManager.Instance.startPoint.checkBuiltBlock();
         }
     }
 }

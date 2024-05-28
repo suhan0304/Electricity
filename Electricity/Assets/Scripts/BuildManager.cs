@@ -18,7 +18,6 @@ public class BuildManager : MonoBehaviour
     /// </summary>
     public void BuildBlockOnNode(Node node)
     {
-
         float blockHeight = blockToBuild.transform.localScale.y;
         Vector3 buildPosition = node.transform.position + new UnityEngine.Vector3(0,node.nodeHeight + node.blocksTotalHeight +  (blockHeight/2),0);
         node.blockOnNode = (GameObject)Instantiate(blockToBuild, buildPosition, node.transform.rotation);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
@@ -70,18 +71,25 @@ public class Block : MonoBehaviour
 
         float rayDistance = 0f;
         foreach (Vector3 direction in directions) {
+            Ray ray = new Ray(transform.position, direction);
+
             if (direction == Vector3.up || direction == Vector3.down) 
                 rayDistance = 1f;
-            else 
+            else {
                 rayDistance = 4f;
+            }
 
-            RaycastHit[] hitData = Physics.RaycastAll(transform.position, direction, rayDistance, blockLayer);
+            RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
             foreach(RaycastHit hit in hitData) {
-                Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
-                //Debug.Log(hit.collider.name); // For Debug Test
+                if (hit.collider.CompareTag("startPoint")) {
+                    ChangeOnState();
+                }
+                else {
+                    Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
+                    //Debug.Log(hit.collider.name); // For Debug Test
 
-                blocksInRaycast.Add(hitBlock);
-        
+                    blocksInRaycast.Add(hitBlock);
+                }
             }
         }
 
@@ -116,7 +124,7 @@ public class Block : MonoBehaviour
         foreach (Block block in AdjacentBlocks) 
         {
             if (block.currentState == BlockState.ON) {
-                ChangeOnState(); // 
+                ChangeOnState(); 
                 continue; // There is no need to check other blocks anymore.
             }
         }

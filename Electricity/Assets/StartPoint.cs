@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class StartPoint : MonoBehaviour
 {
-    List<Block> adjacentBlocks = new List<Block>();
-    public BlockState startState = BlockState.ON;
+    [SerializeField]
+    public List<Block> adjacentBlocks = new List<Block>();
+    public BlockState startState;
 
     private void Start() {
-        adjacentBlocks = GetBlockAdjacentBlocks();
+        startState = BlockState.ON;
     }
 
     /// <summary>
     /// Check adjacent block nearby start point when block built
     /// </summary>
-    public void checkBuiltBlock() 
+    public void UpdateAdjacentBlock() 
     {
-        List<Block> checkAdjacentBlocks = GetBlockAdjacentBlocks();
+        List<Block> checkAdjacentBlocks = GetAdjacentBlocks();
+        Debug.Log("Start Point - Check Adjacent BLocks");
+
         foreach (Block block in checkAdjacentBlocks) 
         {
             if (adjacentBlocks.Contains(block)) 
                 continue;
-            adjacentBlocks.Add(block);
-            block.ChangeOnState();
+            else {
+                adjacentBlocks.Add(block);
+                block.ChangeOnState();
+            }
         }
     }
 
     /// <summary>
     /// Get Block use laycast
     /// </summary>
-    public List<Block> GetBlockAdjacentBlocks()
+    public List<Block> GetAdjacentBlocks()
     {
         Vector3[] directions = {
             Vector3.left,
@@ -50,10 +55,8 @@ public class StartPoint : MonoBehaviour
                 Debug.Log(hit.collider.name);
 
                 blocksInRaycast.Add(hitBlock);
-        
             }
         }
-
         return blocksInRaycast;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4404087623053151319}
   - component: {fileID: 1378737970312636601}
   - component: {fileID: 4661766118847275619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LightSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3673614751922550087}
   - component: {fileID: 1554647222841896346}
   - component: {fileID: 7274187894586673869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6138864581182685331}
   - component: {fileID: -4503673043992360000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 1, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1556982651390746}
@@ -235,6 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470cf84d2692c4231bc80044accda3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adjacentBlocks: []
+  startState: 0
 --- !u!1 &6685188781214972615
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +248,7 @@ GameObject:
   - component: {fileID: 9128274654675572446}
   - component: {fileID: 2662639081628792568}
   - component: {fileID: 4468882528106798211}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
