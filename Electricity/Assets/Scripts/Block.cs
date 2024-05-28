@@ -83,6 +83,7 @@ public class Block : MonoBehaviour
             RaycastHit[] hitData = Physics.RaycastAll(transform.position, direction, rayDistance, blockLayer);
             foreach(RaycastHit hit in hitData) {
                 Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
+                Debug.Log(hit.collider.name);
                 //if (hitBlock != this)
                     //blocksInRaycast.Add(hitBlock);
             }

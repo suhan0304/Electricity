@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5250333176456916183}
   - component: {fileID: 1888344557634104451}
   - component: {fileID: 7228372595426263514}
-  m_Layer: 0
-  m_Name: Start Node
+  m_Layer: 7
+  m_Name: StartNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,10 +131,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4385077212880871889}
     m_Modifications:
+    - target: {fileID: 210908401000748264, guid: 725b047436f8ab2479f94765801d4168,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 891538038497897483, guid: 725b047436f8ab2479f94765801d4168,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6038280058203467106, guid: 725b047436f8ab2479f94765801d4168,
         type: 3}
       propertyPath: m_Name
       value: StartPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038280058203467106, guid: 725b047436f8ab2479f94765801d4168,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6138864581182685331, guid: 725b047436f8ab2479f94765801d4168,
         type: 3}
@@ -195,6 +210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685188781214972615, guid: 725b047436f8ab2479f94765801d4168,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
