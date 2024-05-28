@@ -15,11 +15,15 @@ public class Block : MonoBehaviour
 
     private BoxCollider[] colliders; // For Check Blocks in Contact
 
+    [SerializeField]
+    public Material OnMaterial = null;
+    public Material OffMaterial = null;
 
     private void Start()
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
+        StartCoroutine(ChangePillarMaterial(currentState, 0f));
         node = GetComponentInParent<Node>();
         AdjacentBlocks = GetBlockAdjacentBlocks();
         UpdateAdjacentBlockList();
@@ -129,11 +133,33 @@ public class Block : MonoBehaviour
     /// Need to notify adjacent blocks that I have changed to the On state.
     /// </summary>
     public void ChangeOnState() {
+        float delayTime = 2f;
+
         currentState = BlockState.ON;
+        StartCoroutine(ChangePillarMaterial(BlockState.ON, delayTime));
+
         foreach (Block block in AdjacentBlocks) {
             if (block.currentState == BlockState.OFF) {
                 block.ChangeOnState();
             }
+        }
+    }
+
+    IEnumerator ChangePillarMaterial(BlockState st, float delayTime) 
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        Transform pillar = transform.Find("Pillar");
+        Debug.Log("Change Pillar Material to OnMaterial");
+        Renderer renderer = pillar.GetComponent<Renderer>();
+
+        if (st == BlockState.ON) 
+        {
+            renderer.material = OnMaterial;
+        }
+        else if (st == BlockState.OFF)
+        {
+            renderer.material = OffMaterial;
         }
     }
 }
