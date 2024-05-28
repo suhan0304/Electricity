@@ -1,8 +1,7 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
+using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
@@ -12,16 +11,109 @@ public class Block : MonoBehaviour
     public BlockState currentState; 
     public List<Block> AdjacentBlocks = new List<Block>();  // Blocks adjacent to me
 
-    private BoxCollider[] colliders; // For Check Blocks in Contact
-
+    [SerializeField]
+    public Material OnMaterial = null;
+    public Material OffMaterial = null;
 
     private void Start()
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
-        InitializeColliders();
+        ChangePillarMaterial(BlockState.OFF);
         node = GetComponentInParent<Node>();
+        AdjacentBlocks = GetBlockAdjacentBlocks();
+        UpdateAdjacentBlockList();
+
         UpdateBlockState();
+    }
+
+    public void OnMouseEnter() // When the mouse leaves the object collider
+    {
+        if (node != null)
+        {
+            node.OnMouseEnter();
+        }
+    }
+
+    public void OnMouseExit() // When the mouse leaves the object collider
+    {
+        if (node != null)
+        {
+            node.OnMouseExit();
+        }
+    }
+
+    public void OnMouseDown() //When the mouse click the object collider
+    {
+        if (node != null)
+        {
+            // Build a Block
+            node.OnMouseDown();
+        }
+    }
+
+    /// <summary>
+    /// Get Block use laycast
+    /// </summary>
+    public List<Block> GetBlockAdjacentBlocks()
+    {
+        Vector3[] directions = {
+            Vector3.up,
+            Vector3.down,
+            Vector3.left,
+            Vector3.right,
+            Vector3.forward,
+            Vector3.back
+        };
+
+        List<Block> blocksInRaycast = new List<Block>();
+        LayerMask blockLayer = LayerMask.GetMask("Block");
+
+        float rayDistance = 0f;
+        foreach (Vector3 direction in directions) {
+            Ray ray = new Ray(transform.position, direction);
+
+            if (direction == Vector3.up || direction == Vector3.down) 
+                rayDistance = 1f;
+            else {
+                rayDistance = 4f;
+            }
+
+            RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
+            foreach(RaycastHit hit in hitData) {
+                if (hit.collider.CompareTag("startPoint")) {
+                    ChangeOnState();
+                }
+                else {
+                    Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
+                    //Debug.Log(hit.collider.name); // For Debug Test
+
+                    blocksInRaycast.Add(hitBlock);
+                }
+            }
+        }
+
+        return blocksInRaycast;
+    }
+
+    /// <summary>
+    /// Add me(block) where adjacent block's list
+    /// </summary>
+    /// <param name="adjBlocks"></param>
+    public void UpdateAdjacentBlockList() 
+    {
+        foreach (Block block in AdjacentBlocks) {
+            block.AddBlockToAdjacentBlock(this);
+        }
+    }
+
+    /// <summary>
+    /// Add the parameter Block to the AdjacentBlock list.
+    /// </summary>
+    public void AddBlockToAdjacentBlock(Block block) 
+    {
+        if (block != null && !AdjacentBlocks.Contains(block))
+            AdjacentBlocks.Add(block);
     }
 
     /// <summary>
@@ -29,56 +121,56 @@ public class Block : MonoBehaviour
     /// </summary>
     public void UpdateBlockState()
     {
-        AdjacentBlocks = GetBlockInColliders();
-        foreach (var adjacentBlock in AdjacentBlocks)
+        foreach (Block block in AdjacentBlocks) 
         {
-            adjacentBlock.AddBlockToAdjacentBlock(this);
-        }
-    }
-
-    /// <summary>
-    /// Check initial Collider Components
-    /// </summary>
-    private void InitializeColliders() 
-    {
-        colliders = GetComponents<BoxCollider>();
-
-        if (colliders.Length < 3)
-        {
-            Debug.LogError("Error 01 - more than 3 BoxColliders are required per block.");
-            return;
-        }
-    }
-
-    /// <summary>
-    /// Get Block in Colliders
-    /// </summary>
-    public List<Block> GetBlockInColliders()
-    {
-        List<Block> blocksInColliders = new List<Block>();
-
-        foreach (var collider in  colliders)
-        {
-            Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation);
-            foreach (var hitCollider in hitColliders)
-            {
-                Block hitBlock = hitCollider.GetComponent<Block>();
-                if (hitBlock != null && hitBlock != this && !blocksInColliders.Contains(hitBlock)) 
-                { 
-                    blocksInColliders.Add(hitBlock);
-                }
+            if (block.currentState == BlockState.ON) {
+                ChangeOnState(); 
+                continue; // There is no need to check other blocks anymore.
             }
         }
-
-        return blocksInColliders;
     }
 
     /// <summary>
-    /// Add the parameter Block to the AdjacentBlock list.
+    /// Block State change to ON ( befor : OFF )
+    /// Need to notify adjacent blocks that I have changed to the On state.
     /// </summary>
-    public void AddBlockToAdjacentBlock(Block block)
+    public void ChangeOnState() {
+        float delayTime = 0.75f;
+
+        currentState = BlockState.ON;
+        ChangePillarMaterial(currentState);
+
+        StartCoroutine(ChangeAdjacentBlockStateON(delayTime));
+    }
+
+    /// <summary>
+    /// Change Pillar Material 
+    /// </summary>
+    public void ChangePillarMaterial(BlockState st) 
     {
-        if (block != null && !AdjacentBlocks.Contains(block))
-            AdjacentBlocks.Add(block);
+
+        Transform pillar = transform.Find("Pillar");
+        //Debug.Log("Change Pillar Material to OnMaterial"); //For Debug Test
+        Renderer renderer = pillar.GetComponent<Renderer>();
+
+        if (st == BlockState.ON) 
+        {
+            renderer.material = OnMaterial;
+        }
+        else if (st == BlockState.OFF)
+        {
+            renderer.material = OffMaterial;
+        }
+    }
+
+    IEnumerator ChangeAdjacentBlockStateON(float delayTime) 
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        foreach (Block block in AdjacentBlocks) {
+            if (block.currentState == BlockState.OFF) {
+                block.ChangeOnState();
+            }
+        }
     }
 }

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4628232939178563823}
   - component: {fileID: 8842983283968121653}
   - component: {fileID: 5145465966503502184}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Node
-  m_TagString: Untagged
+  m_TagString: node
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,5 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeHeight: 0
+  blocksTotalHeight: 0
   hoverColor: {r: 0.18013525, g: 0.1709238, b: 0.21698111, a: 0}
   blockOnNode: {fileID: 0}
+  isBuildable: 1

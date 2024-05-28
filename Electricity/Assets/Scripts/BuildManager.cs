@@ -2,28 +2,29 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    public static BuildManager instance; // Singleton Pattern
-
-    private void Awake() // For singleton Pattern
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        instance = this;
-    }
 
     public GameObject standardBlockPrefab;
 
     private void Start()
     {
-        blockToBuild = standardBlockPrefab; //For Test - 초기값 : standardBlock으로 나중에 UI에서 블럭 선택해서 건설하도록
+        blockToBuild = standardBlockPrefab; //For Test
     }
 
     private GameObject blockToBuild; // blockToBuild GameObject
 
-    public GameObject GetBlockToBuild() // return blockToBuild;
+    /// <summary>
+    /// Build Block On Node
+    /// - The buildManager holds information about the blocks the player has chosen to build.
+    /// </summary>
+    public void BuildBlockOnNode(Node node)
     {
-        return blockToBuild;
+        float blockHeight = blockToBuild.transform.localScale.y;
+        Vector3 buildPosition = node.transform.position + new UnityEngine.Vector3(0,node.nodeHeight + node.blocksTotalHeight +  (blockHeight/2),0);
+        node.blockOnNode = (GameObject)Instantiate(blockToBuild, buildPosition, node.transform.rotation);
+
+        node.blockOnNode.transform.SetParent(node.transform, true); // set Parent
+        node.blocksTotalHeight += blockHeight; // Update blocksTotalHeights ( add block height )
+
+        //Debug.Log("Build the Block!"); //For DebugTest
     }
 }
