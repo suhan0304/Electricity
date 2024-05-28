@@ -1,9 +1,6 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
-using static UnityEditor.VersionControl.Asset;
 
 public class Block : MonoBehaviour
 {
@@ -13,8 +10,6 @@ public class Block : MonoBehaviour
     public BlockState currentState; 
     public List<Block> AdjacentBlocks = new List<Block>();  // Blocks adjacent to me
 
-    private BoxCollider[] colliders; // For Check Blocks in Contact
-
     [SerializeField]
     public Material OnMaterial = null;
     public Material OffMaterial = null;
@@ -23,7 +18,7 @@ public class Block : MonoBehaviour
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
-        StartCoroutine(ChangePillarMaterial(currentState, 0f));
+        ChangePillarMaterial(BlockState.OFF);
         node = GetComponentInParent<Node>();
         AdjacentBlocks = GetBlockAdjacentBlocks();
         UpdateAdjacentBlockList();
@@ -57,7 +52,7 @@ public class Block : MonoBehaviour
     }
 
     /// <summary>
-    /// Get Block in Colliders
+    /// Get Block use laycast
     /// </summary>
     public List<Block> GetBlockAdjacentBlocks()
     {
@@ -74,7 +69,6 @@ public class Block : MonoBehaviour
         LayerMask blockLayer = LayerMask.GetMask("Block");
 
         float rayDistance = 0f;
-        
         foreach (Vector3 direction in directions) {
             if (direction == Vector3.up || direction == Vector3.down) 
                 rayDistance = 1f;
@@ -84,7 +78,7 @@ public class Block : MonoBehaviour
             RaycastHit[] hitData = Physics.RaycastAll(transform.position, direction, rayDistance, blockLayer);
             foreach(RaycastHit hit in hitData) {
                 Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name); // For Debug Test
 
                 blocksInRaycast.Add(hitBlock);
         
@@ -133,24 +127,22 @@ public class Block : MonoBehaviour
     /// Need to notify adjacent blocks that I have changed to the On state.
     /// </summary>
     public void ChangeOnState() {
-        float delayTime = 2f;
+        float delayTime = 0.75f;
 
         currentState = BlockState.ON;
-        StartCoroutine(ChangePillarMaterial(BlockState.ON, delayTime));
+        ChangePillarMaterial(currentState);
 
-        foreach (Block block in AdjacentBlocks) {
-            if (block.currentState == BlockState.OFF) {
-                block.ChangeOnState();
-            }
-        }
+        StartCoroutine(ChangeAdjacentBlockStateON(delayTime));
     }
 
-    IEnumerator ChangePillarMaterial(BlockState st, float delayTime) 
+    /// <summary>
+    /// Change Pillar Material 
+    /// </summary>
+    public void ChangePillarMaterial(BlockState st) 
     {
-        yield return new WaitForSeconds(delayTime);
 
         Transform pillar = transform.Find("Pillar");
-        Debug.Log("Change Pillar Material to OnMaterial");
+        //Debug.Log("Change Pillar Material to OnMaterial"); //For Debug Test
         Renderer renderer = pillar.GetComponent<Renderer>();
 
         if (st == BlockState.ON) 
@@ -160,6 +152,17 @@ public class Block : MonoBehaviour
         else if (st == BlockState.OFF)
         {
             renderer.material = OffMaterial;
+        }
+    }
+
+    IEnumerator ChangeAdjacentBlockStateON(float delayTime) 
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        foreach (Block block in AdjacentBlocks) {
+            if (block.currentState == BlockState.OFF) {
+                block.ChangeOnState();
+            }
         }
     }
 }

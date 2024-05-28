@@ -300,7 +300,7 @@ MonoBehaviour:
   node: {fileID: 0}
   currentState: 0
   AdjacentBlocks: []
-  OnMaterial: {fileID: 2100000, guid: cf5d21ecda87844febf8ecb24ea64fbe, type: 2}
+  OnMaterial: {fileID: 2100000, guid: c9315b6eb2143df43a4e414238d17e43, type: 2}
   OffMaterial: {fileID: 2100000, guid: b9a1128ca5bb0a542a8b78f3028d8b98, type: 2}
 --- !u!65 &6175815629370688505
 BoxCollider:

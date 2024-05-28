@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Start")]
+    public GameObject startObject;
+    public StartPoint startPoint;
+
+    [Space(5)]
+    [Header("Manager")]
+    public BuildManager buildManager;
+
+    public static GameManager Instance { get; private set; }
+
+    void Awake()
     {
-        
+        // 싱글톤 인스턴스 설정
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Error - Only 1 instance - GameManager.");
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start() 
     {
-        
+        startPoint = startObject.GetComponent<StartPoint>();
+        buildManager = GetComponent<BuildManager>();
     }
 }
