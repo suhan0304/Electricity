@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public Material OnMaterial = null;
     public Material OffMaterial = null;
+    public float OnIntensity = 1f;
+    public float OffIntensity = -10f;
 
     public static GameManager Instance { get; private set; }
 

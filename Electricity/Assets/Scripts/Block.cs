@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
@@ -178,24 +175,15 @@ public class Block : MonoBehaviour
     IEnumerator TurnOnBlock(float delayTime)
     {
         Debug.Log("Chaning Mateiral Now...");
-        Renderer renderer = transform.Find("Pillar").GetComponent<Renderer>();
-        
-        if (delayTime == 0)
-        {
-            renderer.material = GameManager.Instance.OnMaterial;
-            yield return null;
-        }
+        Material mat = transform.Find("Pillar").GetComponent<Renderer>().material;
         
         float lerpTime = 0.0f;
-
-        Material startMaterial = GameManager.Instance.OffMaterial;
-        Material endMaterial = GameManager.Instance.OnMaterial;
 
         while (lerpTime < delayTime)
         {
             lerpTime += Time.deltaTime;
-            renderer.material.Lerp(startMaterial, endMaterial, lerpTime / delayTime);
 
+            renderer.material = GameManager.Instance.OnMaterial;
             yield return null; // wait for next frame
         }
     }
