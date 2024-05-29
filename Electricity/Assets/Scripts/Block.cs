@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -187,15 +188,15 @@ public class Block : MonoBehaviour
         
         float lerpTime = 0.0f;
 
+        Material startMaterial = GameManager.Instance.OffMaterial;
+        Material endMaterial = GameManager.Instance.OnMaterial;
+
         while (lerpTime < delayTime)
         {
-            lerpTime += Time.deltaTime / delayTime;
-            lerpTime = Mathf.Clamp01(lerpTime); //Limit the value of lerpTime to between 1 and 0
-
-            renderer.material.Lerp(GameManager.Instance.OffMaterial, GameManager.Instance.OnMaterial, lerpTime);
+            lerpTime += Time.deltaTime;
+            renderer.material.Lerp(startMaterial, endMaterial, lerpTime / delayTime);
 
             yield return null; // wait for next frame
-
         }
     }
 

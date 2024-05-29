@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9a1128ca5bb0a542a8b78f3028d8b98, type: 2}
+  - {fileID: 2100000, guid: 1545d8d03505e45be8c339ddac293120, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,8 +300,6 @@ MonoBehaviour:
   node: {fileID: 0}
   currentState: 0
   AdjacentBlocks: []
-  OnMaterial: {fileID: 2100000, guid: c9315b6eb2143df43a4e414238d17e43, type: 2}
-  OffMaterial: {fileID: 2100000, guid: b9a1128ca5bb0a542a8b78f3028d8b98, type: 2}
 --- !u!65 &6175815629370688505
 BoxCollider:
   m_ObjectHideFlags: 0
