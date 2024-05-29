@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-
+    [Header("Parameter")]
     [SerializeField]
     public Node node; // Node where the block was constructed
     public BlockState currentState; 
     public List<Block> AdjacentBlocks = new List<Block>();  // Blocks adjacent to me
+
+    [Space(5)]
+    [Header("Pillar")]
+    [SerializeField]
+    public GameObject pillar;
+    public Renderer pillarRenderer;
+    public Material pillarMaterial;
 
     private GameObject endPoint = null;
 
@@ -172,18 +179,31 @@ public class Block : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void connectPillarMaterial()
+    {
+        pillar = transform.Find("Pillar").transform.gameObject;
+        pillarRenderer = pillar.GetComponent<Renderer>();
+        if (pillar != null) 
+            pillarMaterial = new Material(pillarRenderer.material);
+        pillarRenderer.material = pillarMaterial;
+    }
+
     IEnumerator TurnOnBlock(float delayTime)
     {
         Debug.Log("Chaning Mateiral Now...");
-        Material mat = transform.Find("Pillar").GetComponent<Renderer>().material;
-        
+        Color currentColor = pillarMaterial.GetColor("_EmissionColor");
+
         float lerpTime = 0.0f;
 
         while (lerpTime < delayTime)
         {
             lerpTime += Time.deltaTime;
 
-            renderer.material = GameManager.Instance.OnMaterial;
+            pillarMaterial.SetColor("_EmissionColor", currentColor * GameManager.Instance.OnIntensity);
+
             yield return null; // wait for next frame
         }
     }
