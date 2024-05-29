@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -348,7 +348,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 5000
-  field of view: 6.532769
+  field of view: 8.031753
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -374,7 +374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.021605585, y: 0.9759646, z: -0.114496544, w: -0.18416525}
+  m_LocalRotation: {x: -0.021363692, y: 0.97611415, z: -0.1132147, w: -0.1841934}
   m_LocalPosition: {x: 34.154015, y: 20, z: 79.49861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -709,6 +709,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 752535972}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &519713472 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6038280058203467106, guid: 4c065765bc35d4db9961251b1a187409,
+    type: 3}
+  m_PrefabInstance: {fileID: 526897476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &526897476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -717,6 +723,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346952863}
     m_Modifications:
+    - target: {fileID: 210908401000748264, guid: 4c065765bc35d4db9961251b1a187409,
+        type: 3}
+      propertyPath: m_Name
+      value: Bulb
+      objectReference: {fileID: 0}
     - target: {fileID: 6038280058203467106, guid: 4c065765bc35d4db9961251b1a187409,
         type: 3}
       propertyPath: m_Name
@@ -780,7 +791,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6038280058203467106, guid: 4c065765bc35d4db9961251b1a187409,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 962454106}
   m_SourcePrefab: {fileID: 100100000, guid: 4c065765bc35d4db9961251b1a187409, type: 3}
 --- !u!1 &597246807
 GameObject:
@@ -954,7 +969,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 6.532769
+    FieldOfView: 8.031753
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -980,7 +995,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681925479}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.022130983, y: 0.9756339, z: -0.11728083, w: -0.18410285}
+  m_LocalRotation: {x: -0.022010073, y: 0.97571075, z: -0.116640165, w: -0.18411724}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1160,7 +1175,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 6.532769
+    FieldOfView: 8.031753
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -1186,7 +1201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891947834}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.021605587, y: 0.9759646, z: -0.11449655, w: -0.18416527}
+  m_LocalRotation: {x: -0.0213637, y: 0.97611415, z: -0.11321471, w: -0.18419345}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1333,6 +1348,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 526897476}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &962454106
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519713472}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.5, y: 2, z: 3.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1017348568
 GameObject:
   m_ObjectHideFlags: 3
@@ -1511,7 +1547,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 6.532769
+    FieldOfView: 8.031753
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -1537,7 +1573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183842245}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.022656197, y: 0.97529536, z: -0.120064236, w: -0.18403883}
+  m_LocalRotation: {x: -0.022656191, y: 0.97529536, z: -0.120064214, w: -0.18403883}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1556,6 +1592,7 @@ GameObject:
   - component: {fileID: 1281385732}
   - component: {fileID: 1281385731}
   - component: {fileID: 1281385730}
+  - component: {fileID: 1281385733}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1590,7 +1627,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildManager: {fileID: 0}
+  validator: {fileID: 0}
   startTag: startTag
+  endTag: endPoint
+  BulbName: Bulb
+  endPoint: {fileID: 519713472}
+  OnMaterial: {fileID: 2100000, guid: c9315b6eb2143df43a4e414238d17e43, type: 2}
+  OffMaterial: {fileID: 2100000, guid: 1545d8d03505e45be8c339ddac293120, type: 2}
 --- !u!4 &1281385732
 Transform:
   m_ObjectHideFlags: 0
@@ -1606,6 +1649,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1281385733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281385729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80fd688fe9287944831fa4129609c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1299634357 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4516501321095468712, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
@@ -1824,6 +1879,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5145465966503502184, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
         type: 3}
+      propertyPath: isBuildable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145465966503502184, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
+        type: 3}
       propertyPath: positionOffset.y
       value: 1.5
       objectReference: {fileID: 0}
@@ -1997,6 +2057,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346952863}
     m_Modifications:
+    - target: {fileID: 210908401000748264, guid: 725b047436f8ab2479f94765801d4168,
+        type: 3}
+      propertyPath: m_Name
+      value: Bulb
+      objectReference: {fileID: 0}
     - target: {fileID: 1196182621486387863, guid: 725b047436f8ab2479f94765801d4168,
         type: 3}
       propertyPath: m_Size.y
@@ -2112,7 +2177,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1177279467}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 6.532769
+    FieldOfView: 8.031753
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000

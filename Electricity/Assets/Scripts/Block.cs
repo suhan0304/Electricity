@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
-
+    [Header("Parameter")]
     [SerializeField]
     public Node node; // Node where the block was constructed
     public BlockState currentState; 
     public List<Block> AdjacentBlocks = new List<Block>();  // Blocks adjacent to me
 
+    [Space(5)]
+    [Header("Pillar")]
     [SerializeField]
-    public Material OnMaterial = null;
-    public Material OffMaterial = null;
+    public GameObject pillar;
+    public Renderer pillarRenderer;
+    public Material pillarMaterial;
+
+    private GameObject endPoint = null;
 
     private void Start()
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
-        ChangePillarMaterial(BlockState.OFF);
+        ChangePillarMaterial(BlockState.OFF, 0f);
         node = GetComponentInParent<Node>();
         AdjacentBlocks = GetBlockAdjacentBlocks();
         UpdateAdjacentBlockList();
@@ -80,9 +84,15 @@ public class Block : MonoBehaviour
             }
 
             RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
-            foreach(RaycastHit hit in hitData) {
-                if (hit.collider.CompareTag("startPoint")) {
-                    ChangeOnState();
+            foreach(RaycastHit hit in hitData)
+            {
+                if (hit.collider.CompareTag(GameManager.Instance.startTag))
+                {
+                    ChangeOnState(); // Block State On - Adjacent StartPoint
+                }
+                if (hit.collider.CompareTag(GameManager.Instance.endTag))
+                {
+                    endPoint = hit.collider.gameObject; // if end-Poin is adjacent me : initialization endPoint
                 }
                 else {
                     Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
@@ -99,11 +109,11 @@ public class Block : MonoBehaviour
     /// <summary>
     /// Add me(block) where adjacent block's list
     /// </summary>
-    /// <param name="adjBlocks"></param>
     public void UpdateAdjacentBlockList() 
     {
         foreach (Block block in AdjacentBlocks) {
-            block.AddBlockToAdjacentBlock(this);
+            if (block != null)
+                block.AddBlockToAdjacentBlock(this);
         }
     }
 
@@ -123,6 +133,9 @@ public class Block : MonoBehaviour
     {
         foreach (Block block in AdjacentBlocks) 
         {
+            if (block == null)
+                continue;
+
             if (block.currentState == BlockState.ON) {
                 ChangeOnState(); 
                 continue; // There is no need to check other blocks anymore.
@@ -132,13 +145,21 @@ public class Block : MonoBehaviour
 
     /// <summary>
     /// Block State change to ON ( befor : OFF )
+    /// If the endpoint is adjacent to me, it is necessary to clear the stage
     /// Need to notify adjacent blocks that I have changed to the On state.
     /// </summary>
     public void ChangeOnState() {
         float delayTime = 0.75f;
 
         currentState = BlockState.ON;
-        ChangePillarMaterial(currentState);
+        ChangePillarMaterial(currentState, delayTime);
+
+        // if endPoint is not null = endPoint is adjacent me.
+        // When I change to the On state, EndPoint also changes to the On state and clears the stage
+        if (endPoint != null) 
+        {
+            GameManager.Instance.Clear();
+        }
 
         StartCoroutine(ChangeAdjacentBlockStateON(delayTime));
     }
@@ -146,28 +167,55 @@ public class Block : MonoBehaviour
     /// <summary>
     /// Change Pillar Material 
     /// </summary>
-    public void ChangePillarMaterial(BlockState st) 
+    public void ChangePillarMaterial(BlockState st, float delayTime) 
     {
-
-        Transform pillar = transform.Find("Pillar");
-        //Debug.Log("Change Pillar Material to OnMaterial"); //For Debug Test
-        Renderer renderer = pillar.GetComponent<Renderer>();
-
         if (st == BlockState.ON) 
         {
-            renderer.material = OnMaterial;
+            StartCoroutine(TurnOnBlock(delayTime));
         }
         else if (st == BlockState.OFF)
         {
-            renderer.material = OffMaterial;
+            //TODO - BlockState Change OFF
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void connectPillarMaterial()
+    {
+        pillar = transform.Find("Pillar").transform.gameObject;
+        pillarRenderer = pillar.GetComponent<Renderer>();
+        if (pillar != null) 
+            pillarMaterial = new Material(pillarRenderer.material);
+        pillarRenderer.material = pillarMaterial;
+    }
+
+    IEnumerator TurnOnBlock(float delayTime)
+    {
+        Debug.Log("Chaning Mateiral Now...");
+        Color currentColor = pillarMaterial.GetColor("_EmissionColor");
+
+        float lerpTime = 0.0f;
+
+        while (lerpTime < delayTime)
+        {
+            lerpTime += Time.deltaTime;
+
+            pillarMaterial.SetColor("_EmissionColor", currentColor * GameManager.Instance.OnIntensity);
+
+            yield return null; // wait for next frame
+        }
+    }
+
 
     IEnumerator ChangeAdjacentBlockStateON(float delayTime) 
     {
         yield return new WaitForSeconds(delayTime);
 
         foreach (Block block in AdjacentBlocks) {
+            if (block == null) continue;
+
             if (block.currentState == BlockState.OFF) {
                 block.ChangeOnState();
             }
