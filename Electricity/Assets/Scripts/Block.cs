@@ -170,6 +170,7 @@ public class Block : MonoBehaviour
 
         StartCoroutine(ChangeAdjacentBlockStateON(delayTime));
     }
+
     IEnumerator ChangeAdjacentBlockStateON(float delayTime) 
     {
         yield return new WaitForSeconds(delayTime);
