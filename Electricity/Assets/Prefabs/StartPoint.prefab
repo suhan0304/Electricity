@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1378737970312636601}
   - component: {fileID: 4661766118847275619}
   m_Layer: 8
-  m_Name: LightSource
+  m_Name: Bulb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 1196182621486387863}
   m_Layer: 8
   m_Name: StartPoint
-  m_TagString: Untagged
+  m_TagString: startPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,7 +242,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 1, z: 3.5}
+  m_Size: {x: 3.5, y: 2, z: 3.5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6685188781214972615
 GameObject:

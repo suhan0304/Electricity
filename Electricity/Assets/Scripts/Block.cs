@@ -20,6 +20,7 @@ public class Block : MonoBehaviour
     [Space(5)]
     [Header("Animation")]
     public Animator anim;
+
     private GameObject endPoint = null;
 
     private void Awake()

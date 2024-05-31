@@ -63,13 +63,14 @@ public class GameManager : MonoBehaviour
         if (endPoint == null)
             return;
 
-        endAnimator.SetTrigger("endStateOn");
         StartCoroutine(FinishStage());
     }
 
     IEnumerator FinishStage()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
+
+        endAnimator.SetTrigger("endStateOn");
     }
 
     /// <summary>

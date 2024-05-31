@@ -723,20 +723,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346952863}
     m_Modifications:
-    - target: {fileID: 210908401000748264, guid: 4c065765bc35d4db9961251b1a187409,
-        type: 3}
-      propertyPath: m_Name
-      value: Bulb
-      objectReference: {fileID: 0}
     - target: {fileID: 6038280058203467106, guid: 4c065765bc35d4db9961251b1a187409,
         type: 3}
       propertyPath: m_Name
       value: EndPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038280058203467106, guid: 4c065765bc35d4db9961251b1a187409,
-        type: 3}
-      propertyPath: m_TagString
-      value: endPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6138864581182685331, guid: 4c065765bc35d4db9961251b1a187409,
         type: 3}
@@ -791,11 +781,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6038280058203467106, guid: 4c065765bc35d4db9961251b1a187409,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 962454106}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c065765bc35d4db9961251b1a187409, type: 3}
 --- !u!1 &597246807
 GameObject:
@@ -1348,27 +1334,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 526897476}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &962454106
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519713472}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 2, z: 3.5}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1017348568
 GameObject:
   m_ObjectHideFlags: 3
@@ -1573,7 +1538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183842245}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.022656191, y: 0.97529536, z: -0.120064214, w: -0.18403883}
+  m_LocalRotation: {x: -0.022656204, y: 0.97529536, z: -0.12006429, w: -0.18403883}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1632,6 +1597,7 @@ MonoBehaviour:
   endTag: endPoint
   BulbName: Bulb
   endPoint: {fileID: 519713472}
+  endAnimator: {fileID: 0}
   PillarMaterial: {fileID: 2100000, guid: c9315b6eb2143df43a4e414238d17e43, type: 2}
 --- !u!4 &1281385732
 Transform:
@@ -2056,30 +2022,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346952863}
     m_Modifications:
-    - target: {fileID: 210908401000748264, guid: 725b047436f8ab2479f94765801d4168,
-        type: 3}
-      propertyPath: m_Name
-      value: Bulb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1196182621486387863, guid: 725b047436f8ab2479f94765801d4168,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1196182621486387863, guid: 725b047436f8ab2479f94765801d4168,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6038280058203467106, guid: 725b047436f8ab2479f94765801d4168,
         type: 3}
       propertyPath: m_Name
       value: StartPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038280058203467106, guid: 725b047436f8ab2479f94765801d4168,
-        type: 3}
-      propertyPath: m_TagString
-      value: startPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6138864581182685331, guid: 725b047436f8ab2479f94765801d4168,
         type: 3}
