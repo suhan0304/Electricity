@@ -17,16 +17,14 @@ public class GameManager : MonoBehaviour
     public string BulbName = "Bulb";
 
     [Space(5)]
-    [Header("Object")]
+    [Header("endPoint")]
     public GameObject endPoint;
+    public Animator endAnimator;
 
     [Space(5)]
     [Header("Material")]
     [SerializeField]
-    public Material OnMaterial = null;
-    public Material OffMaterial = null;
-    public float OnIntensity = 1f;
-    public float OffIntensity = -10f;
+    public Material PillarMaterial = null;
 
     public static GameManager Instance { get; private set; }
 
@@ -42,6 +40,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Error - Only 1 instance - GameManager.");
             Destroy(gameObject);
         }
+        endAnimator = endPoint.GetComponent<Animator>();
         startTag = "startPoint";
         endTag = "endPoint";
     }
@@ -69,12 +68,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FinishStage()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
-        Transform bulb = endPoint.transform.Find(BulbName);
-        Renderer renderer = bulb.GetComponent<Renderer>();
-
-        renderer.material = OnMaterial;
+        endAnimator.SetTrigger("endStateOn");
     }
 
     /// <summary>

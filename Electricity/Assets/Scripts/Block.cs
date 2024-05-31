@@ -17,13 +17,21 @@ public class Block : MonoBehaviour
     public Renderer pillarRenderer;
     public Material pillarMaterial;
 
+    [Space(5)]
+    [Header("Animation")]
+    public Animator anim;
+
     private GameObject endPoint = null;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     private void Start()
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
-        ChangePillarMaterial(BlockState.OFF, 0f);
         node = GetComponentInParent<Node>();
         AdjacentBlocks = GetBlockAdjacentBlocks();
         UpdateAdjacentBlockList();
@@ -149,65 +157,19 @@ public class Block : MonoBehaviour
     /// Need to notify adjacent blocks that I have changed to the On state.
     /// </summary>
     public void ChangeOnState() {
-        float delayTime = 0.75f;
+        float delayTime = 1f;
 
         currentState = BlockState.ON;
-        ChangePillarMaterial(currentState, delayTime);
+        anim.SetTrigger("StateOn");
 
         // if endPoint is not null = endPoint is adjacent me.
         // When I change to the On state, EndPoint also changes to the On state and clears the stage
-        if (endPoint != null) 
-        {
+        if (endPoint != null)  {
             GameManager.Instance.Clear();
         }
 
         StartCoroutine(ChangeAdjacentBlockStateON(delayTime));
     }
-
-    /// <summary>
-    /// Change Pillar Material 
-    /// </summary>
-    public void ChangePillarMaterial(BlockState st, float delayTime) 
-    {
-        if (st == BlockState.ON) 
-        {
-            StartCoroutine(TurnOnBlock(delayTime));
-        }
-        else if (st == BlockState.OFF)
-        {
-            //TODO - BlockState Change OFF
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public void connectPillarMaterial()
-    {
-        pillar = transform.Find("Pillar").transform.gameObject;
-        pillarRenderer = pillar.GetComponent<Renderer>();
-        if (pillar != null) 
-            pillarMaterial = new Material(pillarRenderer.material);
-        pillarRenderer.material = pillarMaterial;
-    }
-
-    IEnumerator TurnOnBlock(float delayTime)
-    {
-        Debug.Log("Chaning Mateiral Now...");
-        Color currentColor = pillarMaterial.GetColor("_EmissionColor");
-
-        float lerpTime = 0.0f;
-
-        while (lerpTime < delayTime)
-        {
-            lerpTime += Time.deltaTime;
-
-            pillarMaterial.SetColor("_EmissionColor", currentColor * GameManager.Instance.OnIntensity);
-
-            yield return null; // wait for next frame
-        }
-    }
-
 
     IEnumerator ChangeAdjacentBlockStateON(float delayTime) 
     {

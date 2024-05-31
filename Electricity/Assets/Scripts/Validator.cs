@@ -13,14 +13,9 @@ public class Validator : MonoBehaviour
         }
 
         // Validation Initialization Material in GameManager
-        if (GameManager.Instance.OnMaterial == null)
+        if (GameManager.Instance.PillarMaterial == null)
         {
             Debug.Log("Error 02 : 02 - InitializationError");
-            return false;
-        }
-        if (GameManager.Instance.OffMaterial == null)
-        {
-            Debug.Log("Error 02 : 03 - InitializationError");
             return false;
         }
 
