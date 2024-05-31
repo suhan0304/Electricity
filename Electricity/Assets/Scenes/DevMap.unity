@@ -497,16 +497,10 @@ Transform:
   - {fileID: 1471300732}
   - {fileID: 151672031}
   - {fileID: 1843701529}
-  - {fileID: 386517941}
+  - {fileID: 4516501321906430958}
   - {fileID: 899510132}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &386517941 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4516501321095468712, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
-    type: 3}
-  m_PrefabInstance: {fileID: 1890252102}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183842245}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.022656225, y: 0.9752953, z: -0.12006432, w: -0.18403892}
+  m_LocalRotation: {x: -0.022656199, y: 0.97529536, z: -0.12006425, w: -0.18403883}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1867,6 +1861,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7483889198190526906, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056987886340285955, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1935,11 +1939,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5145465966503502184, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
-        type: 3}
-      propertyPath: positionOffset.y
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7483889198190526906, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
         type: 3}
@@ -2246,6 +2245,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSpeed: 1
+--- !u!4 &4516501321906430958 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4516501321095468712, guid: 0e0d1a50a0ad2a54e99c5c9ecf957718,
+    type: 3}
+  m_PrefabInstance: {fileID: 1890252102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
