@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    public Animator endPointAnim = null;
+
+    private void Awake()
     {
-        
+        endPointAnim = GameManager.Instance.endPoint.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+
     }
 }

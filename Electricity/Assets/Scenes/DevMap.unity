@@ -1632,8 +1632,7 @@ MonoBehaviour:
   endTag: endPoint
   BulbName: Bulb
   endPoint: {fileID: 519713472}
-  OnMaterial: {fileID: 2100000, guid: c9315b6eb2143df43a4e414238d17e43, type: 2}
-  OffMaterial: {fileID: 2100000, guid: 1545d8d03505e45be8c339ddac293120, type: 2}
+  PillarMaterial: {fileID: 2100000, guid: c9315b6eb2143df43a4e414238d17e43, type: 2}
 --- !u!4 &1281385732
 Transform:
   m_ObjectHideFlags: 0
