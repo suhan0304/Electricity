@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
     [Space(5)]
     [Header("Manager")]
     public BuildManager buildManager;
@@ -33,6 +34,10 @@ public class GameManager : MonoBehaviour
     [Header("mainCamera")]
     public GameObject mainCamera = null;
 
+    [Space(5)]
+    [Header("State")]
+    public GameState gameState;
+
     public static GameManager Instance { get; private set; }
 
     void Awake()
@@ -47,6 +52,8 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Error - Only 1 instance - GameManager.");
             Destroy(gameObject);
         }
+        validator = GetComponent<Validator>();
+        buildManager = GetComponent<BuildManager>();
         endAnimator = endPoint.GetComponent<Animator>();
         startTag = "startPoint";
         endTag = "endPoint";
@@ -54,9 +61,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        validator = GetComponent<Validator>();
-        buildManager = GetComponent<BuildManager>();
-
+        gameState = GameState.PLAY;
         // Validation
         if (!validator.ValidateInitialization())
             QuitGame();
@@ -67,23 +72,31 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-        float delayTime = 2f;
-        mainCamera.GetComponent<CMmainFreeLookCameraSetting>().ClearGame(endPoint.transform, delayTime);
-        StartCoroutine(FinishStage(delayTime));
+        gameState = GameState.CLEAR; // game Clear
+
+        float delayTime = 1.0f;
+        float finishDuration = 2.0f;
+
+        StartCoroutine(FinishCameraSetting(delayTime, finishDuration));
+        StartCoroutine(FinishStage(delayTime, finishDuration));
     }
 
     /// <summary>
     /// Clear State, Finish Stage
     /// </summary>
-    IEnumerator FinishStage(float delayTime)
+    IEnumerator FinishStage(float delayTime, float finishDuration)
     {
-        Debug.Log("Clear Game!");
-        yield return new WaitForSeconds(0.5f * 2);
+        yield return new WaitForSeconds(delayTime);
 
         endAnimator.speed = endAnimationDuration / delayTime;
         endAnimator.SetTrigger("endStateOn"); // play endPoint Animation
 
+    }
+
+    IEnumerator FinishCameraSetting(float delayTime, float finishDuration)
+    {
         yield return new WaitForSeconds(delayTime);
+        mainCamera.GetComponent<CMmainFreeLookCameraSetting>().ClearGame(endPoint.transform, finishDuration);
     }
 
     /// <summary>

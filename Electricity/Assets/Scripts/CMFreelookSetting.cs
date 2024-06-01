@@ -7,7 +7,9 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     [Space(5)]
     [Header("Camera Settings")]
     public CinemachineFreeLook mainFreeLookCamera;
-    public float zoomSpeed = 5.0f;
+    public float initFOV = 10f;
+    public float XAxisSpeed = 50f;
+    public float zoomSpeed = 30.0f;
     public float targetFOV = 5.0f;
 
     [Space(5)]
@@ -15,17 +17,27 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     public GameObject CameraTarget;
     public Transform field;
 
-    private void Start()
+    private void Awake()
     {
         mainFreeLookCamera = GetComponent<CinemachineFreeLook>();
+
+    }
+
+    private void Start()
+    {
+        mainFreeLookCamera.m_YAxis.m_InputAxisName = "Vertical";
+        mainFreeLookCamera.m_XAxis.m_InputAxisName = "Horizontal";
+        mainFreeLookCamera.m_XAxis.m_MaxSpeed = XAxisSpeed;
+
         if (field == null)
             return;
+
         Vector3 centerPos = CalculateCameraTarget(field);
         SetCameraTargetPos(centerPos);
 
+        mainFreeLookCamera.m_Lens.FieldOfView = initFOV; 
         mainFreeLookCamera.LookAt = CameraTarget.transform;
         mainFreeLookCamera.Follow = CameraTarget.transform;
-
     }
 
     Vector3 CalculateCameraTarget(Transform parent)
@@ -63,6 +75,12 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     /// </summary>
     public void ClearGame(Transform endPoint, float transitionDuration)
     {
+        mainFreeLookCamera.m_YAxis.m_InputAxisName = "";
+        mainFreeLookCamera.m_XAxis.m_InputAxisName = "";
+
+        mainFreeLookCamera.m_XAxis.m_MaxSpeed = 20f;
+        mainFreeLookCamera.m_XAxis.m_InputAxisValue = 1f;
+
         StartCoroutine(MoveTargetToPosition(endPoint, transitionDuration));
         StartCoroutine(CloseUpEndPoint(endPoint, transitionDuration));
     }
@@ -91,7 +109,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
     IEnumerator CloseUpEndPoint(Transform endPoint, float duration)
     {
-        float originalFOW = mainFreeLookCamera.m_Lens.FieldOfView;
+        float originalFOV = mainFreeLookCamera.m_Lens.FieldOfView;
         float elapsedTime = 0f;
 
         while ( elapsedTime < duration )
@@ -99,7 +117,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / duration);
             float smoothT = Mathf.SmoothStep(0.0f, 1.0f, t);
 
-            float interpolatedFOV = Mathf.Lerp(originalFOW, targetFOV, t);
+            float interpolatedFOV = Mathf.Lerp(originalFOV, targetFOV, t);
 
             mainFreeLookCamera.m_Lens.FieldOfView = interpolatedFOV;
 
@@ -112,6 +130,9 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.gameState == GameState.CLEAR)
+            return;
+
         if (Input.GetKey("q")) // Press "q" Key = Zoom in
         {
             if(mainFreeLookCamera.m_Lens.FieldOfView >= 5)

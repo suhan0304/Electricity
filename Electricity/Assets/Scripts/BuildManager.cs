@@ -4,6 +4,7 @@ public class BuildManager : MonoBehaviour
 {
 
     public GameObject standardBlockPrefab;
+    public GameObject blockOnNode;
 
     private void Start()
     {
