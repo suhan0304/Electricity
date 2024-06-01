@@ -75,7 +75,6 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
-        transBlockOnNode.SetActive(false);
         // Build a Block
         if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
         {

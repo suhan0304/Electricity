@@ -26,13 +26,13 @@ public class Block : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        node = transform.parent.GetChild(0).GetComponentInParent<Node>();
     }
 
     private void Start()
     {
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
-        node = GetComponentInParent<Node>();
 
         AdjacentBlocks = GetBlockAdjacentBlocks();
         UpdateAdjacentBlockList();
