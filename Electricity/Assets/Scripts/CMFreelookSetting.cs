@@ -20,7 +20,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
         if (field == null)
             return;
         Vector3 centerPos = CalculateCameraTarget(field);
-        SetCameraTarget(centerPos);
+        SetCameraTargetPos(centerPos);
 
         mainFreeLookCamera.LookAt = CameraTarget.transform;
         mainFreeLookCamera.Follow = CameraTarget.transform;
@@ -51,7 +51,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
         }
     }
 
-    private void SetCameraTarget(Vector3 centerPos)
+    private void SetCameraTargetPos(Vector3 centerPos)
     {
         if (CameraTarget != null)
             CameraTarget.transform.position = centerPos;
@@ -60,14 +60,29 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     /// <summary>
     /// When Clear Stage, GameManager called this method
     /// </summary>
-    public void ClearGame(Transform endPoint, float duration)
+    public void ClearGame(Transform endPoint, float transitionDuration)
     {
-        StartCoroutine(TransitionTarget(endPoint, duration));
+        StartCoroutine(MoveTargetToPosition(endPoint, transitionDuration));
     }
 
-    IEnumerator TransitionTarget(Transform endPoint, float duration)
+    /// <summary>
+    /// Move CameraTarget to EndPoint
+    /// </summary>
+    IEnumerator MoveTargetToPosition(Transform endPoint, float duration)
     {
-        yield return new WaitForSeconds(duration);
+        Vector3 startPosition = CameraTarget.transform.position;
+        
+        float elapsedTime = 0f;
+
+        while ( elapsedTime < duration )
+        {
+            float t = elapsedTime / duration;
+            CameraTarget.transform.position = Vector3.Lerp(startPosition, endPoint.position, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+
+        }
+        CameraTarget.transform.position = endPoint.position;
     }
 
     private void Update()

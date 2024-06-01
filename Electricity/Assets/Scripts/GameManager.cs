@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("endPoint")]
     public GameObject endPoint;
     public Animator endAnimator;
+    public float endAnimationDuration = 1.0f;   // Current Animation Duration
 
     [Space(5)]
     [Header("Material")]
@@ -66,7 +67,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-        float delayTime = 0.5f;
+        float delayTime = 2f;
+        mainCamera.GetComponent<CMmainFreeLookCameraSetting>().ClearGame(endPoint.transform, delayTime);
         StartCoroutine(FinishStage(delayTime));
     }
 
@@ -75,10 +77,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     IEnumerator FinishStage(float delayTime)
     {
-        yield return new WaitForSeconds(delayTime);
-
         Debug.Log("Clear Game!");
-        endAnimator.SetTrigger("endStateOn");
+        yield return new WaitForSeconds(0.5f);
+
+        endAnimator.speed = endAnimationDuration / delayTime;
+        endAnimator.SetTrigger("endStateOn"); // play endPoint Animation
+
+        yield return new WaitForSeconds(delayTime);
     }
 
     /// <summary>
