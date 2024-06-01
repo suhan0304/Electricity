@@ -33,6 +33,7 @@ public class Block : MonoBehaviour
         // Set Block Parameters ( list, state... )
         currentState = BlockState.OFF;
         node = GetComponentInParent<Node>();
+
         AdjacentBlocks = GetBlockAdjacentBlocks();
         UpdateAdjacentBlockList();
 

@@ -287,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeHeight: 0
   blocksTotalHeight: 0
+  transBlockHeight: 0
   hoverColor: {r: 0.18013525, g: 0.1709238, b: 0.21698111, a: 0}
   blockOnNode: {fileID: 0}
   transBlockOnNode: {fileID: 0}
