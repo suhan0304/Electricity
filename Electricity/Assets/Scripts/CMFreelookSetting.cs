@@ -7,8 +7,8 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     [Space(5)]
     [Header("Camera Settings")]
     public CinemachineFreeLook mainFreeLookCamera;
-    public float zoomSpeed = 2.5f;
-    public float targetFOV = 30.0f;
+    public float zoomSpeed = 5.0f;
+    public float targetFOV = 5.0f;
 
     [Space(5)]
     [Header("Objects & Transform")]
