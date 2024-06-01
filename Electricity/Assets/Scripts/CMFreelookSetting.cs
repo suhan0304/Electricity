@@ -1,9 +1,6 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
-using UnityEngine.UIElements;
 
 public class CMmainFreeLookCameraSetting : MonoBehaviour
 {
@@ -14,7 +11,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
     [Space(5)]
     [Header("Objects & Transform")]
-    public GameObject centerPoint;
+    public GameObject CameraTarget;
     public Transform field;
 
     private void Start()
@@ -22,15 +19,15 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
         mainFreeLookCamera = GetComponent<CinemachineFreeLook>();
         if (field == null)
             return;
-        Vector3 centerPos = CalculateCenterPoint(field);
-        SetCenterPoint(centerPos);
+        Vector3 centerPos = CalculateCameraTarget(field);
+        SetCameraTarget(centerPos);
 
-        mainFreeLookCamera.LookAt = centerPoint.transform;
-        mainFreeLookCamera.Follow = centerPoint.transform;
+        mainFreeLookCamera.LookAt = CameraTarget.transform;
+        mainFreeLookCamera.Follow = CameraTarget.transform;
 
     }
 
-    Vector3 CalculateCenterPoint(Transform parent)
+    Vector3 CalculateCameraTarget(Transform parent)
     {
         Vector3 totalPosition = Vector3.zero;
         int childCount = 0;
@@ -54,10 +51,23 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
         }
     }
 
-    private void SetCenterPoint(Vector3 centerPos)
+    private void SetCameraTarget(Vector3 centerPos)
     {
-        if (centerPoint != null)
-            centerPoint.transform.position = centerPos;
+        if (CameraTarget != null)
+            CameraTarget.transform.position = centerPos;
+    }
+
+    /// <summary>
+    /// When Clear Stage, GameManager called this method
+    /// </summary>
+    public void ClearGame(Transform endPoint, float duration)
+    {
+        StartCoroutine(TransitionTarget(endPoint, duration));
+    }
+
+    IEnumerator TransitionTarget(Transform endPoint, float duration)
+    {
+        yield return new WaitForSeconds(duration);
     }
 
     private void Update()

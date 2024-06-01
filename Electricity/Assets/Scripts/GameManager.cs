@@ -1,5 +1,7 @@
+using Cinemachine;
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,6 +27,10 @@ public class GameManager : MonoBehaviour
     [Header("Material")]
     [SerializeField]
     public Material PillarMaterial = null;
+
+    [Space(5)]
+    [Header("mainCamera")]
+    public GameObject mainCamera = null;
 
     public static GameManager Instance { get; private set; }
 
@@ -60,17 +66,18 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-        if (endPoint == null)
-            return;
-
-        StartCoroutine(FinishStage());
+        float delayTime = 0.5f;
+        StartCoroutine(FinishStage(delayTime));
     }
 
-    IEnumerator FinishStage()
+    /// <summary>
+    /// Clear State, Finish Stage
+    /// </summary>
+    IEnumerator FinishStage(float delayTime)
     {
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("Clear Game!");
+        yield return new WaitForSeconds(delayTime);
 
+        Debug.Log("Clear Game!");
         endAnimator.SetTrigger("endStateOn");
     }
 
