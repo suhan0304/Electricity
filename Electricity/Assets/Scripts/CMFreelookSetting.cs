@@ -8,6 +8,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     [Header("Camera Settings")]
     public CinemachineFreeLook mainFreeLookCamera;
     public float zoomSpeed = 2.5f;
+    public float targetFOV = 30.0f;
 
     [Space(5)]
     [Header("Objects & Transform")]
@@ -63,6 +64,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     public void ClearGame(Transform endPoint, float transitionDuration)
     {
         StartCoroutine(MoveTargetToPosition(endPoint, transitionDuration));
+        StartCoroutine(CloseUpEndPoint(endPoint, transitionDuration));
     }
 
     /// <summary>
@@ -76,13 +78,36 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
         while ( elapsedTime < duration )
         {
-            float t = elapsedTime / duration;
-            CameraTarget.transform.position = Vector3.Lerp(startPosition, endPoint.position, t);
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float smoothT = Mathf.SmoothStep(0.0f, 1.0f, t);
+
+            CameraTarget.transform.position = Vector3.Lerp(startPosition, endPoint.position, smoothT);
             elapsedTime += Time.deltaTime;
             yield return null;
 
         }
         CameraTarget.transform.position = endPoint.position;
+    }
+
+    IEnumerator CloseUpEndPoint(Transform endPoint, float duration)
+    {
+        float originalFOW = mainFreeLookCamera.m_Lens.FieldOfView;
+        float elapsedTime = 0f;
+
+        while ( elapsedTime < duration )
+        {
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float smoothT = Mathf.SmoothStep(0.0f, 1.0f, t);
+
+            float interpolatedFOV = Mathf.Lerp(originalFOW, targetFOV, t);
+
+            mainFreeLookCamera.m_Lens.FieldOfView = interpolatedFOV;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        mainFreeLookCamera.m_Lens.FieldOfView = targetFOV;
     }
 
     private void Update()

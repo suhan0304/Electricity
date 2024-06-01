@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     IEnumerator FinishStage(float delayTime)
     {
         Debug.Log("Clear Game!");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f * 2);
 
         endAnimator.speed = endAnimationDuration / delayTime;
         endAnimator.SetTrigger("endStateOn"); // play endPoint Animation
