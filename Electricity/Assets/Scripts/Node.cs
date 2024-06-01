@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -46,18 +47,28 @@ public class Node : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        if(isBuildable) 
+        if(isBuildable && GameManager.Instance.gameState == GameState.PLAY) 
         {
-            transBlockOnNode.SetActive(true);
+            StartCoroutine(transparentBlockNodeControl());
             rend.material.color = hoverColor; // change color to hoverColor
         }
     }
 
+    IEnumerator transparentBlockNodeControl()
+    {
+        transBlockOnNode.SetActive(true);
+        while (transBlockOnNode.activeSelf && GameManager.Instance.gameState == GameState.PLAY)
+        {
+            yield return null;
+        }
+        transBlockOnNode.SetActive(false);
+    }
+
     public void OnMouseExit() // When the mouse leaves the object collider
     {
-        if (isBuildable)
+        transBlockOnNode.SetActive(false);
+        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
         {
-            transBlockOnNode.SetActive(false);
             rend.material.color = startColor; // return color to startColor
         }
     }
@@ -65,7 +76,7 @@ public class Node : MonoBehaviour
     public void OnMouseDown() //When the mouse click the object collider
     {
         // Build a Block
-        if(isBuildable)
+        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
         {
             GameManager.Instance.buildManager.BuildBlockOnNode(this);
             Vector3 targetPos = transBlockOnNode.transform.position;

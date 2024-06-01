@@ -304,6 +304,7 @@ MonoBehaviour:
   pillar: {fileID: 0}
   pillarRenderer: {fileID: 0}
   pillarMaterial: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!65 &6175815629370688505
 BoxCollider:
   m_ObjectHideFlags: 0

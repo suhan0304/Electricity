@@ -11,11 +11,16 @@ public class Validator : MonoBehaviour
             Debug.Log("Error 02 : 01 - InitializationError");
             return false;
         }
+        if (GameManager.Instance.mainCamera == null)
+        {
+            Debug.Log("Error 02 : 02 - InitializationError");
+            return false;
+        }
 
         // Validation Initialization Material in GameManager
         if (GameManager.Instance.PillarMaterial == null)
         {
-            Debug.Log("Error 02 : 02 - InitializationError");
+            Debug.Log("Error 03 : 01 - InitializationError");
             return false;
         }
 

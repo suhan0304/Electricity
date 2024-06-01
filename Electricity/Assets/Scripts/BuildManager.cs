@@ -1,9 +1,12 @@
+using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
 
     public GameObject standardBlockPrefab;
+    public GameObject blockOnNode;
 
     private void Start()
     {
@@ -20,9 +23,8 @@ public class BuildManager : MonoBehaviour
     {
         float blockHeight = blockToBuild.transform.localScale.y;
         Vector3 buildPosition = node.transform.position + new Vector3(0,node.nodeHeight + node.blocksTotalHeight + (blockHeight/2),0);
-        node.blockOnNode = (GameObject)Instantiate(blockToBuild, buildPosition, node.transform.rotation);
+        node.blockOnNode = (GameObject)Instantiate(blockToBuild, buildPosition, node.transform.rotation, node.transform.parent);
 
-        node.blockOnNode.transform.SetParent(node.transform, true); // set Parent
 
         node.blocksTotalHeight += blockHeight; // Update blocksTotalHeights ( add block height )
         node.transBlockHeight += blockHeight; // Update TransBlockHeight ( add block height )
