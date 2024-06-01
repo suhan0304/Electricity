@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     IEnumerator FinishStage()
     {
         yield return new WaitForSeconds(0.5f);
+        Debug.Log("Clear Game!");
 
         endAnimator.SetTrigger("endStateOn");
     }
