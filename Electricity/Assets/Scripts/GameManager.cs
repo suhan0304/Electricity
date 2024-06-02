@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     [Space(5)]
     [Header("State")]
-    public GameState gameState;
+    public GameState gameState = GameState.PLAY;
 
     public static GameManager Instance { get; private set; }
 
@@ -53,15 +53,15 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         validator = GetComponent<Validator>();
-        buildManager = GetComponent<BuildManager>();
         endAnimator = endPoint.GetComponent<Animator>();
+        gameState = GameState.PLAY;
         startTag = "startPoint";
         endTag = "endPoint";
     }
 
     void Start()
     {
-        gameState = GameState.PLAY;
+        buildManager = BuildManager.Instance;
         // Validation
         if (!validator.ValidateInitialization())
             QuitGame();

@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class Node : MonoBehaviour
@@ -32,24 +33,36 @@ public class Node : MonoBehaviour
     private Color startColor;  // start color
 
 
+    [SerializeField]
+    public BuildManager buildManager;
+
+
     private void Awake()
     {
         rend = GetComponent<Renderer>(); // call renderer component
         transBlockOnNode = transform.GetChild(0).gameObject;
         transBlockHeight = transBlockOnNode.transform.position.y;
+
     }
 
     private void Start()
     {
+        buildManager = BuildManager.Instance;
         nodeHeight = transform.localScale.y / 2; // half of node height - for build
         startColor = rend.material.color; // remember start color
     }
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        if(isBuildable && GameManager.Instance.gameState == GameState.PLAY) 
+        if (buildManager.GetBlockToBuild() == null || !isBuildable)
+            return;
+
+
+        if (GameManager.Instance.gameState == GameState.PLAY)
         {
-            StartCoroutine(transparentBlockNodeControl());
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            //StartCoroutine(transparentBlockNodeControl());
             rend.material.color = hoverColor; // change color to hoverColor
         }
     }
@@ -67,7 +80,7 @@ public class Node : MonoBehaviour
     public void OnMouseExit() // When the mouse leaves the object collider
     {
         transBlockOnNode.SetActive(false);
-        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
+        if (GameManager.Instance.gameState == GameState.PLAY)
         {
             rend.material.color = startColor; // return color to startColor
         }
@@ -75,10 +88,15 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
+        if (buildManager.GetBlockToBuild() == null || !isBuildable)
+            return;
+
         // Build a Block
-        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
+        if (GameManager.Instance.gameState == GameState.PLAY)
         {
-            GameManager.Instance.buildManager.BuildBlockOnNode(this);
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            BuildManager.Instance.BuildBlockOnNode(this);
             Vector3 targetPos = transBlockOnNode.transform.position;
             transBlockOnNode.transform.position = new Vector3(targetPos.x, transBlockHeight, targetPos.z);
         }
