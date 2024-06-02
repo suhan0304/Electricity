@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class Node : MonoBehaviour
@@ -31,12 +32,16 @@ public class Node : MonoBehaviour
     private Renderer rend; // renderer component
     private Color startColor;  // start color
 
+    private BuildManager buildManager;
+
 
     private void Awake()
     {
         rend = GetComponent<Renderer>(); // call renderer component
         transBlockOnNode = transform.GetChild(0).gameObject;
         transBlockHeight = transBlockOnNode.transform.position.y;
+
+        buildManager = BuildManager.Instance;
     }
 
     private void Start()
@@ -47,10 +52,16 @@ public class Node : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        if(isBuildable && GameManager.Instance.gameState == GameState.PLAY) 
+        if (buildManager.GetBlockToBuild() == null)
+            return;
+
+        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY) 
         {
-            StartCoroutine(transparentBlockNodeControl());
-            rend.material.color = hoverColor; // change color to hoverColor
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                StartCoroutine(transparentBlockNodeControl());
+                rend.material.color = hoverColor; // change color to hoverColor
+            }
         }
     }
 
@@ -75,6 +86,9 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
+        if (buildManager.GetBlockToBuild() == null)
+            return;
+
         // Build a Block
         if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
         {
