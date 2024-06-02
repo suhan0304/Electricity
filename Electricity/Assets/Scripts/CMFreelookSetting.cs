@@ -91,6 +91,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     IEnumerator MoveTargetToPosition(Transform endPoint, float duration)
     {
         Vector3 startPosition = CameraTarget.transform.position;
+        Vector3 endPosition = new Vector3(endPoint.position.x, startPosition.y, endPoint.position.z);
         
         float elapsedTime = 0f;
 
@@ -99,7 +100,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / duration);
             float smoothT = Mathf.SmoothStep(0.0f, 1.0f, t);
 
-            CameraTarget.transform.position = Vector3.Lerp(startPosition, endPoint.position, smoothT);
+            CameraTarget.transform.position = Vector3.Lerp(startPosition, endPosition, smoothT);
             elapsedTime += Time.deltaTime;
             yield return null;
 
