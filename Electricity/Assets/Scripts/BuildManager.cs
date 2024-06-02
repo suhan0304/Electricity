@@ -7,7 +7,10 @@ public class BuildManager : MonoBehaviour
     [Header("Blocks Prefab")]
     public GameObject standardBlockPrefab;
     public GameObject otherBlockPrefab;
+    public GameObject blockToBuild; // blockToBuild GameObject
 
+    [Space(5)]
+    [Header("Block On Node")]
     public GameObject blockOnNode;
     
     public static BuildManager Instance; // for singleton pattern
@@ -24,10 +27,8 @@ public class BuildManager : MonoBehaviour
 
     private void Start()
     {
-        blockToBuild = standardBlockPrefab; //For Test
+        blockToBuild = null;
     }
-
-    private GameObject blockToBuild; // blockToBuild GameObject
 
     /// <summary>
     /// Getter, Setter Block To Build
@@ -36,9 +37,10 @@ public class BuildManager : MonoBehaviour
     {
         return blockToBuild;
     }
-    public void SetBlockToBuild(GameObject blockToBuild)
+
+    public void SetBlockToBuild(GameObject selectBuild)
     {
-        this.blockToBuild = blockToBuild;
+        blockToBuild = selectBuild;
     }
 
     /// <summary>

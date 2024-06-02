@@ -32,7 +32,9 @@ public class Node : MonoBehaviour
     private Renderer rend; // renderer component
     private Color startColor;  // start color
 
-    private BuildManager buildManager;
+
+    [SerializeField]
+    public BuildManager buildManager;
 
 
     private void Awake()
@@ -41,27 +43,27 @@ public class Node : MonoBehaviour
         transBlockOnNode = transform.GetChild(0).gameObject;
         transBlockHeight = transBlockOnNode.transform.position.y;
 
-        buildManager = BuildManager.Instance;
     }
 
     private void Start()
     {
+        buildManager = BuildManager.Instance;
         nodeHeight = transform.localScale.y / 2; // half of node height - for build
         startColor = rend.material.color; // remember start color
     }
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        if (buildManager.GetBlockToBuild() == null)
+        if (buildManager.GetBlockToBuild() == null || !isBuildable)
             return;
 
-        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY) 
+
+        if (GameManager.Instance.gameState == GameState.PLAY)
         {
             if (EventSystem.current.IsPointerOverGameObject())
-            {
-                StartCoroutine(transparentBlockNodeControl());
-                rend.material.color = hoverColor; // change color to hoverColor
-            }
+                return;
+            StartCoroutine(transparentBlockNodeControl());
+            rend.material.color = hoverColor; // change color to hoverColor
         }
     }
 
@@ -78,7 +80,7 @@ public class Node : MonoBehaviour
     public void OnMouseExit() // When the mouse leaves the object collider
     {
         transBlockOnNode.SetActive(false);
-        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
+        if (GameManager.Instance.gameState == GameState.PLAY)
         {
             rend.material.color = startColor; // return color to startColor
         }
@@ -86,12 +88,14 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
-        if (buildManager.GetBlockToBuild() == null)
+        if (buildManager.GetBlockToBuild() == null || !isBuildable)
             return;
 
         // Build a Block
-        if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
+        if (GameManager.Instance.gameState == GameState.PLAY)
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
             BuildManager.Instance.BuildBlockOnNode(this);
             Vector3 targetPos = transBlockOnNode.transform.position;
             transBlockOnNode.transform.position = new Vector3(targetPos.x, transBlockHeight, targetPos.z);
