@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         validator = GetComponent<Validator>();
-        buildManager = GetComponent<BuildManager>();
         endAnimator = endPoint.GetComponent<Animator>();
         startTag = "startPoint";
         endTag = "endPoint";
@@ -65,6 +64,7 @@ public class GameManager : MonoBehaviour
         // Validation
         if (!validator.ValidateInitialization())
             QuitGame();
+        buildManager = BuildManager.Instance;
     }
 
     /// <summary>

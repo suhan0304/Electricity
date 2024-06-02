@@ -78,7 +78,7 @@ public class Node : MonoBehaviour
         // Build a Block
         if (isBuildable && GameManager.Instance.gameState == GameState.PLAY)
         {
-            GameManager.Instance.buildManager.BuildBlockOnNode(this);
+            BuildManager.Instance.BuildBlockOnNode(this);
             Vector3 targetPos = transBlockOnNode.transform.position;
             transBlockOnNode.transform.position = new Vector3(targetPos.x, transBlockHeight, targetPos.z);
         }

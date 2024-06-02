@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-
+    [Header("Blocks Prefab")]
     public GameObject standardBlockPrefab;
+    public GameObject otherBlockPrefab;
+
     public GameObject blockOnNode;
+    
+    public static BuildManager Instance; // for singleton pattern
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("Error - Only 1 instance - BuildManager.");
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -14,6 +28,18 @@ public class BuildManager : MonoBehaviour
     }
 
     private GameObject blockToBuild; // blockToBuild GameObject
+
+    /// <summary>
+    /// Getter, Setter Block To Build
+    /// </summary>
+    public GameObject GetBlockToBuild()
+    {
+        return blockToBuild;
+    }
+    public void SetBlockToBuild(GameObject blockToBuild)
+    {
+        this.blockToBuild = blockToBuild;
+    }
 
     /// <summary>
     /// Build Block On Node
