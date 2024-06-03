@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
+        Debug.Log("Clear");
         gameState = GameState.CLEAR; // game Clear
 
         float delayTime = 1.0f;
