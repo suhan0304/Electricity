@@ -84,7 +84,9 @@ public class Block : MonoBehaviour
 
         float rayDistance = 0f;
         foreach (Vector3 direction in directions) {
-            Ray ray = new Ray(transform.position, direction);
+
+            Vector3 startRayPos = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            Ray ray = new Ray(startRayPos, direction);
 
             if (direction == Vector3.up || direction == Vector3.down) 
                 rayDistance = 1f;
