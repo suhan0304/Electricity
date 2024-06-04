@@ -1,18 +1,2 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MapBuilder : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+// Map Editor을 따로 만들어서 제작 후 내보내기 누르면 JSON 형식으로 데이터가 나가고 레벨에 따라서 연결되도록 할 예정
+// Map Editor를 하나 만들어보자 
