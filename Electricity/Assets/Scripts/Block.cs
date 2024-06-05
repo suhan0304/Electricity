@@ -94,7 +94,7 @@ public class Block : MonoBehaviour
             else
             {
                 rayDistance = transform.localScale.y;
-                startRayPos = transform.position + direction * transform.localScale.x;
+                startRayPos = transform.position + direction * transform.localScale.x + new Vector3(0, transform.localScale.y / 2,0);
             }
 
             Ray ray = new Ray(startRayPos, direction);
