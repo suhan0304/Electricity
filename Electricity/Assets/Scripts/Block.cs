@@ -82,19 +82,25 @@ public class Block : MonoBehaviour
         List<Block> blocksInRaycast = new List<Block>();
         LayerMask blockLayer = LayerMask.GetMask("Block");
 
+        Vector3 startRayPos = transform.position;
+
         float rayDistance = 0f;
-        foreach (Vector3 direction in directions) {
-
-            Vector3 startRayPos = new Vector3(transform.position.x, 0.5f, transform.position.z);
-            Ray ray = new Ray(startRayPos, direction);
-
-            if (direction == Vector3.up || direction == Vector3.down) 
+        foreach (Vector3 direction in directions)
+        {
+            if (direction == Vector3.up || direction == Vector3.down)
+            {
                 rayDistance = 1f;
-            else {
-                rayDistance = 4f;
+            }
+            else
+            {
+                rayDistance = transform.localScale.y;
+                startRayPos = transform.position + direction * transform.localScale.x;
             }
 
+            Ray ray = new Ray(startRayPos, direction);
+
             RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
+
             foreach(RaycastHit hit in hitData)
             {
                 if (hit.collider.CompareTag(GameManager.Instance.startTag))
