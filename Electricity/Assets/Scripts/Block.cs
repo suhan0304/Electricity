@@ -187,7 +187,7 @@ public class Block : MonoBehaviour
         Color pointColor = Color.green; 
         Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2 - 0.1f, 0.1f);
         Vector3 size2 = new Vector3(0.1f, transform.localScale.y - 0.1f, 0.1f);
-        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2 - 0.1f, transform.localScale.z);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2- 0.1f, transform.localScale.z);
 
         Gizmos.color = pointColor;
         Gizmos.DrawWireCube(transform.position, size1 * 2);

@@ -41,8 +41,10 @@ public class Node : MonoBehaviour
     {
         rend = GetComponent<Renderer>(); // call renderer component
         if(transform.childCount != 0)
+        {
             transBlockOnNode = transform.GetChild(0).gameObject;
-        transBlockHeight = transBlockOnNode.transform.position.y;
+            transBlockHeight = transBlockOnNode.transform.position.y;
+        }
 
     }
 
