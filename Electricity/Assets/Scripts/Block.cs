@@ -79,9 +79,9 @@ public class Block : MonoBehaviour
         LayerMask blockLayer = LayerMask.GetMask("Block");
         Vector3 centerPoint = transform.position;
 
-        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0.1f);
-        Vector3 size2 = new Vector3(0.1f, transform.localScale.y, 0.1f);
-        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2, transform.localScale.z);
+        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2 - 0.1f, 0.1f);
+        Vector3 size2 = new Vector3(0.1f, transform.localScale.y - 0.1f, 0.1f);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2 - 0.1f, transform.localScale.z);
 
         List<Collider> colliders = new List<Collider>();
         colliders.AddRange(Physics.OverlapBox(centerPoint, size1, Quaternion.identity, blockLayer));
@@ -107,60 +107,6 @@ public class Block : MonoBehaviour
 
         return blocksInOverlapBox;
     }
-
-    /*
-    /// <summary>
-    /// Get Block use laycast
-    /// </summary>
-    public List<Block> GetBlockAdjacentBlocks()
-    {
-        Vector3[] directions = {
-            Vector3.up,
-            Vector3.down,
-            Vector3.left,
-            Vector3.right,
-            Vector3.forward,
-            Vector3.back
-        };
-
-        List<Block> blocksInRaycast = new List<Block>();
-        LayerMask blockLayer = LayerMask.GetMask("Block");
-
-        float rayDistance = 0f;
-        foreach (Vector3 direction in directions) {
-
-            Vector3 startRayPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            Ray ray = new Ray(startRayPos, direction);
-
-            if (direction == Vector3.up || direction == Vector3.down) 
-                rayDistance = transform.localScale.y;
-            else {
-                rayDistance = 4f;
-            }
-
-            RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
-            foreach(RaycastHit hit in hitData)
-            {
-                if (hit.collider.CompareTag(GameManager.Instance.startTag))
-                {
-                    ChangeOnState(); // Block State On - Adjacent StartPoint
-                }
-                if (hit.collider.CompareTag(GameManager.Instance.endTag))
-                {
-                    endPoint = hit.collider.gameObject; // if end-Poin is adjacent me : initialization endPoint
-                }
-                else {
-                    Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
-                    //Debug.Log(hit.collider.name); // For Debug Test
-
-                    blocksInRaycast.Add(hitBlock);
-                }
-            }
-        }
-
-        return blocksInRaycast;
-    }
-    */
 
     /// <summary>
     /// Add me(block) where adjacent block's list
@@ -239,9 +185,9 @@ public class Block : MonoBehaviour
     private void OnDrawGizmos()
     {
         Color pointColor = Color.green; 
-        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0.1f);
-        Vector3 size2 = new Vector3(0.1f, transform.localScale.y, 0.1f);
-        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2, transform.localScale.z);
+        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2 - 0.1f, 0.1f);
+        Vector3 size2 = new Vector3(0.1f, transform.localScale.y - 0.1f, 0.1f);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2 - 0.1f, transform.localScale.z);
 
         Gizmos.color = pointColor;
         Gizmos.DrawWireCube(transform.position, size1 * 2);

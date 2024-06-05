@@ -40,7 +40,8 @@ public class Node : MonoBehaviour
     private void Awake()
     {
         rend = GetComponent<Renderer>(); // call renderer component
-        transBlockOnNode = transform.GetChild(0).gameObject;
+        if(transform.childCount != 0)
+            transBlockOnNode = transform.GetChild(0).gameObject;
         transBlockHeight = transBlockOnNode.transform.position.y;
 
     }

@@ -115,7 +115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6138864581182685331}
   - component: {fileID: 5110101341514687088}
-  - component: {fileID: 4200937893689671978}
   - component: {fileID: 54358132683747936}
   m_Layer: 8
   m_Name: EndPoint
@@ -142,27 +141,6 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5110101341514687088
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038280058203467106}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 2, z: 3.5}
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!65 &4200937893689671978
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
