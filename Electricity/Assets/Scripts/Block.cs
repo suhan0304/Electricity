@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -89,6 +91,7 @@ public class Block : MonoBehaviour
             Vector3 dir = Vector3.zero;
             if (direction == Vector3.up || direction == Vector3.down)
             {
+                rayDistance = transform.localScale.y;
                 dir = direction;
             }
             else
@@ -96,8 +99,11 @@ public class Block : MonoBehaviour
                 startRayPos = transform.position + (direction * 4f) + (Vector3.up * transform.localScale.y / 2);
                 dir = Vector3.down;
             }
+            DrawPointGizmo(startRayPos);
             Debug.Log(startRayPos);
+
             Ray ray = new Ray(startRayPos, dir);
+            rayDistance = transform.localScale.y;
 
             RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
 
@@ -191,5 +197,17 @@ public class Block : MonoBehaviour
                 block.ChangeOnState();
             }
         }
+    }
+
+    /// <summary>
+    /// Draw Gizmo on Point
+    /// </summary>
+    private void DrawPointGizmo(Vector3 point)
+    {
+        float pointSize = 0.1f;
+        Color pointColor = Color.red;
+
+        Gizmos.color = pointColor;
+        Gizmos.DrawSphere(point, pointSize);
     }
 }
