@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Tag & Name")]
     public string startTag = "startPoint";
     public string endTag = "endPoint";
+    public string blockTag = "block";
     public string BulbName = "Bulb";
 
     [Space(5)]
@@ -55,8 +56,12 @@ public class GameManager : MonoBehaviour
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
         gameState = GameState.PLAY;
+
+
+        ///Tag settings
         startTag = "startPoint";
         endTag = "endPoint";
+        blockTag = "block";
     }
 
     void Start()

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
     [SerializeField]
     public Vector3 gizmoPoint;
-
 
     [Header("Parameter")]
     [SerializeField]
@@ -74,12 +75,37 @@ public class Block : MonoBehaviour
     /// </summary>
     public List<Block> GetBlockAdjacentBlocks()
     {
-        List<Block> blocksInRaycast = new List<Block>();
+        List<Block> blocksInOverlapBox = new List<Block>();
         LayerMask blockLayer = LayerMask.GetMask("Block");
-
         Vector3 centerPoint = transform.position;
 
-        return blocksInRaycast;
+        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0.1f);
+        Vector3 size2 = new Vector3(0.1f, transform.localScale.y, 0.1f);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2, transform.localScale.z);
+
+        List<Collider> colliders = new List<Collider>();
+        colliders.AddRange(Physics.OverlapBox(centerPoint, size1, Quaternion.identity, blockLayer));
+        colliders.AddRange(Physics.OverlapBox(centerPoint, size2, Quaternion.identity, blockLayer));
+        colliders.AddRange(Physics.OverlapBox(centerPoint, size3, Quaternion.identity, blockLayer));
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag(GameManager.Instance.startTag))
+            {
+                ChangeOnState(); // Block State On - Adjacent StartPoint
+            }
+            else if (collider.CompareTag(GameManager.Instance.endTag))
+            {
+                endPoint = collider.gameObject; // if end-Poin is adjacent me : initialization endPoint
+            }
+            else if (collider.CompareTag(GameManager.Instance.blockTag))
+            {
+                if (collider.transform != transform) 
+                    blocksInOverlapBox.Add(collider.gameObject.GetComponent<Block>());
+            }
+        }
+
+        return blocksInOverlapBox;
     }
 
     /*
@@ -212,11 +238,14 @@ public class Block : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        Color pointColor = Color.red;
+        Color pointColor = Color.green; 
+        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0.1f);
+        Vector3 size2 = new Vector3(0.1f, transform.localScale.y, 0.1f);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2, transform.localScale.z);
 
         Gizmos.color = pointColor;
-        Gizmos.DrawWireCube(transform.position, new Vector3(4, 1, 1));
-        Gizmos.DrawWireCube(transform.position, new Vector3(1, 2, 1));
-        Gizmos.DrawWireCube(transform.position, new Vector3(1, 1, 4));
+        Gizmos.DrawWireCube(transform.position, size1 * 2);
+        Gizmos.DrawWireCube(transform.position, size2 * 2);
+        Gizmos.DrawWireCube(transform.position, size3 * 2);
     }
 }
