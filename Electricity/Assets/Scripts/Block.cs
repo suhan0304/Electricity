@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [SerializeField]
+    public Vector3 gizmoPoint;
+
+
     [Header("Parameter")]
     [SerializeField]
     public Node node; // Node where the block was constructed
@@ -66,6 +70,20 @@ public class Block : MonoBehaviour
     }
 
     /// <summary>
+    /// Get Block use OverlapBox
+    /// </summary>
+    public List<Block> GetBlockAdjacentBlocks()
+    {
+        List<Block> blocksInRaycast = new List<Block>();
+        LayerMask blockLayer = LayerMask.GetMask("Block");
+
+        Vector3 centerPoint = transform.position;
+
+        return blocksInRaycast;
+    }
+
+    /*
+    /// <summary>
     /// Get Block use laycast
     /// </summary>
     public List<Block> GetBlockAdjacentBlocks()
@@ -85,11 +103,11 @@ public class Block : MonoBehaviour
         float rayDistance = 0f;
         foreach (Vector3 direction in directions) {
 
-            Vector3 startRayPos = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            Vector3 startRayPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             Ray ray = new Ray(startRayPos, direction);
 
             if (direction == Vector3.up || direction == Vector3.down) 
-                rayDistance = 1f;
+                rayDistance = transform.localScale.y;
             else {
                 rayDistance = 4f;
             }
@@ -116,6 +134,7 @@ public class Block : MonoBehaviour
 
         return blocksInRaycast;
     }
+    */
 
     /// <summary>
     /// Add me(block) where adjacent block's list
@@ -185,5 +204,19 @@ public class Block : MonoBehaviour
                 block.ChangeOnState();
             }
         }
+    }
+
+
+    /// <summary>
+    /// Draw Gizmo on Point
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Color pointColor = Color.red;
+
+        Gizmos.color = pointColor;
+        Gizmos.DrawWireCube(transform.position, new Vector3(4, 1, 1));
+        Gizmos.DrawWireCube(transform.position, new Vector3(1, 2, 1));
+        Gizmos.DrawWireCube(transform.position, new Vector3(1, 1, 4));
     }
 }
