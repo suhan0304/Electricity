@@ -1,7 +1,5 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -83,30 +81,20 @@ public class Block : MonoBehaviour
 
         List<Block> blocksInRaycast = new List<Block>();
         LayerMask blockLayer = LayerMask.GetMask("Block");
-        Vector3 startRayPos = transform.position;
 
         float rayDistance = 0f;
-        foreach (Vector3 direction in directions)
-        {
-            Vector3 dir = Vector3.zero;
-            if (direction == Vector3.up || direction == Vector3.down)
-            {
-                rayDistance = transform.localScale.y;
-                dir = direction;
-            }
-            else
-            {
-                startRayPos = transform.position + (direction * 4f) + (Vector3.up * transform.localScale.y / 2);
-                dir = Vector3.down;
-            }
-            DrawPointGizmo(startRayPos);
-            Debug.Log(startRayPos);
+        foreach (Vector3 direction in directions) {
 
-            Ray ray = new Ray(startRayPos, dir);
-            rayDistance = transform.localScale.y;
+            Vector3 startRayPos = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            Ray ray = new Ray(startRayPos, direction);
+
+            if (direction == Vector3.up || direction == Vector3.down) 
+                rayDistance = 1f;
+            else {
+                rayDistance = 4f;
+            }
 
             RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
-
             foreach(RaycastHit hit in hitData)
             {
                 if (hit.collider.CompareTag(GameManager.Instance.startTag))
@@ -197,17 +185,5 @@ public class Block : MonoBehaviour
                 block.ChangeOnState();
             }
         }
-    }
-
-    /// <summary>
-    /// Draw Gizmo on Point
-    /// </summary>
-    private void DrawPointGizmo(Vector3 point)
-    {
-        float pointSize = 0.1f;
-        Color pointColor = Color.red;
-
-        Gizmos.color = pointColor;
-        Gizmos.DrawSphere(point, pointSize);
     }
 }
