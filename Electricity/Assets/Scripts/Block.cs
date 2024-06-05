@@ -83,24 +83,20 @@ public class Block : MonoBehaviour
         LayerMask blockLayer = LayerMask.GetMask("Block");
         Vector3 startRayPos = transform.position;
 
-        Debug.Log(transform.localScale.y);
-
         float rayDistance = 0f;
         foreach (Vector3 direction in directions)
         {
             Vector3 dir = Vector3.zero;
             if (direction == Vector3.up || direction == Vector3.down)
             {
-                rayDistance = transform.localScale.y / 2 + 1.0f;
-                startRayPos = transform.position;
                 dir = direction;
             }
             else
             {
-                rayDistance = transform.localScale.y;
-                startRayPos = transform.position + direction * transform.localScale.x + new Vector3(0, transform.localScale.y / 2, 0);
+                startRayPos = transform.position + (direction * 4f) + (Vector3.up * transform.localScale.y / 2);
                 dir = Vector3.down;
             }
+            Debug.Log(startRayPos);
             Ray ray = new Ray(startRayPos, dir);
 
             RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
