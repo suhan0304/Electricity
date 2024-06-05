@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [SerializeField]
+    public Vector3 gizmoPoint;
+
     [Header("Parameter")]
     [SerializeField]
     public Node node; // Node where the block was constructed
@@ -66,55 +71,41 @@ public class Block : MonoBehaviour
     }
 
     /// <summary>
-    /// Get Block use laycast
+    /// Get Block use OverlapBox
     /// </summary>
     public List<Block> GetBlockAdjacentBlocks()
     {
-        Vector3[] directions = {
-            Vector3.up,
-            Vector3.down,
-            Vector3.left,
-            Vector3.right,
-            Vector3.forward,
-            Vector3.back
-        };
-
-        List<Block> blocksInRaycast = new List<Block>();
+        List<Block> blocksInOverlapBox = new List<Block>();
         LayerMask blockLayer = LayerMask.GetMask("Block");
+        Vector3 centerPoint = transform.position;
 
-        float rayDistance = 0f;
-        foreach (Vector3 direction in directions) {
+        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2 - 0.1f, 0.1f);
+        Vector3 size2 = new Vector3(0.1f, transform.localScale.y - 0.1f, 0.1f);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2 - 0.1f, transform.localScale.z);
 
-            Vector3 startRayPos = new Vector3(transform.position.x, 0.5f, transform.position.z);
-            Ray ray = new Ray(startRayPos, direction);
+        List<Collider> colliders = new List<Collider>();
+        colliders.AddRange(Physics.OverlapBox(centerPoint, size1, Quaternion.identity, blockLayer));
+        colliders.AddRange(Physics.OverlapBox(centerPoint, size2, Quaternion.identity, blockLayer));
+        colliders.AddRange(Physics.OverlapBox(centerPoint, size3, Quaternion.identity, blockLayer));
 
-            if (direction == Vector3.up || direction == Vector3.down) 
-                rayDistance = 1f;
-            else {
-                rayDistance = 4f;
-            }
-
-            RaycastHit[] hitData = Physics.RaycastAll(ray, rayDistance, blockLayer);
-            foreach(RaycastHit hit in hitData)
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag(GameManager.Instance.startTag))
             {
-                if (hit.collider.CompareTag(GameManager.Instance.startTag))
-                {
-                    ChangeOnState(); // Block State On - Adjacent StartPoint
-                }
-                if (hit.collider.CompareTag(GameManager.Instance.endTag))
-                {
-                    endPoint = hit.collider.gameObject; // if end-Poin is adjacent me : initialization endPoint
-                }
-                else {
-                    Block hitBlock = hit.collider.gameObject.GetComponent<Block>();
-                    //Debug.Log(hit.collider.name); // For Debug Test
-
-                    blocksInRaycast.Add(hitBlock);
-                }
+                ChangeOnState(); // Block State On - Adjacent StartPoint
+            }
+            else if (collider.CompareTag(GameManager.Instance.endTag))
+            {
+                endPoint = collider.gameObject; // if end-Poin is adjacent me : initialization endPoint
+            }
+            else if (collider.CompareTag(GameManager.Instance.blockTag))
+            {
+                if (collider.transform != transform) 
+                    blocksInOverlapBox.Add(collider.gameObject.GetComponent<Block>());
             }
         }
 
-        return blocksInRaycast;
+        return blocksInOverlapBox;
     }
 
     /// <summary>
@@ -185,5 +176,22 @@ public class Block : MonoBehaviour
                 block.ChangeOnState();
             }
         }
+    }
+
+
+    /// <summary>
+    /// Draw Gizmo on Point
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Color pointColor = Color.green; 
+        Vector3 size1 = new Vector3(transform.localScale.x, transform.localScale.y / 2 - 0.1f, 0.1f);
+        Vector3 size2 = new Vector3(0.1f, transform.localScale.y - 0.1f, 0.1f);
+        Vector3 size3 = new Vector3(0.1f, transform.transform.localScale.y / 2- 0.1f, transform.localScale.z);
+
+        Gizmos.color = pointColor;
+        Gizmos.DrawWireCube(transform.position, size1 * 2);
+        Gizmos.DrawWireCube(transform.position, size2 * 2);
+        Gizmos.DrawWireCube(transform.position, size3 * 2);
     }
 }

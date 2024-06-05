@@ -131,6 +131,9 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance == null)
+            return;
+
         if (GameManager.Instance.gameState == GameState.CLEAR)
             return;
 
