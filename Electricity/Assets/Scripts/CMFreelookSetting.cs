@@ -66,12 +66,9 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
     private void SetCameraTargetPos(Vector3 centerPos)
     {
-        Vector3 targetPos = centerPos * (1, 0, 1);
+        Vector3 targetPos = new Vector3(centerPos.x, 0, centerPos.z);
         if (CameraTarget != null)
-        {
-
-        }
-            CameraTarget.transform.position = centerPos;
+            CameraTarget.transform.position = targetPos;
     }
 
     /// <summary>
