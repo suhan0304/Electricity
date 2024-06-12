@@ -116,7 +116,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         map.SetMapData();
-        Debug.Log("Start Set MapData...");
     }
     /// set MapData
     public void SaveMapData() {
@@ -125,7 +124,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         map.SaveMapData();
-        Debug.Log("Start Save MapData...");
     }
     /// set MapData
     public void LoadMapData() {
@@ -134,6 +132,5 @@ public class GameManager : MonoBehaviour
             return;
         }
         Debug.Log("TODO - Map Load");
-        Debug.Log("Start Load MapData...");
     }
 }

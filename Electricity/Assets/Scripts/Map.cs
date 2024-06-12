@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
-[System.Serializable]
 public class Map : MonoBehaviour
 {
     public GameObject fieldObject;
@@ -11,10 +9,9 @@ public class Map : MonoBehaviour
     public Vector3 startNode; // StartNode Position
     public Vector3 endNode; // EndNode Position
 
-    //[JsonIgnore]
-    public List<Vector3> nodesPosition; // all Nodes Position
-
     public Dictionary<int, int> blockInventory; // blockInventrory<BlockType(num), blockCounts> {1: 2, 3: 4})
+
+    public List<Vector3> nodesPosition; // all Nodes Position
 
     public void SetMapData() {
         nodesPosition = new List<Vector3>();
@@ -33,6 +30,7 @@ public class Map : MonoBehaviour
                 }
             }
         }
+        Debug.Log("Finish - Set Map Data");
     } 
 
     public void SaveMapData() {
