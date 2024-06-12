@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class Map : MonoBehaviour
@@ -9,10 +10,14 @@ public class Map : MonoBehaviour
     public int level;
     public Vector3 startNode; // StartNode Position
     public Vector3 endNode; // EndNode Position
-    public List<float[]> nodesPosition = new List<float[]>(); // all Nodes Position
+
+    //[JsonIgnore]
+    public List<Vector3> nodesPosition; // all Nodes Position
+
     public Dictionary<int, int> blockInventory; // blockInventrory<BlockType(num), blockCounts> {1: 2, 3: 4})
 
     public void SetMapData() {
+        nodesPosition = new List<Vector3>();
         if (fieldObject != null) {
             foreach (Transform child in fieldObject.transform) {
                 if(child.CompareTag(Tags.NodeTag)) {
@@ -23,7 +28,7 @@ public class Map : MonoBehaviour
                         endNode = child.position;
                     }
                     else {
-                        nodesPosition.Add(new float[3] {child.position.x, child.position.y, child.position.z});
+                        nodesPosition.Add(child.position);
                     }
                 }
             }

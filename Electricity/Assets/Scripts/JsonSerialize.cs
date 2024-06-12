@@ -1,11 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.IO;
-
-public class DataWrapper {
-    public Vector3[] infos;
-}
-
+using Newtonsoft.Json;
 public class JsonSerialize
 {
     public static void SaveMapDataToJson(Map map) {
@@ -15,13 +10,12 @@ public class JsonSerialize
         if (File.Exists(fileName)) {
             File.Delete(fileName); // delete existing file
         }
+        
+        string json = JsonConvert.SerializeObject(map); // Convert MapData to Json
 
-        MapData mData = new MapData(map); // set MappData
-
-        string json = JsonUtility.ToJson(mData, true); // Convert MapData to Json
 
         Debug.Log(json);
-        
+
         File.WriteAllText(fileName, json);
 
         Debug.Log("Finish - Save Map Data");
