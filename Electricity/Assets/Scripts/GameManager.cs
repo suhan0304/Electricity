@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Space(5)]
+    [Header("ForMapData")]
+    public GameObject Filed;
+
 
     [Space(5)]
     [Header("Manager")]
@@ -15,10 +19,11 @@ public class GameManager : MonoBehaviour
 
     [Space(5)]
     [Header("Tag & Name")]
-    public string startTag = "startPoint";
-    public string endTag = "endPoint";
-    public string blockTag = "block";
-    public string BulbName = "Bulb";
+    public string startTag;
+    public string endTag;
+    public string blockTag;
+    public string BulbName;
+    public string NodeTag;
 
     [Space(5)]
     [Header("endPoint")]
@@ -59,9 +64,14 @@ public class GameManager : MonoBehaviour
 
 
         ///Tag settings
+        SetTagNames();
+    }
+    void SetTagNames() {
         startTag = "startPoint";
         endTag = "endPoint";
         blockTag = "block";
+        BulbName = "Bulb";
+        NodeTag = "Node";
     }
 
     void Start()
