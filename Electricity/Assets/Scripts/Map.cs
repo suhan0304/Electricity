@@ -13,7 +13,7 @@ public class Map : MonoBehaviour
     public Dictionary<int, int> blockInventory; // blockInventrory<BlockType(num), blockCounts> {1: 2, 3: 4})
 
     void Start() {
-
+        SetMapData();
     }
 
     void SetMapData() {
@@ -21,8 +21,15 @@ public class Map : MonoBehaviour
         if (fieldObject != null) {
             foreach (Transform child in fieldObject.transform) {
                 if(child.CompareTag(GameManager.Instance.NodeTag)) {
-                    if(child.name = )
-                    nodePositions.Add(child.position);
+                    if(child.name == GameManager.Instance.startNode) {
+                        startNode = child.position;
+                    }
+                    else if(child.name == GameManager.Instance.endNode) {
+                        endNode = child.position;
+                    }
+                    else {
+                        nodePositions.Add(child.position); 
+                    }
                 }
             }
         }
