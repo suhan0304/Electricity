@@ -9,7 +9,7 @@ public class Map : MonoBehaviour
     public int level;
     public Vector3 startNode; // StartNode Position
     public Vector3 endNode; // EndNode Position
-    public List<float[]> nodes; // all Nodes Position
+    public List<Vector3> nodes; // all Nodes Position
     public Dictionary<int, int> blockInventory; // blockInventrory<BlockType(num), blockCounts> {1: 2, 3: 4})
 
     public void SetMapData() {
