@@ -16,16 +16,6 @@ public class GameManager : MonoBehaviour
     public Validator validator;
 
     [Space(5)]
-    [Header("Tag & Name")]
-    public string startNode;
-    public string endNode;
-    public string startTag;
-    public string endTag;
-    public string blockTag;
-    public string BulbName;
-    public string NodeTag;
-
-    [Space(5)]
     [Header("endPoint")]
     public GameObject endPoint;
     public Animator endAnimator;
@@ -63,19 +53,6 @@ public class GameManager : MonoBehaviour
         if(map == null) 
             map = GetComponent<Map>();
         gameState = GameState.PLAY;
-
-
-        ///Tag settings
-        SetTagNames();
-    }
-    void SetTagNames() {
-        startNode = "StartNode";
-        endNode = "EndNode";
-        startTag = "startPoint";
-        endTag = "endPoint";
-        blockTag = "block";
-        BulbName = "Bulb";
-        NodeTag = "node";
     }
 
     void Start()
