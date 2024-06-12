@@ -12,12 +12,13 @@ public class Map : MonoBehaviour
     public List<Vector3> nodePositions; // all Nodes Position
     public Dictionary<int, int> blockInventory; // blockInventrory<BlockType(num), blockCounts> {1: 2, 3: 4})
 
-    void Start() {
-        SetMapData();
-    }
-
-    void SetMapData() {
-        fieldObject = GameManager.Instance.field;
+    public void SetMapData() {
+        if(GameManager.Instance.field == null) {
+            Debug.LogError("GameManager's Filed Object is Null");
+        }
+        else {
+            fieldObject = GameManager.Instance.field;
+        }
         if (fieldObject != null) {
             foreach (Transform child in fieldObject.transform) {
                 if(child.CompareTag(GameManager.Instance.NodeTag)) {
@@ -33,5 +34,9 @@ public class Map : MonoBehaviour
                 }
             }
         }
+    } 
+
+    public void SaveMapData() {
+        JsonSerialize.SaveMapDataToJson(this);
     }
 }

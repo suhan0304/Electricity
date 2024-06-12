@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEditor;
 
 public class JsonSerialize
 {
-    public static void SaveMapDataToJson(MapData mapData) {
+    public static void SaveMapDataToJson(Map map) {
         string fileName = Path.Combine(Application.dataPath + "/MapData/mapData_Level1.json");
 
         // file already exist
@@ -14,6 +11,10 @@ public class JsonSerialize
             File.Delete(fileName); // delete existing file
         }
 
+        MapData mData = new MapData(map); // set MappData
 
+        string json = JsonUtility.ToJson(mData); // Convert MapData to Json
+
+        File.WriteAllText(fileName, json);
     }
 }

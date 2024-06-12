@@ -1,14 +1,12 @@
-using Cinemachine;
-using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [Space(5)]
     [Header("ForMapData")]
+    public int mapLevel = 1;
+    public Map map;
     public GameObject field;
 
 
@@ -62,6 +60,8 @@ public class GameManager : MonoBehaviour
         }
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
+        if(map == null) 
+            map = GetComponent<Map>();
         gameState = GameState.PLAY;
 
 
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         endTag = "endPoint";
         blockTag = "block";
         BulbName = "Bulb";
-        NodeTag = "Node";
+        NodeTag = "node";
     }
 
     void Start()
@@ -130,5 +130,30 @@ public class GameManager : MonoBehaviour
     #else
         Application.Quit();
     #endif
+    }
+
+    /// set MapData
+    public void SetMapData() {
+        if(map == null) {
+            return;
+        }
+        map.SetMapData();
+        Debug.Log("Start Set MapData...");
+    }
+    /// set MapData
+    public void SaveMapData() {
+        if(map == null) {
+            return;
+        }
+        map.SaveMapData();
+        Debug.Log("Start Save MapData...");
+    }
+    /// set MapData
+    public void LoadMapData() {
+        if(map == null) {
+            return;
+        }
+        Debug.Log("TODO - Map Load");
+        Debug.Log("Start Load MapData...");
     }
 }
