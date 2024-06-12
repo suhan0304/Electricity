@@ -13,7 +13,7 @@ public class JsonSerialize
 
         MapData mData = new MapData(map); // set MappData
 
-        string json = JsonUtility.ToJson(mData); // Convert MapData to Json
+        string json = JsonUtility.ToJson(mData, true); // Convert MapData to Json
 
         File.WriteAllText(fileName, json);
     }

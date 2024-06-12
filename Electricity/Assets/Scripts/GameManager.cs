@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
         SetTagNames();
     }
     void SetTagNames() {
-        startNode = "startNode";
-        endNode = "endNode";
+        startNode = "StartNode";
+        endNode = "EndNode";
         startTag = "startPoint";
         endTag = "endPoint";
         blockTag = "block";
@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
     /// set MapData
     public void SetMapData() {
         if(map == null) {
+            Debug.LogError("Map is not exist.");
             return;
         }
         map.SetMapData();
@@ -143,6 +144,7 @@ public class GameManager : MonoBehaviour
     /// set MapData
     public void SaveMapData() {
         if(map == null) {
+            Debug.LogError("Map is not exist.");
             return;
         }
         map.SaveMapData();
@@ -151,6 +153,7 @@ public class GameManager : MonoBehaviour
     /// set MapData
     public void LoadMapData() {
         if(map == null) {
+            Debug.LogError("Map is not exist.");
             return;
         }
         Debug.Log("TODO - Map Load");
