@@ -20,7 +20,10 @@ public class Map : MonoBehaviour
         fieldObject = GameManager.Instance.field;
         if (fieldObject != null) {
             foreach (Transform child in fieldObject.transform) {
-                if(child.CompareTag(GameManager.Instance.blo))
+                if(child.CompareTag(GameManager.Instance.NodeTag)) {
+                    if(child.name = )
+                    nodePositions.Add(child.position);
+                }
             }
         }
     }

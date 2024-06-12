@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     [Space(5)]
     [Header("ForMapData")]
-    public GameObject Filed;
+    public GameObject field;
 
 
     [Space(5)]
@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     [Space(5)]
     [Header("Tag & Name")]
+    public string startNode;
+    public string endNode;
     public string startTag;
     public string endTag;
     public string blockTag;
@@ -67,6 +69,8 @@ public class GameManager : MonoBehaviour
         SetTagNames();
     }
     void SetTagNames() {
+        startNode = "startNode";
+        endNode = "endNode";
         startTag = "startPoint";
         endTag = "endPoint";
         blockTag = "block";
