@@ -51,7 +51,8 @@ public class JsonSerialize
             return;
         }
 
-        
+        string jsonFromFile = File.ReadAllText(fileName);
+        Map mData = JsonUtility.FromJson<Vector3ListWrapper>(jsonFromFile);;
 
     }
 }
