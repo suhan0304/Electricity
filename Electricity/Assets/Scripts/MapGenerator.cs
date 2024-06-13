@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -34,10 +35,9 @@ public class MapGenerator : MonoBehaviour
         Instantiate(StartNodePrefab, map.startNode, Quaternion.identity, fieldObject);
 
         GameObject endNode = Instantiate(EndNodePrefab, map.endNode, Quaternion.identity, fieldObject);
-
         GameManager.Instance.endPoint = endNode.transform.Find(Names.endPoint).gameObject;
 
-        StartCoroutine(SpawnNodesWithDelay(map, fieldObject, 0.2f));
+        StartCoroutine(SpawnNodesWithDelay(map, fieldObject, 0.1f));
 
         Debug.Log("Map Generation Finish!");
     }    

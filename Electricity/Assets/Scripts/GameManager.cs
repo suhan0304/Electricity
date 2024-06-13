@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [Space(5)]
     [Header("Map")]
+    public Map map;
     public int mapLevel = 1;
     public MapGenerator mapGenerator;
 
@@ -51,11 +52,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        /*
+        if(map == null) {
+            Debug.LogWarning("Map is not exist! (Check Mapmanager)");
+        }
+        mapGenerate();
+
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
         gameState = GameState.PLAY;
-        */
         buildManager = BuildManager.Instance;
         // Validation
         if (!validator.ValidateInitialization())
@@ -111,5 +115,10 @@ public class GameManager : MonoBehaviour
     public void ResetPrefabFromRepository() {
         mapGenerator.GetPrefabFromRepository();
         //TODO - BuildManager Prefabs Initialize
+    }
+
+    /// map Generate
+    public void mapGenerate() {
+        map.GenerateMapFromMapData();
     }
 }
