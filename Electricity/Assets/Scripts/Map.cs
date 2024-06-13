@@ -59,6 +59,6 @@ public class Map : MonoBehaviour
             if (mapGenerator == null) {
                 transform.GetComponent<MapGenerator>();
             }
-            mapGenerator.MapGenerate(this);
+            mapGenerator.MapGenerate(this, fieldObject.transform);
         }
 }

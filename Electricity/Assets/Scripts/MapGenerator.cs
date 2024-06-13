@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -16,7 +17,7 @@ public class MapGenerator : MonoBehaviour
         EndNodePrefab = prefabRepository.GetPrefab(Names.endNode);
     }
 
-    public void MapGenerate(Map map) {
+    public void MapGenerate(Map map, Transform fieldObject) {
         Debug.Log("Map Generation Start...");
 
         GetPrefabFromRepository();
@@ -25,6 +26,9 @@ public class MapGenerator : MonoBehaviour
             Debug.LogWarning("Node Prefab Error");
             return;
         }
+
+        Instantiate(StartNodePrefab, map.startNode, Quaternion.identity, fieldObject);
+        Instantiate(EndNodePrefab, map.endNode, Quaternion.identity, fieldObject);
 
         Debug.Log("Map Generation Finish!");
     }
