@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class Map : MonoBehaviour
-{
+{    
     public GameObject fieldObject;
 
     public int level;
@@ -12,6 +13,12 @@ public class Map : MonoBehaviour
     public Dictionary<int, int> blockInventory; // blockInventrory<BlockType(num), blockCounts> {1: 2, 3: 4})
 
     public List<Vector3> nodesPosition; // all Nodes Position
+
+    public MapGenerator mapGenerator;
+    
+    private void Start() {
+        transform.GetComponent<MapGenerator>();
+    }
 
     public void SetMapData() {
         nodesPosition = new List<Vector3>();

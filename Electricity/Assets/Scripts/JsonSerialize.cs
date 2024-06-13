@@ -42,11 +42,6 @@ public class JsonSerialize
     }
 
     public static void LoadMapDataToMap(Map map) {
-        // 0 level is not exist
-        if (map.level == 0) {
-            Debug.LogError("0 Level is not Exist!");
-            return;
-        }
         string fileName = Path.Combine(Application.dataPath + "/MapData/mapData_Level" + map.level + ".json");
 
         // file already exist
@@ -58,7 +53,6 @@ public class JsonSerialize
         string jsonFromFile = File.ReadAllText(fileName);
         Vector3ListWrapper jsonData = JsonUtility.FromJson<Vector3ListWrapper>(jsonFromFile);;
         
-        map.level = jsonData.level;
         map.startNode = jsonData.startNode;
         map.endNode = jsonData.endNode;
         map.nodesPosition = jsonData.vector3List;
