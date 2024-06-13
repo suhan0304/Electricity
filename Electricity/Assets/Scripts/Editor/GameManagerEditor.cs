@@ -7,8 +7,9 @@ public class GameManagerEditor : Editor
     public override void OnInspectorGUI()
     {
         GameManager gameManager = (GameManager)target;
-        if (GUILayout.Button("Nothing"))
+        if (GUILayout.Button("Reset Prafabs From PrefabRepository"))
         {
+            gameManager.ResetPrefabFromRepository();
         }
 
         DrawDefaultInspector();

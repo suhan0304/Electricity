@@ -25,7 +25,6 @@ public class MapManagerEditor : Editor
         }
 
         GUILayout.Space(10);
-
         if (GUILayout.Button("Generate Map"))
         {
             map.GenerateMapFromMapData();

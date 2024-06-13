@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class PrefabRepository : ScriptableObject {
     public List<GameObject> prefabs;
 
-    private Dictionary<string, GameObject> prefabDictionary;
+    public Dictionary<string, GameObject> prefabDictionary;
 
-    private void OnEnable() {
-        
+    public void OnEnable() {
+        InitializeDictionary();
     }
 
-    private void InitializeDictionary() {
+    public void InitializeDictionary() {
         prefabDictionary = new Dictionary<string, GameObject>();
 
         foreach (var prefab in prefabs) {

@@ -4,10 +4,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Space(5)]
-    [Header("ForMapData")]
+    [Header("Map")]
     public int mapLevel = 1;
-    public Map map;
-    public GameObject field;
+    public MapGenerator mapGenerator;
 
 
     [Space(5)]
@@ -48,15 +47,15 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Error - Only 1 instance - GameManager.");
             Destroy(gameObject);
         }
-        validator = GetComponent<Validator>();
-        endAnimator = endPoint.GetComponent<Animator>();
-        if(map == null) 
-            map = GetComponent<Map>();
-        gameState = GameState.PLAY;
     }
 
     void Start()
     {
+        /*
+        validator = GetComponent<Validator>();
+        endAnimator = endPoint.GetComponent<Animator>();
+        gameState = GameState.PLAY;
+        */
         buildManager = BuildManager.Instance;
         // Validation
         if (!validator.ValidateInitialization())
@@ -109,36 +108,8 @@ public class GameManager : MonoBehaviour
     #endif
     }
 
-    /// set MapData
-    public void SetMapData() {
-        if(map == null) {
-            Debug.LogError("Map is not exist.");
-            return;
-        }
-        map.SetMapData();
-    }
-    /// set MapData
-    public void SaveMapData() {
-        if(map == null) {
-            Debug.LogError("Map is not exist.");
-            return;
-        }
-        map.SaveMapData();
-    }
-    /// Load MapData
-    public void LoadMapData() {
-        if(map == null) {
-            Debug.LogError("Map is not exist.");
-            return;
-        }
-        map.LoadMapData();
-    }
-    /// Reset MapData
-    public void ResetMapData() {
-        if(map == null) {
-            Debug.LogError("Map is not exist.");
-            return;
-        }
-        map.ResetMapData();
+    public void ResetPrefabFromRepository() {
+        mapGenerator.GetPrefabFromRepository();
+        //TODO - BuildManager Prefabs Initialize
     }
 }
