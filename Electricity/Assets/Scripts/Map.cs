@@ -33,7 +33,22 @@ public class Map : MonoBehaviour
         Debug.Log("Finish - Set Map Data");
     } 
 
+    /// Save Map Data to Json format file
     public void SaveMapData() {
         JsonSerialize.SaveMapDataToJson(this);
+    }
+
+    /// Load Map Data from Json format file
+    public void LoadMapData() {
+        JsonSerialize.LoadMapDataToMap(this);
+    }
+
+    /// Reset Map Data
+    public void ResetMapData() {
+        level = 0;
+        startNode = Vector3.zero; 
+        endNode = Vector3.zero;
+        nodesPosition.Clear();
+        //blockInventory.Clear();
     }
 }

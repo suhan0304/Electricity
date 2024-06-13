@@ -125,12 +125,20 @@ public class GameManager : MonoBehaviour
         }
         map.SaveMapData();
     }
-    /// set MapData
+    /// Load MapData
     public void LoadMapData() {
         if(map == null) {
             Debug.LogError("Map is not exist.");
             return;
         }
-        Debug.Log("TODO - Map Load");
+        map.LoadMapData();
+    }
+    /// Reset MapData
+    public void ResetMapData() {
+        if(map == null) {
+            Debug.LogError("Map is not exist.");
+            return;
+        }
+        map.ResetMapData();
     }
 }

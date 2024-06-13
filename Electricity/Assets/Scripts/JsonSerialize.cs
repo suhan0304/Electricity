@@ -1,9 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Enumeration;
-
-
+using Unity.VisualScripting;
 
 public class Vector3ListWrapper
 {
@@ -24,7 +22,7 @@ public class Vector3ListWrapper
 public class JsonSerialize
 {
     public static void SaveMapDataToJson(Map map) {
-        string fileName = Path.Combine(Application.dataPath + "/MapData/mapData_Level1.json");
+        string fileName = Path.Combine(Application.dataPath + "/MapData/mapData_Level" + map.level + ".json");
 
         // file already exist
         if (File.Exists(fileName)) {
@@ -44,15 +42,25 @@ public class JsonSerialize
     }
 
     public static void LoadMapDataToMap(Map map) {
-        string fileName = Path.Combine(Application.dataPath + "/MapData/mapData_Level1.json");
+        // 0 level is not exist
+        if (map.level == 0) {
+            Debug.LogError("0 Level is not Exist!");
+            return;
+        }
+        string fileName = Path.Combine(Application.dataPath + "/MapData/mapData_Level" + map.level + ".json");
+
         // file already exist
         if (!File.Exists(fileName)) {
-            Debug.LogError("No File (MapData)");
+            Debug.LogError("No File (" + map.level +  " level MapData)");
             return;
         }
 
         string jsonFromFile = File.ReadAllText(fileName);
-        Map mData = JsonUtility.FromJson<Vector3ListWrapper>(jsonFromFile);;
-
+        Vector3ListWrapper jsonData = JsonUtility.FromJson<Vector3ListWrapper>(jsonFromFile);;
+        
+        map.level = jsonData.level;
+        map.startNode = jsonData.startNode;
+        map.endNode = jsonData.endNode;
+        map.nodesPosition = jsonData.vector3List;
     }
 }
