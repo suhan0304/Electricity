@@ -56,7 +56,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
         if (childCount > 0)
         {
-            return totalPosition / childCount;
+            return (totalPosition / childCount);
         }
         else
         {
@@ -66,8 +66,9 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
 
     private void SetCameraTargetPos(Vector3 centerPos)
     {
+        Vector3 targetPos = new Vector3(centerPos.x, 0, centerPos.z);
         if (CameraTarget != null)
-            CameraTarget.transform.position = centerPos;
+            CameraTarget.transform.position = targetPos;
     }
 
     /// <summary>

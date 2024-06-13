@@ -1,8 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class Node : MonoBehaviour
 {
@@ -65,7 +63,7 @@ public class Node : MonoBehaviour
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
-            //StartCoroutine(transparentBlockNodeControl());
+            StartCoroutine(transparentBlockNodeControl());
             rend.material.color = hoverColor; // change color to hoverColor
         }
     }

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    [Header("Blocks Prefab")]
+    [Header("Prefab Repository")]
+    public PrefabRepository prefabRepository;
+
+    [Space(5)]
+    [Header("Blocks Prefabs")]
     public GameObject standardBlockPrefab;
     public GameObject otherBlockPrefab;
     public GameObject blockToBuild; // blockToBuild GameObject
@@ -27,6 +31,11 @@ public class BuildManager : MonoBehaviour
 
     private void Start()
     {
+        if (prefabRepository == null) {
+            Debug.Log("PrefabRepository is not assigned in BuildManager");
+            return;
+        }
+
         blockToBuild = null;
     }
 

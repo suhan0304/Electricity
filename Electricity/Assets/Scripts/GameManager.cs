@@ -1,24 +1,19 @@
-using Cinemachine;
-using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Space(5)]
+    [Header("Map")]
+    public Map map;
+    public int mapLevel = 1;
+    public MapGenerator mapGenerator;
+
 
     [Space(5)]
     [Header("Manager")]
     public BuildManager buildManager;
     public Validator validator;
-
-    [Space(5)]
-    [Header("Tag & Name")]
-    public string startTag = "startPoint";
-    public string endTag = "endPoint";
-    public string blockTag = "block";
-    public string BulbName = "Bulb";
 
     [Space(5)]
     [Header("endPoint")]
@@ -53,19 +48,18 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Error - Only 1 instance - GameManager.");
             Destroy(gameObject);
         }
-        validator = GetComponent<Validator>();
-        endAnimator = endPoint.GetComponent<Animator>();
-        gameState = GameState.PLAY;
-
-
-        ///Tag settings
-        startTag = "startPoint";
-        endTag = "endPoint";
-        blockTag = "block";
     }
 
     void Start()
     {
+        if(map == null) {
+            Debug.LogWarning("Map is not exist! (Check Mapmanager)");
+        }
+        mapGenerate();
+
+        validator = GetComponent<Validator>();
+        endAnimator = endPoint.GetComponent<Animator>();
+        gameState = GameState.PLAY;
         buildManager = BuildManager.Instance;
         // Validation
         if (!validator.ValidateInitialization())
@@ -116,5 +110,15 @@ public class GameManager : MonoBehaviour
     #else
         Application.Quit();
     #endif
+    }
+
+    public void ResetPrefabFromRepository() {
+        mapGenerator.GetPrefabFromRepository();
+        //TODO - BuildManager Prefabs Initialize
+    }
+
+    /// map Generate
+    public void mapGenerate() {
+        map.GenerateMapFromMapData();
     }
 }

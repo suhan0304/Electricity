@@ -90,15 +90,15 @@ public class Block : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag(GameManager.Instance.startTag))
+            if (collider.CompareTag(Tags.startTag))
             {
                 ChangeOnState(); // Block State On - Adjacent StartPoint
             }
-            else if (collider.CompareTag(GameManager.Instance.endTag))
+            else if (collider.CompareTag(Tags.endTag))
             {
                 endPoint = collider.gameObject; // if end-Poin is adjacent me : initialization endPoint
             }
-            else if (collider.CompareTag(GameManager.Instance.blockTag))
+            else if (collider.CompareTag(Tags.blockTag))
             {
                 if (collider.transform != transform) 
                     blocksInOverlapBox.Add(collider.gameObject.GetComponent<Block>());
