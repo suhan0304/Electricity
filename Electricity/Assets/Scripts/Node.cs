@@ -63,7 +63,7 @@ public class Node : MonoBehaviour
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
-            //StartCoroutine(transparentBlockNodeControl());
+            StartCoroutine(transparentBlockNodeControl());
             rend.material.color = hoverColor; // change color to hoverColor
         }
     }
