@@ -24,6 +24,13 @@ public class MapManagerEditor : Editor
             map.ResetMapData();
         }
 
+        GUILayout.Space(10);
+
+        if (GUILayout.Button("Generate Map"))
+        {
+            map.GenerateMapFromMapData();
+        }
+
         DrawDefaultInspector();
     }
 }

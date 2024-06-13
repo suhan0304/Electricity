@@ -58,4 +58,8 @@ public class Map : MonoBehaviour
         nodesPosition.Clear();
         //blockInventory.Clear();
     }
+
+        public void GenerateMapFromMapData() {
+            mapGenerator.MapGenerate(this);
+        }
 }
