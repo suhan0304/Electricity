@@ -15,10 +15,6 @@ public class Map : MonoBehaviour
     public List<Vector3> nodesPosition; // all Nodes Position
 
     public MapGenerator mapGenerator;
-    
-    private void Start() {
-        transform.GetComponent<MapGenerator>();
-    }
 
     public void SetMapData() {
         nodesPosition = new List<Vector3>();
@@ -60,6 +56,9 @@ public class Map : MonoBehaviour
     }
 
         public void GenerateMapFromMapData() {
+            if (mapGenerator == null) {
+                transform.GetComponent<MapGenerator>();
+            }
             mapGenerator.MapGenerate(this);
         }
 }
