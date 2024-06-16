@@ -33,7 +33,6 @@ public class MapGenerator : MonoBehaviour
         }
 
         Instantiate(StartNodePrefab, map.startNode, Quaternion.identity, fieldObject);
-
         GameObject endNode = Instantiate(EndNodePrefab, map.endNode, Quaternion.identity, fieldObject);
         GameManager.Instance.endPoint = endNode.transform.Find(Names.endPoint).gameObject;
 
