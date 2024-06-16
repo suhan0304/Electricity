@@ -36,7 +36,7 @@ public class MapGenerator : MonoBehaviour
         GameObject endNode = Instantiate(EndNodePrefab, map.endNode, Quaternion.identity, fieldObject);
         GameManager.Instance.endPoint = endNode.transform.Find(Names.endPoint).gameObject;
 
-        StartCoroutine(SpawnNodesWithDelay(map, fieldObject, 0.2f)); // 0.2초 간격으로 노드 생성
+        StartCoroutine(SpawnNodesWithDelay(map, fieldObject, 0.1f)); // 0.2초 간격으로 노드 생성
 
         Debug.Log("Map Generation Finish!");
     }    
@@ -44,7 +44,7 @@ public class MapGenerator : MonoBehaviour
     /// Coroutines for creating nodes at intervals
     IEnumerator SpawnNodesWithDelay(Map map, Transform fieldObject, float delayTime)
     {
-        float downTime = delayTime * 2f;
+        float downTime = delayTime * 10f;
         float firstNodeHeight = 100f;
         foreach (Vector3 targetVec in map.nodesPosition)
         {
@@ -75,4 +75,4 @@ public class MapGenerator : MonoBehaviour
         }
         node.position = endPos;
     }
-}
+    }
