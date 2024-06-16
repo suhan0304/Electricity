@@ -68,7 +68,11 @@ public class MapGenerator : MonoBehaviour
             float t = elapsedTime / duration;
             float smoothT = Mathf.SmoothStep(0, 1, t);
 
-            node.position = Vector3.Lerp(startPos, endPos, smoothT)
+            node.position = Vector3.Lerp(startPos, endPos, smoothT);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+        node.position = endPos;
     }
 }
