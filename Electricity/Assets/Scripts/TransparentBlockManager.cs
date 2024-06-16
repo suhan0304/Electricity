@@ -46,9 +46,8 @@ public class TransparentBlockManager : MonoBehaviour
         if (selectedBlockType == -1) // not select
             return;
         if (blockDictionary.TryGetValue(selectedBlockType, out var block)) {
-            block.transform.position = new Vector3(position.x, 
-                blockHeight + (BuildManager.Instance.blockToBuild.transform.localScale.y / 2), 
-                position.z);
+            block.transform.position = position + 
+                new Vector3(0, blockHeight + (BuildManager.Instance.blockToBuild.transform.localScale.y /2), 0);
             block.SetActive(true);
         }
     }
