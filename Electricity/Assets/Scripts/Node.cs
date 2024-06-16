@@ -55,7 +55,7 @@ public class Node : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        if(!isBuildable)
+        if(!isBuildable || buildManager.GetBlockToBuild() == null)
             return;
 
         if (GameManager.Instance.gameState == GameState.PLAY)
@@ -81,7 +81,7 @@ public class Node : MonoBehaviour
     {
         if (!isBuildable)
             return;
-
+            
         transBlockOnNode.SetActive(false);
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
@@ -91,7 +91,7 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
-        if (!isBuildable)
+        if(!isBuildable)
             return;
 
         if (buildManager.GetBlockToBuild() == null || !isBuildable)
