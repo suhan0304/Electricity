@@ -8,7 +8,6 @@ public class Node : MonoBehaviour
     [SerializeField]
     public float nodeHeight = 0; // to calculate buildBlock Position
     public float blocksTotalHeight = 0; // total of blocks height on node
-    public float transBlockHeight = 0;
 
     [Space(5)]
     [Header("Colors")]
@@ -51,6 +50,7 @@ public class Node : MonoBehaviour
         if(!isBuildable || buildManager.GetBlockToBuild() == null)
             return;
 
+        TransparentBlockManager.Instance.ShowTransparentBlock(transform.position, nodeHeight + blocksTotalHeight);
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -62,7 +62,8 @@ public class Node : MonoBehaviour
     {
         if (!isBuildable)
             return;
-            
+        
+        TransparentBlockManager.Instance.HideTransparnetBlock();
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
             rend.material.color = startColor; // return color to startColor
