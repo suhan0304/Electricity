@@ -55,9 +55,11 @@ public class Node : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
+        if(!transform.CompareTag(Tags.NodeTag)) 
+            return;
+            
         if (buildManager.GetBlockToBuild() == null || !isBuildable)
             return;
-
 
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
@@ -80,6 +82,8 @@ public class Node : MonoBehaviour
 
     public void OnMouseExit() // When the mouse leaves the object collider
     {
+        if(!transform.CompareTag(Tags.NodeTag)) 
+            return;
         transBlockOnNode.SetActive(false);
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
@@ -89,6 +93,8 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
+        if(!transform.CompareTag(Tags.NodeTag)) 
+            return;
         if (buildManager.GetBlockToBuild() == null || !isBuildable)
             return;
 

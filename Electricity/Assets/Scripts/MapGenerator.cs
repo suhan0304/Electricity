@@ -57,6 +57,7 @@ public class MapGenerator : MonoBehaviour
     /// Coroutines for creating nodes at intervals
     IEnumerator SpawnNodesWithDelay(Map map, Transform fieldObject, float delayTime, float StartHeight, float delayTimeMulti)
     {
+        yield return new WaitForSeconds(delayTime * delayTimeMulti / 2); 
         foreach (Vector3 targetVec in map.nodesPosition)
         {
             Vector3 firstVec = new Vector3(targetVec.x, StartHeight, targetVec.z);
