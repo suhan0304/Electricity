@@ -41,6 +41,12 @@ public class TransparentBlockManager : MonoBehaviour
         }
     }
 
+    // Set Selected Block Type ( Hide other Type transparent Block )
+    public void SetSelectedBlockType(int blockType) {
+        selectedBlockType = blockType;
+        HideTransparnetBlock();
+    }
+
     /// Show Transparent Block ( When Mouse On )
     public void ShowTransparentBlock(Vector3 position, float blockHeight) {
         if (selectedBlockType == -1) // not select
@@ -56,8 +62,9 @@ public class TransparentBlockManager : MonoBehaviour
     public void HideTransparnetBlock() {
         if (selectedBlockType == -1) // not select
             return;
-        if (blockDictionary.TryGetValue(selectedBlockType, out var block)) {
-            block.SetActive(false);
+
+        foreach (var block in transparentBlocks) {
+            block.blockObject.SetActive(false);
         }
     }
 }

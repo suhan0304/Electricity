@@ -12,7 +12,7 @@ public class BuildMenu : MonoBehaviour
     public void SelectStandardBlock()
     {
         Debug.Log("Standard Block Selected");
-        TransparentBlockManager.Instance.selectedBlockType = 0; // set selected block Type to 0 ( = standard block )
+        TransparentBlockManager.Instance.SetSelectedBlockType(0); // set selected block Type to 0 ( = standard block )
         // TODO - selected Block Type = !!hard cording!! ( Block Ropository, Inventory Manager )
         buildManager.SetBlockToBuild(buildManager.standardBlockPrefab); // set selected block to Standard block 
     }
@@ -20,7 +20,7 @@ public class BuildMenu : MonoBehaviour
     public void SelectOtherBlock()
     {
         Debug.Log("Other Block Selected");
-        TransparentBlockManager.Instance.selectedBlockType = 1;
+        TransparentBlockManager.Instance.SetSelectedBlockType(1);
         // TODO - selected Block Type = !!hard cording!! ( Block Ropository, Inventory Manager )
         buildManager.SetBlockToBuild(buildManager.otherBlockPrefab); // set selceted block to Other block;
     }

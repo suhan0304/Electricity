@@ -61,7 +61,6 @@ public class BuildManager : MonoBehaviour
         Vector3 buildPosition = node.transform.position + new Vector3(0,node.nodeHeight + node.blocksTotalHeight + (blockHeight/2),0);
         node.blockOnNode = Instantiate(blockToBuild, buildPosition, node.transform.rotation, node.transform.parent);
 
-
         node.blocksTotalHeight += blockHeight; // Update blocksTotalHeights ( add block height )
 
         //Debug.Log("Build the Block!"); //For DebugTest

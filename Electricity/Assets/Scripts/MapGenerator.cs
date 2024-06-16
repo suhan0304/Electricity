@@ -87,4 +87,4 @@ public class MapGenerator : MonoBehaviour
         }
         node.position = endPos;
     }
-    }
+}
