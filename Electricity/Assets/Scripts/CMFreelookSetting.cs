@@ -106,7 +106,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
             yield return null;
 
         }
-        CameraTarget.transform.position = endPoint.position;
+        CameraTarget.transform.position = endPosition;
     }
 
     IEnumerator CloseUpEndPoint(Transform endPoint, float duration)
