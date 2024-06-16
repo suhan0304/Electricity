@@ -8,7 +8,6 @@ public class Node : MonoBehaviour
     [SerializeField]
     public float nodeHeight = 0; // to calculate buildBlock Position
     public float blocksTotalHeight = 0; // total of blocks height on node
-    public float transBlockHeight = 0;
 
     [Space(5)]
     [Header("Colors")]
@@ -19,7 +18,6 @@ public class Node : MonoBehaviour
     [Header("Block On Node")]
     [SerializeField]
     public GameObject blockOnNode; // Block Object ( built on node )
-    public GameObject transBlockOnNode; // Transparent Block Object ( before build )
 
     [Space(5)]
     [Header("Node Settings")]
@@ -38,12 +36,6 @@ public class Node : MonoBehaviour
     private void Awake()
     {
         rend = GetComponent<Renderer>(); // call renderer component
-        if(transform.childCount != 0)
-        {
-            transBlockOnNode = transform.GetChild(0).gameObject;
-            transBlockHeight = transBlockOnNode.transform.position.y;
-        }
-
     }
 
     private void Start()
@@ -55,32 +47,23 @@ public class Node : MonoBehaviour
 
     public void OnMouseEnter() // When the mouse passes or enters an object collider
     {
-        if (buildManager.GetBlockToBuild() == null || !isBuildable)
+        if(!isBuildable || buildManager.GetBlockToBuild() == null)
             return;
 
-
+        TransparentBlockManager.Instance.ShowTransparentBlock(transform.position, nodeHeight + blocksTotalHeight);
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
-            StartCoroutine(transparentBlockNodeControl());
             rend.material.color = hoverColor; // change color to hoverColor
         }
     }
-
-    IEnumerator transparentBlockNodeControl()
-    {
-        transBlockOnNode.SetActive(true);
-        while (transBlockOnNode.activeSelf && GameManager.Instance.gameState == GameState.PLAY)
-        {
-            yield return null;
-        }
-        transBlockOnNode.SetActive(false);
-    }
-
     public void OnMouseExit() // When the mouse leaves the object collider
     {
-        transBlockOnNode.SetActive(false);
+        if (!isBuildable)
+            return;
+        
+        TransparentBlockManager.Instance.HideTransparnetBlock();
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
             rend.material.color = startColor; // return color to startColor
@@ -89,6 +72,9 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown() //When the mouse click the object collider
     {
+        if(!isBuildable)
+            return;
+
         if (buildManager.GetBlockToBuild() == null || !isBuildable)
             return;
 
@@ -98,8 +84,6 @@ public class Node : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
             BuildManager.Instance.BuildBlockOnNode(this);
-            Vector3 targetPos = transBlockOnNode.transform.position;
-            transBlockOnNode.transform.position = new Vector3(targetPos.x, transBlockHeight, targetPos.z);
         }
     }
 }

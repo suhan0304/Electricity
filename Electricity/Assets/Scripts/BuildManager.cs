@@ -1,5 +1,3 @@
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
@@ -24,6 +22,7 @@ public class BuildManager : MonoBehaviour
         if (Instance != null)
         {
             Debug.LogWarning("Error - Only 1 instance - BuildManager.");
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -60,11 +59,9 @@ public class BuildManager : MonoBehaviour
     {
         float blockHeight = blockToBuild.transform.localScale.y;
         Vector3 buildPosition = node.transform.position + new Vector3(0,node.nodeHeight + node.blocksTotalHeight + (blockHeight/2),0);
-        node.blockOnNode = (GameObject)Instantiate(blockToBuild, buildPosition, node.transform.rotation, node.transform.parent);
-
+        node.blockOnNode = Instantiate(blockToBuild, buildPosition, node.transform.rotation, node.transform.parent);
 
         node.blocksTotalHeight += blockHeight; // Update blocksTotalHeights ( add block height )
-        node.transBlockHeight += blockHeight; // Update TransBlockHeight ( add block height )
 
         //Debug.Log("Build the Block!"); //For DebugTest
     }

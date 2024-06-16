@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 6175815629370688505}
   - component: {fileID: 526649717368925463}
   m_Layer: 8
-  m_Name: OtherBlock
+  m_Name: tallerBlock
   m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

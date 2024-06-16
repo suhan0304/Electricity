@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Error - Only 1 instance - GameManager.");
             Destroy(gameObject);
+            return;
         }
     }
 
