@@ -58,4 +58,17 @@ public class MapGenerator : MonoBehaviour
             yield return new WaitForSeconds(delayTime); 
         }
     }
+
+    /// Smoothly moves the node transform to the end position over the specified duration.
+    IEnumerator SmoothMoveToPosition(Transform node, Vector3 endPos, float duration) {
+        Vector3 startPos = node.position;
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration) {
+            float t = elapsedTime / duration;
+            float smoothT = Mathf.SmoothStep(0, 1, t);
+
+            node.position = Vector3.Lerp(startPos, endPos, smoothT)
+        }
+    }
 }
