@@ -31,29 +31,40 @@ public class MapGenerator : MonoBehaviour
             Debug.LogWarning("Node Prefab Error");
             return;
         }
+        float delayTime = 0.1f;
+        float StartNodeHeight = 100f;
+        float delayTimeMulti = 10f;
 
-        GameObject startNode = Instantiate(StartNodePrefab, map.startNode, Quaternion.identity, fieldObject);
-        GameObject endNode = Instantiate(EndNodePrefab, map.endNode, Quaternion.identity, fieldObject);
+        GameObject startNode = Instantiate(StartNodePrefab, 
+            new Vector3(map.startNode.x, StartNodeHeight, map.startNode.z) , 
+            Quaternion.identity, fieldObject);
+        GameObject endNode = Instantiate(EndNodePrefab, 
+            new Vector3(map.endNode.x, StartNodeHeight, map.endNode.z) , 
+            Quaternion.identity, fieldObject);
+
+
+        StartCoroutine(SmoothMoveToPosition(startNode.transform, map.startNode, delayTime * delayTimeMulti));
+        StartCoroutine(SmoothMoveToPosition(endNode.transform, map.endNode, delayTime * delayTimeMulti));
+
         GameManager.Instance.endPoint = endNode.transform.Find(Names.endPoint).gameObject;
 
-        StartCoroutine(SpawnNodesWithDelay(map, fieldObject, 0.1f)); // 0.2초 간격으로 노드 생성
+        // Spawn Nodes to use Couroutine (interval Spawn)
+        StartCoroutine(SpawnNodesWithDelay(map, fieldObject, delayTime, StartNodeHeight, delayTimeMulti)); 
 
         Debug.Log("Map Generation Finish!");
     }    
 
     /// Coroutines for creating nodes at intervals
-    IEnumerator SpawnNodesWithDelay(Map map, Transform fieldObject, float delayTime)
+    IEnumerator SpawnNodesWithDelay(Map map, Transform fieldObject, float delayTime, float StartHeight, float delayTimeMulti)
     {
-        float downTime = delayTime * 10f;
-        float firstNodeHeight = 100f;
         foreach (Vector3 targetVec in map.nodesPosition)
         {
-            Vector3 firstVec = new Vector3(targetVec.x, firstNodeHeight, targetVec.z);
+            Vector3 firstVec = new Vector3(targetVec.x, StartHeight, targetVec.z);
 
             GameObject node = Instantiate(NodePrefab, firstVec, Quaternion.identity, fieldObject);
 
             // Start the coroutine to move the node smoothly
-            StartCoroutine(SmoothMoveToPosition(node.transform, targetVec, downTime));
+            StartCoroutine(SmoothMoveToPosition(node.transform, targetVec, delayTime * delayTimeMulti));
         
             yield return new WaitForSeconds(delayTime); 
         }
