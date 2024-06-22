@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BlockRepository", menuName = "ScriptableObjects/BlockRepository", order = 0)]
 public class BlockRepository : ScriptableObject
 {
-    [SerializeField]
+    [Serializable]
     public class blockData {
         public GameObject prefab;
         public Sprite spriteImage;
@@ -13,30 +14,20 @@ public class BlockRepository : ScriptableObject
         public string name;
     }
 
-    public List<blockData> blackDatas;
+    public List<blockData> blockDatas;
 
-    public Dictionary<string, blockData> blockDictionary;
-
-    public void OnEnable() {
-        InitializeDictionary();
+    private void OnValidate() {
+        UpdateBlockDate();    
     }
 
-    public void InitializeDictionary() {
-        blockDictionary = new Dictionary<string, blockData>();
-
-        foreach (var blockData in blackDatas) {
-            if(blockData != null && blockData.prefab != null) {
-                blockDictionary[blockData.prefab.name] = blockData;
+    private void UpdateBlockDate() {
+        for (int i = 0 ; i < blockDatas.Count; i++) {
+            var data = blockDatas[i];
+            if (data.prefab != null) {
+                data.name = data.prefab.name;
+                data.type = i;
             }
         }
     }
 
-    public blockData GetBlockData(string prefabName) {
-        if (blockDictionary.TryGetValue(prefabName, out var blockData)) {
-            return blockData;
-        }
-
-        Debug.LogWarning($"BlockData with prefab name {prefabName} not found!");
-        return null;
-    }
 }
