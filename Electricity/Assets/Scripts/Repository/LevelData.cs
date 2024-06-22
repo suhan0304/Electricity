@@ -36,7 +36,7 @@ public class LevelData : ScriptableObject
             Debug.LogWarning("BlockRepository is not assigned!");
             return;
         }
-
+        
         foreach (var level in levels) {
             level.Initialize(blockRepository);
         }

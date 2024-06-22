@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class LevelDataEditor : MonoBehaviour
+[CustomEditor(typeof(LevelData)), CanEditMultipleObjects]
+public class LevelDataEditor : Editor
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override void OnInspectorGUI() {
+        DrawDefaultInspector();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LevelData levelData = (LevelData)target;
+        if (GUILayout.Button("Update Levels")) {
+            levelData.UpdateLevels();
+        }
     }
 }
