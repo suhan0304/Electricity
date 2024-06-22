@@ -31,5 +31,6 @@ public class BuildMenu : MonoBehaviour
 
     public void BuildSelectedButtonBlock() {
         Debug.Log("Build Block (From Build Menu)");
+        // TODO 2024 06 22 FINAL & COUNT LOGIC
     }
 }
