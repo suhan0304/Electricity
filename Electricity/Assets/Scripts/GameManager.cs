@@ -53,10 +53,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(map == null) {
-            Debug.LogWarning("Map is not exist! (Check Mapmanager)");
-        }
-        mapGenerate();
 
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
@@ -65,6 +61,10 @@ public class GameManager : MonoBehaviour
         // Validation
         if (!validator.ValidateInitialization())
             QuitGame();
+        if(map == null) {
+            Debug.LogWarning("Map is not exist! (Check Mapmanager)");
+        }
+        mapGenerate();
     }
 
     /// <summary>
