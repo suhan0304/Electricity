@@ -1,18 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelData : MonoBehaviour
+[CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelData", order = 0)]
+public class LevelData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public class BlockCount {
+        public BlockRepository.blockData blockData;
+        public int count;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    [Serializable]
+    public class Level {
+        public int levelNumber;
+        public List<BlockCount> blockCounts = new List<BlockCount>();
+
+        public void Initialize(BlockRepository blockRepository) {
+            blockCounts.Clear();
+            foreach (var blockData in blockRepository.blockDatas) {
+                blockCounts.Add(new BlockCount { blockData = blockData, count = 0 });
+            }
+        }
+    }
+
+    public BlockRepository blockRepository;
+    public List<Level> levels = new List<Level>();
+
+    private void OnValidate() {
+        InitializeLevels();
+    }
+
+    public void InitializeLevels() {
+        if (blockRepository == null) {
+            Debug.LogWarning("BlockRepository is not assigned!");
+            return;
+        }
+
+        foreach (var level in levels) {
+            level.Initialize(blockRepository);
+        }
     }
 }
