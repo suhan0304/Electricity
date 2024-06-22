@@ -17,10 +17,10 @@ public class BlockRepository : ScriptableObject
     public List<blockData> blockDatas;
 
     private void OnValidate() {
-        UpdateBlockDate();    
+        UpdateBlockData();    
     }
 
-    private void UpdateBlockDate() {
+    public void UpdateBlockData() {
         for (int i = 0 ; i < blockDatas.Count; i++) {
             var data = blockDatas[i];
             if (data.prefab != null) {
