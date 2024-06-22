@@ -4,6 +4,11 @@ using TMPro;
 
 public class buildButton : MonoBehaviour
 {    
+    public class blockData {
+        public int blockType;
+        public string blockName;
+        public GameObject blockPrefab;
+    }
     private TMP_Text blockNameText;
     private TMP_Text blockCountText;
 
@@ -40,6 +45,6 @@ public class buildButton : MonoBehaviour
     }
 
     public void OnClickBlockButton(blockData blockData) {
-        buildMenu.SelectBlock(blockData.blockType);
+        //buildMenu.SelectBlock(blockData.blockType);
     }
 }

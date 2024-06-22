@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,55 +6,30 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     [Serializable]
-    public class BlockCount {
-        public blockData blockData;
+    public class blockInventory
+    {
+        public int level; 
+        public BlockRepository.BlockData blockData;
         public int count;
-    }
 
-    [Serializable]
-    public class Level {
-        public int levelNumber;
-
-        public List<BlockCount> blockCounts = new List<BlockCount>();
-
-        public void Initialize(BlockRepository blockRepository) {
-            var oldBlockCounts = new Dictionary<string, int>();
-            foreach (var blockCount in blockCounts) {
-                if (blockCount.blockData != null) {
-                    oldBlockCounts[blockCount.blockData.name] = blockCount.count;
-                }
-            }
-
-            blockCounts.Clear();
-            foreach (var blockData in blockRepository.blockDatas) {
-                int count = 0;
-                if (oldBlockCounts.TryGetValue(blockData.name, out var existingCount)) {
-                    count = existingCount;
-                }
-                blockCounts.Add(new BlockCount { blockData = blockData, count = count });
-            }
+        public blockInventory(int level) {
+            this.level = level;
         }
     }
 
-    public BlockRepository blockRepository;
-    public List<Level> levels = new List<Level>();
+    public List<blockInventory> blockInventorys = new List<blockInventory>();
 
-    private void OnValidate() {
-        //InitializeLevels();
-    }
-
-    public void InitializeLevels() {
-        if (blockRepository == null) {
-            Debug.LogWarning("BlockRepository is not assigned!");
-            return;
-        }
+    public void Initialize(BlockRepository blockRepository)
+    {
+        blockInventorys.Clear();
         
-        foreach (var level in levels) {
-            level.Initialize(blockRepository);
+        foreach (var blockData in blockRepository.blockDatas)
+        {
+            // Initialize each block count
+            blockInventory blockInventory = new blockInventory(blockInventorys.Count);
+            blockInventory.blockData = blockData;
+            blockInventory.count = 0; // Initial count is zero
+            blockInventorys.Add(blockInventory);
         }
-    }    
-    
-    public void UpdateLevels() {
-        InitializeLevels();
     }
 }

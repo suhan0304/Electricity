@@ -9,7 +9,7 @@ public class LevelDataEditor : Editor
 
         LevelData levelData = (LevelData)target;
         if (GUILayout.Button("Update Levels")) {
-            levelData.UpdateLevels();
+            //levelData.UpdateLevels();
         }
     }
 }

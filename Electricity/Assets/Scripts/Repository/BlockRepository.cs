@@ -6,7 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BlockRepository", menuName = "ScriptableObjects/BlockRepository", order = 0)]
 public class BlockRepository : ScriptableObject
 {
-    public List<blockData> blockDatas;
+    [Serializable]
+    public class BlockData {
+        public GameObject prefab;
+        public Sprite spriteImage;
+        public int blockType;
+        public string blockName;
+    }
+
+    public List<BlockData> blockDatas;
     public Dictionary<int, GameObject> blockDictionary;
 
     private void OnValidate() {
@@ -18,7 +26,7 @@ public class BlockRepository : ScriptableObject
         for (int i = 0 ; i < blockDatas.Count; i++) {
             var data = blockDatas[i];
             if (data.prefab != null) {
-                data.name = data.prefab.name;
+                data.blockName = data.prefab.name;
                 data.blockType = i;
             }
         }
@@ -26,13 +34,18 @@ public class BlockRepository : ScriptableObject
     
     public void UpdateDictionary()
     {
-        blockDictionary.Clear();
+        if (blockDictionary == null)
+            blockDictionary = new Dictionary<int, GameObject>();
+
+        Dictionary<int, GameObject> newDictionary = new Dictionary<int, GameObject>();
         foreach (var data in blockDatas)
         {
-            if (data.prefab != null)
+            if (data.prefab != null && !newDictionary.ContainsKey(data.blockType))
             {
-                blockDictionary[data.blockType] = data.prefab;
+                newDictionary[data.blockType] = data.prefab;
             }
         }
+
+        blockDictionary = newDictionary;
     }
 }
