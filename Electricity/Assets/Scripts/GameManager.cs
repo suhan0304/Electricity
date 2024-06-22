@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
         gameState = GameState.PLAY;

@@ -8,7 +8,7 @@ public class LevelData : ScriptableObject
 {
     [Serializable]
     public class BlockCount {
-        public BlockRepository.blockData blockData;
+        public blockData blockData;
         public int count;
     }
 

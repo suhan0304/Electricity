@@ -6,18 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BlockRepository", menuName = "ScriptableObjects/BlockRepository", order = 0)]
 public class BlockRepository : ScriptableObject
 {
-    [Serializable]
-    public class blockData {
-        public GameObject prefab;
-        public Sprite spriteImage;
-        public int type;
-        public string name;
-    }
-
     public List<blockData> blockDatas;
+    public Dictionary<int, GameObject> blockDictionary;
 
     private void OnValidate() {
-        UpdateBlockData();    
+        UpdateBlockData();   
+        UpdateDictionary(); 
     }
 
     public void UpdateBlockData() {
@@ -25,7 +19,19 @@ public class BlockRepository : ScriptableObject
             var data = blockDatas[i];
             if (data.prefab != null) {
                 data.name = data.prefab.name;
-                data.type = i;
+                data.blockType = i;
+            }
+        }
+    }    
+    
+    public void UpdateDictionary()
+    {
+        blockDictionary.Clear();
+        foreach (var data in blockDatas)
+        {
+            if (data.prefab != null)
+            {
+                blockDictionary[data.blockType] = data.prefab;
             }
         }
     }
