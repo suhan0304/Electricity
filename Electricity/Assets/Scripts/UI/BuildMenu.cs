@@ -23,7 +23,7 @@ public class BuildMenu : MonoBehaviour
         foreach(var blockInventory in levelData.blockInventories) {
             if (blockInventory.blockCount != 0) {
                 GameObject BuildItem = Instantiate(buttonPrefab, transform);
-                BuildItem.GetComponent<buildButton>().BlockInventory = blockInventory;
+                BuildItem.GetComponent<BuildButton>().BlockInventory = blockInventory;
             }
         }
     }
