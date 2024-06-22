@@ -40,5 +40,9 @@ public class LevelData : ScriptableObject
         foreach (var level in levels) {
             level.Initialize(blockRepository);
         }
+    }    
+    
+    public void UpdateLevels() {
+        InitializeLevels();
     }
 }
