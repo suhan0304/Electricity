@@ -3,12 +3,16 @@ using UnityEngine;
 public class BuildMenu : MonoBehaviour
 {
     BuildManager buildManager;
-
+    public GameObject buttonPrefab;
     public LevelData levelData;
 
     private void Start()
     {
         buildManager = BuildManager.Instance;
+        buttonPrefab = Resources.Load<GameObject>("BuildButton");
+        foreach (var blockCount in levelData.levels[GameManager.Instance.mapLevel].blockCounts) {
+            GameObject btnPrefab = Instantiate(buttonPrefab, transform);
+        }
     }
 
     public void SelectStandardBlock()
