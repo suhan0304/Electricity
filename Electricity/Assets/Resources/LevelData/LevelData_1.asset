@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdefde5a1a1f2a24ea317aa6308484db, type: 3}
-  m_Name: LevelData_2
+  m_Name: LevelData_1
   m_EditorClassIdentifier: 
+  level: 1
   blockRepository: {fileID: 11400000, guid: 723e76af3889ab7479589fb32aa9117f, type: 2}
   blockInventories:
   - blockData:
@@ -20,11 +21,11 @@ MonoBehaviour:
       spriteImage: {fileID: 0}
       blockType: 0
       blockName: standardBlock
-    blockCount: 5
+    blockCount: 10
   - blockData:
       prefab: {fileID: 5621121395291585638, guid: 280fce4ce811c4d41a4931db43f300b8,
         type: 3}
       spriteImage: {fileID: 0}
       blockType: 1
       blockName: tallerBlock
-    blockCount: 5
+    blockCount: 0

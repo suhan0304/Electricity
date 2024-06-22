@@ -5,25 +5,27 @@ public class BuildMenu : MonoBehaviour
 {
     BuildManager buildManager;
     public GameObject buttonPrefab;
+    public LevelData levelData;
 
-    private void Start()
+    void Start() {
+        Debug.Log($"Level is {GameManager.Instance.mapLevel}");
+        AddBtnsBuildMenu();
+    }
+
+    public void AddBtnsBuildMenu()
     {
         buildManager = BuildManager.Instance;
         buttonPrefab = Resources.Load<GameObject>("BuildButton");
-        
-        /*
-        foreach (var blockItem in levelData.levels[GameManager.Instance.mapLevel].BlockInventorys) {
-            GameObject btnPrefab = Instantiate(buttonPrefab, transform);
-            btnPrefab.GetComponent<buildButton>().BlockData = blockItem.blockData;
+        levelData = LevelDataManager.Instance.GetLevelData(GameManager.Instance.mapLevel);
+
+        Debug.Log("Start Build Button UI");
+
+        foreach(var blockInventory in levelData.blockInventories) {
+            if (blockInventory.blockCount != 0) {
+                GameObject BuildItem = Instantiate(buttonPrefab, transform);
+                BuildItem.GetComponent<buildButton>().BlockInventory = blockInventory;
+            }
         }
-        */
     }
-    /*
-    public void SelectBlock(int blockType) {
-        Debug.Log($"Select {blockType} Block");
-        TransparentBlockManager.Instance.SetSelectedBlockType(blockType);
-        buildManager.SetBlockToBuild(levelData.levels[GameManager.Instance.mapLevel].BlockInventorys[blockType].blockData.prefab); 
-    }
-    */
 
 }

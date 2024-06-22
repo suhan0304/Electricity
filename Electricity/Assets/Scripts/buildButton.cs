@@ -1,50 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class buildButton : MonoBehaviour
 {    
-    public class blockData {
-        public int blockType;
-        public string blockName;
-        public GameObject blockPrefab;
-    }
-    private TMP_Text blockNameText;
-    private TMP_Text blockCountText;
+    public TMP_Text blockNameText;
+    public TMP_Text blockCountText;
 
-    private blockData _blockData;
-    private int _blockCount;
+    private LevelData.BlockInventory _blockInventory;
 
-    private BuildMenu buildMenu;
-
-    private void OnEnable() {
-        buildMenu = GetComponentInParent<BuildMenu>();    
-    }
-
-    public blockData BlockData {
+    public LevelData.BlockInventory BlockInventory {
         get { 
-            return _blockData; 
-            }
-        set { 
-            _blockData = value; 
-            blockNameText.text = value.blockName;
-            }
-    }
-
-    public int BlockCount {
-        get { 
-            return _blockCount;
+            return _blockInventory; 
         }
         set {
-            _blockCount = value;
-            blockCountText.text = _blockCount.ToString();
-            if (_blockCount != 0) {
-                GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => OnClickBlockButton(_blockData));
-            }
+            _blockInventory = value;
+            blockNameText.text = _blockInventory.blockData.blockName;
+            blockCountText.text = _blockInventory.blockCount.ToString();
+            GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => OnClickBlockButton());
         }
     }
 
-    public void OnClickBlockButton(blockData blockData) {
+    public void OnClickBlockButton() {
         //buildMenu.SelectBlock(blockData.blockType);
+        Debug.Log("Button!");
     }
 }

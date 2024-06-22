@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelData", order = 0)]
 public class LevelData : ScriptableObject
 {
+    public int level;
     public BlockRepository blockRepository;
 
     [Serializable]

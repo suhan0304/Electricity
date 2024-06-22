@@ -215,7 +215,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 5000
-  field of view: 5
+  field of view: 10
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -241,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4373847, y: -0.0041723363, z: 0.0020293472, w: 0.89926255}
+  m_LocalRotation: {x: 0.43541312, y: -0.004176753, z: 0.0020201902, w: 0.90021884}
   m_LocalPosition: {x: 10.64954, y: 90, z: -59.996986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 5
+    FieldOfView: 10
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -773,7 +773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681925479}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4373847, y: -0.0041722823, z: 0.0020293212, w: 0.89926255}
+  m_LocalRotation: {x: 0.43541312, y: -0.004176739, z: 0.0020201833, w: 0.90021884}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 5
+    FieldOfView: 10
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -1104,7 +1104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891947834}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43542054, y: -0.004176705, z: 0.0020202096, w: 0.9002152}
+  m_LocalRotation: {x: 0.43147174, y: -0.004185514, z: 0.0020018867, w: 0.90211457}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1528,7 +1528,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 5
+    FieldOfView: 10
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d2824aac1d8034898651da05e88af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabRepository: {fileID: 0}
+  prefabRepository: {fileID: 11400000, guid: 8df0f99d6b40dcd48b24ffaa63d4dc26, type: 2}
   standardBlockPrefab: {fileID: 5621121395291585638, guid: e45f3cb048c1a5044ad78d10af5c7680,
     type: 3}
   otherBlockPrefab: {fileID: 5621121395291585638, guid: 280fce4ce811c4d41a4931db43f300b8,
@@ -1897,6 +1897,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1968499881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1968499883}
+  - component: {fileID: 1968499882}
+  m_Layer: 0
+  m_Name: LevelDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1968499882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968499881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8614e6187394042ae6070b6a688c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelDatas: []
+--- !u!4 &1968499883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968499881}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2146271220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1982,7 @@ MonoBehaviour:
   m_Follow: {fileID: 527411280}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 5
+    FieldOfView: 10
     OrthographicSize: 10
     NearClipPlane: 1
     FarClipPlane: 5000
@@ -1960,7 +2005,7 @@ MonoBehaviour:
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
-    m_InputAxisName: 
+    m_InputAxisName: Vertical
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
@@ -1981,10 +2026,10 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 20
+    m_MaxSpeed: 50
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: 
+    m_InputAxisName: Horizontal
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -2634,6 +2679,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1366018427}
   - {fileID: 1281385732}
+  - {fileID: 1968499883}
   - {fileID: 887974366}
   - {fileID: 1039803564}
   - {fileID: 246559293}
