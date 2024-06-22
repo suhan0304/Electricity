@@ -4,6 +4,8 @@ public class BuildMenu : MonoBehaviour
 {
     BuildManager buildManager;
 
+    public LevelData levelData;
+
     private void Start()
     {
         buildManager = BuildManager.Instance;

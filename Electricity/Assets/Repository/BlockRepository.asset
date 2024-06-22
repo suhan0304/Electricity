@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839cd294909be24498b33140898ab923, type: 3}
   m_Name: BlockRepository
   m_EditorClassIdentifier: 
-  blockDatas: []
+  blockDatas:
+  - prefab: {fileID: 5621121395291585638, guid: e45f3cb048c1a5044ad78d10af5c7680,
+      type: 3}
+    spriteImage: {fileID: 0}
+    type: 0
+    name: standardBlock
+  - prefab: {fileID: 5621121395291585638, guid: 280fce4ce811c4d41a4931db43f300b8,
+      type: 3}
+    spriteImage: {fileID: 0}
+    type: 1
+    name: tallerBlock
