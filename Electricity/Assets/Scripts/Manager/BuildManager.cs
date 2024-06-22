@@ -4,6 +4,7 @@ public class BuildManager : MonoBehaviour
 {
     [Header("Prefab Repository")]
     public PrefabRepository prefabRepository;
+    public BlockRepository blockRepository;
 
     [Space(5)]
     [Header("Blocks Prefabs")]
@@ -46,9 +47,9 @@ public class BuildManager : MonoBehaviour
         return blockToBuild;
     }
 
-    public void SetBlockToBuild(GameObject selectBuild)
+    public void SetBlockToBuild(int blockType)
     {
-        blockToBuild = selectBuild;
+        blockToBuild = blockRepository.GetPrefabToType(blockType);
     }
 
     /// <summary>

@@ -53,18 +53,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(map == null) {
-            Debug.LogWarning("Map is not exist! (Check Mapmanager)");
-        }
         mapGenerate();
+        BlockInventory.Instance.Initialize();
 
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
         gameState = GameState.PLAY;
-        buildManager = BuildManager.Instance;
+
         // Validation
         if (!validator.ValidateInitialization())
             QuitGame();
+
+        if(map == null) {
+            Debug.LogWarning("Map is not exist! (Check Mapmanager)");
+        }
     }
 
     /// <summary>

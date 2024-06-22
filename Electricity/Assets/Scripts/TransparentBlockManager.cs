@@ -16,7 +16,7 @@ public class TransparentBlockManager : MonoBehaviour
     }
 
     public List<TransparentBlock> transparentBlocks;
-    public Dictionary<int, GameObject> blockDictionary;
+    public Dictionary<int, GameObject> transparentBlockDictionary;
 
     private void Awake()
     {
@@ -33,11 +33,11 @@ public class TransparentBlockManager : MonoBehaviour
 
     /// Initialize Transparent Block Dictionary
     private void InitializeDictionary() {
-        blockDictionary = new Dictionary<int, GameObject>();
+        transparentBlockDictionary = new Dictionary<int, GameObject>();
 
         foreach (var block in transparentBlocks) {
             block.blockObject.SetActive(false); // All transparent block object Hide.
-            blockDictionary[block.blockType] = block.blockObject; // mapping dict[blockType(int)] = blockObject
+            transparentBlockDictionary[block.blockType] = block.blockObject; // mapping dict[blockType(int)] = blockObject
         }
     }
 
@@ -51,7 +51,7 @@ public class TransparentBlockManager : MonoBehaviour
     public void ShowTransparentBlock(Vector3 position, float blockHeight) {
         if (selectedBlockType == -1) // not select
             return;
-        if (blockDictionary.TryGetValue(selectedBlockType, out var block)) {
+        if (transparentBlockDictionary.TryGetValue(selectedBlockType, out var block)) {
             block.transform.position = position + 
                 new Vector3(0, blockHeight + (BuildManager.Instance.blockToBuild.transform.localScale.y /2), 0);
             block.SetActive(true);
