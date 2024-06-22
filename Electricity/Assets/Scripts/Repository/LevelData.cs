@@ -7,25 +7,32 @@ public class LevelData : ScriptableObject
 {
     public BlockRepository blockRepository;
 
-    public int level; 
-    public List<BlockRepository.BlockData> blockDatas;
-    public Dictionary<int, int> blockCounts;
+    [Serializable]
+    public class BlockInventory {
+        public BlockRepository.BlockData blockData;
+        public int blockCount;
 
-    public void Initialize()
-    {
-        if (blockRepository != null)
-        {
-            blockDatas = new List<BlockRepository.BlockData>(blockRepository.blockDatas);
-
-            blockCounts = new Dictionary<int, int>();
-            foreach (var blockData in blockRepository.blockDatas)
-            {
-                blockCounts[blockData.blockType] = 0;
-            }
+        public BlockInventory(BlockRepository.BlockData data) {
+            blockData = data;
+            blockCount = 0;
         }
-        else
-        {
-            Debug.LogWarning("LevelData: blockRepository is not assigned!");
+    }
+    
+    public List<BlockInventory> blockInventories = new List<BlockInventory>();
+
+    private void OnValidate() {
+        if (blockRepository == null) {
+            Debug.LogWarning($"{this.name}'s BlockRepsoitory is null, Can't make block Inventory");
+        }
+    }
+    public void Initialize() {
+        blockInventories.Clear();
+
+        if(blockRepository != null) {
+            foreach (var blockData in blockRepository.blockDatas) {
+                BlockInventory inventory = new BlockInventory(blockData);
+                blockInventories.Add(inventory);
+            }
         }
     }
 }
