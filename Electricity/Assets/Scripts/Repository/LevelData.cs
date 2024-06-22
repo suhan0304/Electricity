@@ -5,31 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelData", order = 0)]
 public class LevelData : ScriptableObject
 {
-    [Serializable]
-    public class blockInventory
+    public BlockRepository blockRepository;
+
+    public int level; 
+    public List<BlockRepository.BlockData> blockDatas;
+    public Dictionary<int, int> blockCounts;
+
+    public void Initialize()
     {
-        public int level; 
-        public BlockRepository.BlockData blockData;
-        public int count;
-
-        public blockInventory(int level) {
-            this.level = level;
-        }
-    }
-
-    public List<blockInventory> blockInventorys = new List<blockInventory>();
-
-    public void Initialize(BlockRepository blockRepository)
-    {
-        blockInventorys.Clear();
-        
-        foreach (var blockData in blockRepository.blockDatas)
+        if (blockRepository != null)
         {
-            // Initialize each block count
-            blockInventory blockInventory = new blockInventory(blockInventorys.Count);
-            blockInventory.blockData = blockData;
-            blockInventory.count = 0; // Initial count is zero
-            blockInventorys.Add(blockInventory);
+            blockDatas = new List<BlockRepository.BlockData>(blockRepository.blockDatas);
+
+            blockCounts = new Dictionary<int, int>();
+            foreach (var blockData in blockRepository.blockDatas)
+            {
+                blockCounts[blockData.blockType] = 0;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("LevelData: blockRepository is not assigned!");
         }
     }
 }
