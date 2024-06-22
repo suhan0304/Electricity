@@ -6,6 +6,8 @@ using TMPro;
 
 public class BuildButton : MonoBehaviour
 {    
+    private BuildMenu buildMenu;
+
     public TMP_Text blockNameText;
     public TMP_Text blockCountText;
 
@@ -23,8 +25,12 @@ public class BuildButton : MonoBehaviour
         }
     }
 
+    void Start() {
+        buildMenu = GetComponentInParent<BuildMenu>();
+    }
+
     public void OnClickBlockButton() {
-        //buildMenu.SelectBlock(blockData.blockType);
-        Debug.Log("Button!");
+        buildMenu.SelectedButton = this.gameObject;
+        buildMenu.SelectBlock(BlockInventory.blockData.blockType);
     }
 }

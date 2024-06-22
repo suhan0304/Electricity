@@ -48,4 +48,8 @@ public class BlockRepository : ScriptableObject
 
         blockDictionary = newDictionary;
     }
+
+    public GameObject GetPrefabToType(int type) {
+        return blockDictionary[type];
+    }
 }

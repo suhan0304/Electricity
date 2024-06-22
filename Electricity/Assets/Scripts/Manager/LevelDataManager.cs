@@ -14,6 +14,7 @@ public class LevelDataManager : MonoBehaviour
             Instance = this;
         }     
         else {
+            Debug.LogWarning("Error - Only 1 instance - LevelDataManager.");
             Destroy(gameObject);
         }
 

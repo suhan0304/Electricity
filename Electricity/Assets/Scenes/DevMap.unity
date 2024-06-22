@@ -154,6 +154,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &279263253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279263255}
+  - component: {fileID: 279263254}
+  m_Layer: 0
+  m_Name: BuildManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &279263254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279263253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d2824aac1d8034898651da05e88af3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabRepository: {fileID: 11400000, guid: 8df0f99d6b40dcd48b24ffaa63d4dc26, type: 2}
+  blockRepository: {fileID: 0}
+  standardBlockPrefab: {fileID: 5621121395291585638, guid: e45f3cb048c1a5044ad78d10af5c7680,
+    type: 3}
+  otherBlockPrefab: {fileID: 5621121395291585638, guid: 280fce4ce811c4d41a4931db43f300b8,
+    type: 3}
+  blockToBuild: {fileID: 0}
+  blockOnNode: {fileID: 0}
+--- !u!4 &279263255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279263253}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPrefab: {fileID: 2328757571884538806, guid: 58b982061f1baf14996c50a633a68d29,
     type: 3}
+  levelData: {fileID: 0}
 --- !u!1 &887974363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1625,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1281385732}
   - component: {fileID: 1281385731}
-  - component: {fileID: 1281385730}
   - component: {fileID: 1281385733}
   m_Layer: 0
   m_Name: GameManager
@@ -1581,25 +1633,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1281385730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281385729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d2824aac1d8034898651da05e88af3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabRepository: {fileID: 11400000, guid: 8df0f99d6b40dcd48b24ffaa63d4dc26, type: 2}
-  standardBlockPrefab: {fileID: 5621121395291585638, guid: e45f3cb048c1a5044ad78d10af5c7680,
-    type: 3}
-  otherBlockPrefab: {fileID: 5621121395291585638, guid: 280fce4ce811c4d41a4931db43f300b8,
-    type: 3}
-  blockToBuild: {fileID: 0}
-  blockOnNode: {fileID: 0}
 --- !u!114 &1281385731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1613,7 +1646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 887974365}
-  mapLevel: 1
+  mapLevel: 2
   mapGenerator: {fileID: 887974364}
   buildManager: {fileID: 0}
   validator: {fileID: 0}
@@ -2679,6 +2712,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1366018427}
   - {fileID: 1281385732}
+  - {fileID: 279263255}
   - {fileID: 1968499883}
   - {fileID: 887974366}
   - {fileID: 1039803564}
