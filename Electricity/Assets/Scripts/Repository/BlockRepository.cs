@@ -5,30 +5,38 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BlockRepository", menuName = "ScriptableObjects/BlockRepository", order = 0)]
 public class BlockRepository : ScriptableObject
 {
-    public List<GameObject> blockPrefabs;
+    [SerializeField]
+    public class blockData {
+        public GameObject prefab;
+        public Sprite spriteImage;
+        public int type;
+        public string name;
+    }
 
-    public Dictionary<string, int> blockDictionary;
+    public List<blockData> blackDatas;
+
+    public Dictionary<string, blockData> blockDictionary;
 
     public void OnEnable() {
         InitializeDictionary();
     }
 
     public void InitializeDictionary() {
-        blockDictionary = new Dictionary<string, int>();
+        blockDictionary = new Dictionary<string, blockData>();
 
-        foreach (var prefab in blockPrefabs) {
-            if(prefab != null) {
-                blockDictionary[prefab.name] = blockDictionary.Count;
+        foreach (var blockData in blackDatas) {
+            if(blockData != null && blockData.prefab != null) {
+                blockDictionary[blockData.prefab.name] = blockData;
             }
         }
     }
 
-    public int GetPlockType(string prefabName) {
-        if (blockDictionary.TryGetValue(prefabName, out var typeNo)) {
-            return typeNo;
+    public blockData GetBlockData(string prefabName) {
+        if (blockDictionary.TryGetValue(prefabName, out var blockData)) {
+            return blockData;
         }
 
-        Debug.LogWarning($"Prefab with name {prefabName} not found!");
-        return -1;
+        Debug.LogWarning($"BlockData with prefab name {prefabName} not found!");
+        return null;
     }
 }
