@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
-    public static string MenuToLoad = "Main";
+    public static string MenuToLoad = "MainMenu";
     public static string levelToLoad = "MainLevel";
 
     public void Play() {
@@ -16,14 +16,14 @@ public class MainMenu : MonoBehaviour
     public void Quit() {
         Debug.Log("Exiting...");
 
-#if UNITY_EDITOR 
+    #if UNITY_EDITOR 
         if (EditorApplication.isPlaying)
         {
             EditorApplication.isPlaying = false; 
         }
-#else
+    #else
         Application.Quit();
-#endif
+    #endif
     }
 
 }

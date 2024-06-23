@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     [Space(5)]
     [Header("Map")]
     public Map map;
-    public int mapLevel = 1;
+    public int mapLevel = -1;
     public MapGenerator mapGenerator;
 
 
@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        mapLevel = CurrentLevel.curLevel;
+
         BlockInventory.Instance.Initialize();
 
         mapGenerate();
