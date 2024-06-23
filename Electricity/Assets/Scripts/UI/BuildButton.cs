@@ -56,12 +56,13 @@ public class BuildButton : MonoBehaviour
 
     public void buildSelectedBlock() {
         Debug.Log($"{this.name} - buildSelectedBlock");
-        
+
         _blockInventory.blockCount--;
         blockCountText.text = _blockInventory.blockCount.ToString();
 
         if (_blockInventory.blockCount == 0) {
             GetComponent<Button>().interactable = false;
+            buildMenu.DeselectBlock();
         }
     }
 }
