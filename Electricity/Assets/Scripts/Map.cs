@@ -56,6 +56,7 @@ public class Map : MonoBehaviour
     }
 
         public void GenerateMapFromMapData() {
+            Debug.Log($"{this.name} - GenerateMapFromMapData");
             if (mapGenerator == null) {
                 transform.GetComponent<MapGenerator>();
             }

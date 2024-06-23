@@ -49,6 +49,10 @@ public class BuildManager : MonoBehaviour
 
     public void SetBlockToBuild(int blockType)
     {
+        if (blockType == -1) {
+            blockToBuild = null;
+            return;
+        }
         blockToBuild = blockRepository.GetPrefabToType(blockType);
     }
 

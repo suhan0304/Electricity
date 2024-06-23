@@ -53,8 +53,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        mapGenerate();
         BlockInventory.Instance.Initialize();
+
+        mapGenerate();
 
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     /// map Generate
     public void mapGenerate() {
+        Debug.Log($"{this.name} - mapGenerate");
         map.GenerateMapFromMapData();
     }
 }

@@ -6,8 +6,14 @@ using TMPro;
 
 public class BuildButton : MonoBehaviour
 {    
+    [Header("Color")]
+    public Color InitialColor;
+    public Color SelectedColor;
+
     private BuildMenu buildMenu;
 
+    [Space(5)]
+    [Header("TMP Text")]
     public TMP_Text blockNameText;
     public TMP_Text blockCountText;
 
@@ -26,11 +32,24 @@ public class BuildButton : MonoBehaviour
     }
 
     void Start() {
+        InitialColor = GetComponent<Image>().color;
         buildMenu = GetComponentInParent<BuildMenu>();
     }
 
     public void OnClickBlockButton() {
-        buildMenu.SelectedButton = this.gameObject;
-        buildMenu.SelectBlock(BlockInventory.blockData.blockType);
+        if (buildMenu.SelectedButton != null) {
+            buildMenu.SelectedButton.GetComponent<Image>().color = InitialColor;
+        }
+
+        if (buildMenu.SelectedButton == this.gameObject) {
+            buildMenu.SelectedButton.GetComponent<Image>().color = InitialColor;
+            buildMenu.SelectedButton = null;
+            buildMenu.DeselectBlock();
+        }
+        else {
+            buildMenu.SelectedButton = this.gameObject;
+            GetComponent<Image>().color = SelectedColor;
+            buildMenu.SelectBlock(BlockInventory.blockData.blockType);
+        }
     }
 }
