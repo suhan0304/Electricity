@@ -16,6 +16,10 @@ public class BuildManager : MonoBehaviour
     [Header("Block On Node")]
     public GameObject blockOnNode;
     
+    [Space(5)]
+    [Header("For Build")]
+    public BuildMenu buildMenu;
+
     public static BuildManager Instance; // for singleton pattern
 
     private void Awake()
@@ -49,6 +53,10 @@ public class BuildManager : MonoBehaviour
 
     public void SetBlockToBuild(int blockType)
     {
+        if (blockType == -1) {
+            blockToBuild = null;
+            return;
+        }
         blockToBuild = blockRepository.GetPrefabToType(blockType);
     }
 
@@ -63,6 +71,8 @@ public class BuildManager : MonoBehaviour
         node.blockOnNode = Instantiate(blockToBuild, buildPosition, node.transform.rotation, node.transform.parent);
 
         node.blocksTotalHeight += blockHeight; // Update blocksTotalHeights ( add block height )
+
+        buildMenu.BuildSelectedButtonBlock();
 
         //Debug.Log("Build the Block!"); //For DebugTest
     }

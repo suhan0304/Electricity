@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     [Space(5)]
     [Header("Map")]
     public Map map;
-    public int mapLevel = 1;
+    public int mapLevel = -1;
     public MapGenerator mapGenerator;
 
 
@@ -53,8 +53,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        mapGenerate();
+        mapLevel = CurrentLevel.curLevel;
+
         BlockInventory.Instance.Initialize();
+
+        mapGenerate();
 
         validator = GetComponent<Validator>();
         endAnimator = endPoint.GetComponent<Animator>();
@@ -122,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     /// map Generate
     public void mapGenerate() {
+        Debug.Log($"{this.name} - mapGenerate");
         map.GenerateMapFromMapData();
     }
 }
