@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialColor: {r: 0, g: 0, b: 0, a: 0}
-  SelectedColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0.39215687}
+  SelectedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 0.27450982}
   blockNameText: {fileID: 2032419017355289394}
   blockCountText: {fileID: 747171755201004365}
 --- !u!1 &3410762751109565509

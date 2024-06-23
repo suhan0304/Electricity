@@ -7,6 +7,7 @@ using TMPro;
 public class BuildButton : MonoBehaviour
 {    
     [Header("Color")]
+    public Image image;
     public Color InitialColor;
     public Color SelectedColor;
 
