@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class BuildButton : MonoBehaviour
 {    
@@ -50,6 +51,17 @@ public class BuildButton : MonoBehaviour
             buildMenu.SelectedButton = this.gameObject;
             GetComponent<Image>().color = SelectedColor;
             buildMenu.SelectBlock(BlockInventory.blockData.blockType);
+        }
+    }
+
+    public void buildSelectedBlock() {
+        Debug.Log($"{this.name} - buildSelectedBlock");
+        
+        _blockInventory.blockCount--;
+        blockCountText.text = _blockInventory.blockCount.ToString();
+
+        if (_blockInventory.blockCount == 0) {
+            GetComponent<Button>().interactable = false;
         }
     }
 }

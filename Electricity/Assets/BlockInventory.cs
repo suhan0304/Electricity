@@ -32,15 +32,4 @@ public class BlockInventory : MonoBehaviour
         }
         buildMenu.AddBtnsBuildMenu();
     }
-
-    public void GetBlockFromInventory(int buildBlockType) {
-        foreach (var blockInventory in LevelBlockInventories) {
-            if (blockInventory.blockData.blockType == buildBlockType) {
-                if (blockInventory.blockCount > 0) {
-                    blockInventory.blockCount--;
-                    buildMenu.BuildSelectedButtonBlock();
-                }
-            }
-        }
-    }
 }

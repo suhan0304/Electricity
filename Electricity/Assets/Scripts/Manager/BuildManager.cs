@@ -16,6 +16,10 @@ public class BuildManager : MonoBehaviour
     [Header("Block On Node")]
     public GameObject blockOnNode;
     
+    [Space(5)]
+    [Header("For Build")]
+    public BuildMenu buildMenu;
+
     public static BuildManager Instance; // for singleton pattern
 
     private void Awake()
@@ -62,6 +66,8 @@ public class BuildManager : MonoBehaviour
     /// </summary>
     public void BuildBlockOnNode(Node node)
     {
+        buildMenu.BuildSelectedButtonBlock();
+
         float blockHeight = blockToBuild.transform.localScale.y;
         Vector3 buildPosition = node.transform.position + new Vector3(0,node.nodeHeight + node.blocksTotalHeight + (blockHeight/2),0);
         node.blockOnNode = Instantiate(blockToBuild, buildPosition, node.transform.rotation, node.transform.parent);

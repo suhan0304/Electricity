@@ -191,6 +191,7 @@ MonoBehaviour:
     type: 3}
   blockToBuild: {fileID: 0}
   blockOnNode: {fileID: 0}
+  buildMenu: {fileID: 859746122}
 --- !u!4 &279263255
 Transform:
   m_ObjectHideFlags: 0
@@ -293,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43541312, y: -0.0041767517, z: 0.0020201898, w: 0.90021884}
+  m_LocalRotation: {x: 0.43541312, y: -0.004176747, z: 0.0020201874, w: 0.90021884}
   m_LocalPosition: {x: 10.64954, y: 90, z: -59.996986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -825,7 +826,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681925479}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43541312, y: -0.004176737, z: 0.002020182, w: 0.90021884}
+  m_LocalRotation: {x: 0.43541312, y: -0.004176725, z: 0.0020201765, w: 0.90021884}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -997,6 +998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05781de8e9f4ca4da4dc123dc9fda8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons: []
   SelectedButton: {fileID: 0}
   buttonPrefab: {fileID: 2328757571884538806, guid: 58b982061f1baf14996c50a633a68d29,
     type: 3}
@@ -1608,7 +1610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183842245}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4393468, y: -0.0041678413, z: 0.0020384244, w: 0.8983056}
+  m_LocalRotation: {x: 0.4393468, y: -0.0041678417, z: 0.0020384244, w: 0.8983056}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
