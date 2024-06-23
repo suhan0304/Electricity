@@ -42,7 +42,6 @@ public class BuildButton : MonoBehaviour
         }
 
         if (buildMenu.SelectedButton == this.gameObject) {
-            buildMenu.SelectedButton.GetComponent<Image>().color = InitialColor;
             buildMenu.SelectedButton = null;
             buildMenu.DeselectBlock();
         }
