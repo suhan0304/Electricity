@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
@@ -14,7 +15,15 @@ public class MainMenu : MonoBehaviour
 
     public void Quit() {
         Debug.Log("Exiting...");
+
+#if UNITY_EDITOR 
+        if (EditorApplication.isPlaying)
+        {
+            EditorApplication.isPlaying = false; 
+        }
+#else
         Application.Quit();
+#endif
     }
 
 }
