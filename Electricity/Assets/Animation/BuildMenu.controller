@@ -57,7 +57,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: CloseBuildMenu
+    m_ConditionEvent: CLEAR
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6202357154792829674}
@@ -82,7 +82,7 @@ AnimatorController:
   m_Name: BuildMenu
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: CloseBuildMenu
+  - m_Name: CLEAR
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

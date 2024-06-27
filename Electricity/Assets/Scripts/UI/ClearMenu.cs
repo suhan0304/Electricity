@@ -28,7 +28,14 @@ public class ClearMenu : MonoBehaviour
         SceneManager.LoadScene(MenuToLoad);
     }
 
-    public void Clear() {
-        this.gameObject.SetActive(true);
+    public void Clear() 
+    {
+        StartCoroutine(ActivateClearMenu());
+    }
+
+    IEnumerator ActivateClearMenu()
+    {
+        yield return new WaitForSeconds(3.0f);
+        gameObject.SetActive(true);
     }
 }

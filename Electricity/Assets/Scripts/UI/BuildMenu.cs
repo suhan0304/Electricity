@@ -1,6 +1,5 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,14 +52,14 @@ public class BuildMenu : MonoBehaviour
         
         SelectedButton.GetComponent<BuildButton>().buildSelectedBlock();
     }
-
-    public void Clear() {
-        anim.SetTrigger(hashClear);
-        Invoke("DeactivateGameObject", 1.0f);
+    public void Clear() 
+    {
+        StartCoroutine(DeactivateBuildMenu());
     }
 
-    private void DeactivateGameObject() {
+    IEnumerator DeactivateBuildMenu()
+    {
+        yield return new WaitForSeconds(1.0f);
         gameObject.SetActive(false);
     }
-
 }
