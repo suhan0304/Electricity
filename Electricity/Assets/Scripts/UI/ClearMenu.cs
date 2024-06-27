@@ -17,7 +17,7 @@ public class ClearMenu : MonoBehaviour
         SceneManager.LoadScene(levelToLoad);
     }
 
-    public void OnClickNextLevel() {
+    public void OnClickNextLevelButton() {
         if(CurrentLevel.maxLevel >= CurrentLevel.curLevel + 1){
             NextLevelButton.interactable = false;
             return;
