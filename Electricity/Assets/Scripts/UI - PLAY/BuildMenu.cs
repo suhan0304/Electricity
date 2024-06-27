@@ -52,6 +52,7 @@ public class BuildMenu : MonoBehaviour
         
         SelectedButton.GetComponent<BuildButton>().buildSelectedBlock();
     }
+    
     public void Clear() 
     {
         StartCoroutine(DeactivateBuildMenu());

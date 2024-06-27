@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -49,7 +50,7 @@ public class Node : MonoBehaviour
     {
         if(!isBuildable || buildManager.GetBlockToBuild() == null)
             return;
-
+        GameManager.Instance.EnterMouseNode = this.gameObject;
         TransparentBlockManager.Instance.ShowTransparentBlock(transform.position, nodeHeight + blocksTotalHeight);
         if (GameManager.Instance.gameState == GameState.PLAY)
         {
@@ -58,6 +59,7 @@ public class Node : MonoBehaviour
             rend.material.color = hoverColor; // change color to hoverColor
         }
     }
+    
     public void OnMouseExit() // When the mouse leaves the object collider
     {
         if (!isBuildable)
@@ -84,6 +86,7 @@ public class Node : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
             BuildManager.Instance.BuildBlockOnNode(this);
+            TransparentBlockManager.Instance.ShowTransparentBlock(transform.position, nodeHeight + blocksTotalHeight);
         }
     }
 }
