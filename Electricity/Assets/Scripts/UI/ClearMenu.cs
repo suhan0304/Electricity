@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ClearMenu : MonoBehaviour
 {
+    public Button NextLevel;
 
     public static string MenuToLoad = "MainMenu";
     public static string levelToLoad = "MainLevel";
@@ -16,7 +18,13 @@ public class ClearMenu : MonoBehaviour
     }
 
     void OnClickNextLevel() {
-        CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
+        if(CurrentLevel.maxLevel >= CurrentLevel.curLevel + 1){
+            NextLevel.interactable = false;
+            return;
+        }
+        else {
+            CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
+        }
         SceneManager.LoadScene(MenuToLoad);
     }
 }
