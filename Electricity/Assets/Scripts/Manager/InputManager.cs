@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public PauseMenu pauseMenu;
+    public GameObject pauseMenu;
 
     private const float pasueDuration = 1.0f;
     private bool isPause = false;
@@ -18,14 +18,20 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape)) 
         {
-            if (!isPause)
+            if (!isPause) {
+                pauseMenu.SetActive(true);
                 StartCoroutine(TimePause(pasueDuration));
-            else 
-                StartCoroutine(TimePause(pasueDuration));
+                
+            }
+            else {
+                StartCoroutine(TimeResume(pasueDuration));
+                pauseMenu.SetActive(false);
+            }
+            isPause = !isPause;
         }
         if (Input.GetKey("R")) 
         {
-
+            pauseMenu.GetComponent<PauseMenu>().OnClickRetryButton();
         }
     }
 
@@ -42,7 +48,7 @@ public class InputManager : MonoBehaviour
 
         Time.timeScale = 0;
     }
-    
+
     private IEnumerator TimeResume(float duration)
     {
         float startScale = Time.timeScale; // should be 0 when resuming
