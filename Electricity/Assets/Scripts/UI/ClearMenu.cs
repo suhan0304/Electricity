@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class ClearMenu : MonoBehaviour
 {
+    public SceneFader sceneFader;
+
     private Animator anim;
     private readonly int hashClear = Animator.StringToHash("CLEAR");
     public Button NextLevelButton;
 
+    public static string PlayToLoad = "Play";
     public static string MenuToLoad = "MainMenu";
     public static string levelToLoad = "MainLevel";
 
@@ -17,16 +20,16 @@ public class ClearMenu : MonoBehaviour
         anim = GetComponent<Animator>();    
     }
     public void OnClickMainMenuButton() {
-        SceneManager.LoadScene(MenuToLoad);
+        sceneFader.FadeTo(MenuToLoad);
     }
     public void OnClickMainLevelButton() {
-        SceneManager.LoadScene(levelToLoad);
+        sceneFader.FadeTo(levelToLoad);
     }
 
     public void OnClickNextLevelButton() {
         CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
         Debug.Log("Load Next Level Scene");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(PlayToLoad);
     }
 
     public void Clear() 
