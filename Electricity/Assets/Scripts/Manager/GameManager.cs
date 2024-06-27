@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     [Space(5)]
     [Header("UI")]
-    public Canvas ClearMenu;
+    public GameObject ClearMenu;
 
     [Space(5)]
     [Header("Manager")]

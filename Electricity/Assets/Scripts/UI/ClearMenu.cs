@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ClearMenu : MonoBehaviour
 {
-    public Button NextLevel;
+    public Button NextLevelButton;
 
     public static string MenuToLoad = "MainMenu";
     public static string levelToLoad = "MainLevel";
@@ -19,7 +19,7 @@ public class ClearMenu : MonoBehaviour
 
     void OnClickNextLevel() {
         if(CurrentLevel.maxLevel >= CurrentLevel.curLevel + 1){
-            NextLevel.interactable = false;
+            NextLevelButton.interactable = false;
             return;
         }
         else {
