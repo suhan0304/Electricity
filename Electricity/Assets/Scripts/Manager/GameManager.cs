@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
 
     [Space(5)]
     [Header("UI")]
-    public GameObject BuildMenu;
-    public GameObject ClearMenu;
+    public BuildMenu BuildMenu;
+    public ClearMenu ClearMenu;
 
     [Space(5)]
     [Header("Manager")]
@@ -90,8 +90,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FinishCameraSetting(delayTime, finishDuration));
         StartCoroutine(FinishStage(delayTime, finishDuration));
 
-        BuildMenu.SetActive(false);
-        ClearMenu.SetActive(true);
+        
         // TODO - Level Unrock
     }
 

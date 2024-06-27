@@ -27,4 +27,8 @@ public class ClearMenu : MonoBehaviour
         }
         SceneManager.LoadScene(MenuToLoad);
     }
+
+    public void Clear() {
+        this.gameObject.SetActive(true);
+    }
 }
