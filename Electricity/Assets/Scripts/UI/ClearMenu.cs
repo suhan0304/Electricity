@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClearMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    public static string MenuToLoad = "MainMenu";
+    public static string levelToLoad = "MainLevel";
+    void OnClickMainMenuButton() {
+        SceneManager.LoadScene(MenuToLoad);
+    }
+    void OnClickMainLevelButton() {
+        SceneManager.LoadScene(levelToLoad);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

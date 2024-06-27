@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public int mapLevel = -1;
     public MapGenerator mapGenerator;
 
+    [Space(5)]
+    [Header("UI")]
+    public Canvas ClearMenu;
 
     [Space(5)]
     [Header("Manager")]
