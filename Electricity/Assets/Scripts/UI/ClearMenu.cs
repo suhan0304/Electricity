@@ -29,7 +29,7 @@ public class ClearMenu : MonoBehaviour
     public void OnClickNextLevelButton() {
         CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
         Debug.Log("Load Next Level Scene");
-        SceneManager.LoadScene(PlayToLoad);
+        sceneFader.FadeTo(PlayToLoad);
     }
 
     public void Clear() 
