@@ -31,7 +31,7 @@ public class ClearMenu : MonoBehaviour
         else {
             CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
         }
-        SceneManager.LoadScene(MenuToLoad);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Clear() 
