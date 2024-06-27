@@ -430,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43541312, y: -0.0041767526, z: 0.00202019, w: 0.90021884}
+  m_LocalRotation: {x: 0.43541312, y: -0.004176753, z: 0.0020201902, w: 0.90021884}
   m_LocalPosition: {x: 10.64954, y: 90, z: -59.996986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -559,6 +559,7 @@ GameObject:
   - component: {fileID: 387996981}
   - component: {fileID: 387996980}
   - component: {fileID: 387996979}
+  - component: {fileID: 387996982}
   m_Layer: 5
   m_Name: Button - NextLevel
   m_TagString: Untagged
@@ -576,7 +577,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1398447361}
   m_Father: {fileID: 1274198649}
@@ -680,6 +681,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387996977}
   m_CullTransparentMesh: 1
+--- !u!225 &387996982
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387996977}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681925479}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43541312, y: -0.0041767387, z: 0.002020183, w: 0.90021884}
+  m_LocalRotation: {x: 0.43541312, y: -0.004176739, z: 0.0020201833, w: 0.90021884}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1576,6 +1589,7 @@ GameObject:
   - component: {fileID: 1017054258}
   - component: {fileID: 1017054257}
   - component: {fileID: 1017054256}
+  - component: {fileID: 1017054259}
   m_Layer: 5
   m_Name: Button - MainLevel
   m_TagString: Untagged
@@ -1593,7 +1607,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1465712923}
   m_Father: {fileID: 1274198649}
@@ -1697,6 +1711,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017054254}
   m_CullTransparentMesh: 1
+--- !u!225 &1017054259
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017054254}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1017348568
 GameObject:
   m_ObjectHideFlags: 3
@@ -1952,6 +1978,7 @@ GameObject:
   - component: {fileID: 1091353097}
   - component: {fileID: 1091353099}
   - component: {fileID: 1091353098}
+  - component: {fileID: 1091353100}
   m_Layer: 5
   m_Name: Text - Clear
   m_TagString: Untagged
@@ -1975,7 +2002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -69.6}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1091353098
@@ -2075,6 +2102,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091353096}
   m_CullTransparentMesh: 1
+--- !u!225 &1091353100
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091353096}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1183842245
 GameObject:
   m_ObjectHideFlags: 3
@@ -2166,13 +2205,14 @@ GameObject:
   - component: {fileID: 1274198651}
   - component: {fileID: 1274198650}
   - component: {fileID: 1274198652}
+  - component: {fileID: 1274198653}
   m_Layer: 5
   m_Name: ClearMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1274198649
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2247,6 +2287,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextLevelButton: {fileID: 387996979}
+--- !u!95 &1274198653
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274198648}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e66f4d6e453bd3f4d85958f7047e3e63, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1281385729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,6 +2953,7 @@ GameObject:
   - component: {fileID: 1823474785}
   - component: {fileID: 1823474784}
   - component: {fileID: 1823474783}
+  - component: {fileID: 1823474786}
   m_Layer: 5
   m_Name: Button - MainMenu
   m_TagString: Untagged
@@ -2909,7 +2971,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 42961830}
   m_Father: {fileID: 1274198649}
@@ -3013,6 +3075,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823474781}
   m_CullTransparentMesh: 1
+--- !u!225 &1823474786
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823474781}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1968499881
 GameObject:
   m_ObjectHideFlags: 0
