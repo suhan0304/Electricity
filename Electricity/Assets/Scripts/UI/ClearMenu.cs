@@ -10,14 +10,14 @@ public class ClearMenu : MonoBehaviour
 
     public static string MenuToLoad = "MainMenu";
     public static string levelToLoad = "MainLevel";
-    void OnClickMainMenuButton() {
+    public void OnClickMainMenuButton() {
         SceneManager.LoadScene(MenuToLoad);
     }
-    void OnClickMainLevelButton() {
+    public void OnClickMainLevelButton() {
         SceneManager.LoadScene(levelToLoad);
     }
 
-    void OnClickNextLevel() {
+    public void OnClickNextLevel() {
         if(CurrentLevel.maxLevel >= CurrentLevel.curLevel + 1){
             NextLevelButton.interactable = false;
             return;
