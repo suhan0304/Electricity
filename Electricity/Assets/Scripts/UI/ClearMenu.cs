@@ -24,19 +24,17 @@ public class ClearMenu : MonoBehaviour
     }
 
     public void OnClickNextLevelButton() {
-        if(CurrentLevel.maxLevel >= CurrentLevel.curLevel + 1){
-            NextLevelButton.interactable = false;
-            return;
-        }
-        else {
-            CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
-        }
+        CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
+        Debug.Log("Load Next Level Scene");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Clear() 
     {
         gameObject.SetActive(true);
+        if(CurrentLevel.maxLevel < CurrentLevel.curLevel + 1){
+            NextLevelButton.interactable = false;
+        }
         StartCoroutine(ActivateClearMenu());
     }
 
