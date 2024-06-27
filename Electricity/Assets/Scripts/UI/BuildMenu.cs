@@ -1,10 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildMenu : MonoBehaviour
 {
+    private Animator anim;
+    private readonly int hashClear = Animator.StringToHash("CLEAR");
+
     [Space(5)]
     [Header("Objects")]
     public List<GameObject> buttons;
@@ -12,7 +15,9 @@ public class BuildMenu : MonoBehaviour
     public GameObject buttonPrefab;
     public LevelData levelData;
 
-
+    public void Start() {
+        anim = GetComponent<Animator>();
+    }
     public void AddBtnsBuildMenu()
     {
         Debug.Log($"{this.name} - AddBtnsBuildMenu");
@@ -46,5 +51,15 @@ public class BuildMenu : MonoBehaviour
         Debug.Log($"{this.name} - BuildSelectedButtonBlock");
         
         SelectedButton.GetComponent<BuildButton>().buildSelectedBlock();
+    }
+    public void Clear() 
+    {
+        StartCoroutine(DeactivateBuildMenu());
+    }
+
+    IEnumerator DeactivateBuildMenu()
+    {
+        yield return new WaitForSeconds(1.0f);
+        gameObject.SetActive(false);
     }
 }

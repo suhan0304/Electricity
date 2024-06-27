@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
     [Space(5)]
     [Header("Map")]
     public Map map;
     public int mapLevel = -1;
     public MapGenerator mapGenerator;
 
+    [Space(5)]
+    [Header("UI")]
+    public BuildMenu buildMenu;
+    public ClearMenu clearMenu;
 
     [Space(5)]
     [Header("Manager")]
@@ -85,6 +90,11 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(FinishCameraSetting(delayTime, finishDuration));
         StartCoroutine(FinishStage(delayTime, finishDuration));
+
+        buildMenu.Clear();
+        clearMenu.Clear();
+
+        // TODO - Level Unrock
     }
 
     /// <summary>

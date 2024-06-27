@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelButton : MonoBehaviour
 {
-    public static string MenuToLoad = "PLAY";
+    public SceneFader sceneFader;
+    public static string PlayToLoad = "Play";
     public TMP_Text levelText;
     
     public void Initialize(int mapLevel) {
@@ -17,6 +18,6 @@ public class LevelButton : MonoBehaviour
 
     private void OnLevelButtonClick(int mapLevel) {
         CurrentLevel.curLevel = mapLevel;
-        SceneManager.LoadScene(MenuToLoad);
+        LevelManager.Instance.sceneFader.FadeTo(PlayToLoad);
     }
 }
