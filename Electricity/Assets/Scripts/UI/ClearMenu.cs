@@ -15,4 +15,8 @@ public class ClearMenu : MonoBehaviour
         SceneManager.LoadScene(levelToLoad);
     }
 
+    void OnClickNextLevel() {
+        CurrentLevel.curLevel = CurrentLevel.curLevel + 1;
+        SceneManager.LoadScene(MenuToLoad);
+    }
 }
