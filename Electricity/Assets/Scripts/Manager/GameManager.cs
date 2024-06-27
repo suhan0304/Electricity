@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Space(5)]
+    [Header("Object")]
+    public GameObject EnterMouseNode;
 
     [Space(5)]
     [Header("Map")]
@@ -90,6 +93,9 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(FinishCameraSetting(delayTime, finishDuration));
         StartCoroutine(FinishStage(delayTime, finishDuration));
+
+        EnterMouseNode?.GetComponent<Node>().OnMouseExit();
+        buildMenu.DeselectBlock();
 
         buildMenu.Clear();
         clearMenu.Clear();
