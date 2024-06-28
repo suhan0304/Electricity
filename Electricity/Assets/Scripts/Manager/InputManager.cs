@@ -16,18 +16,25 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape)) 
+        if (GameManager.Instance.gameState != GameState.PLAY) {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (!isPause) {
                 pauseMenu.SetActive(true);
+                isPause = true;
+                Debug.Log("Pasue");
                 StartCoroutine(TimePause(pasueDuration));
                 
             }
             else {
                 StartCoroutine(TimeResume(pasueDuration));
+                isPause = false;
+                Debug.Log("Resume");
                 pauseMenu.SetActive(false);
             }
-            isPause = !isPause;
         }
         if (Input.GetKey("r")) 
         {
@@ -39,7 +46,7 @@ public class InputManager : MonoBehaviour
         float startScale = Time.timeScale;
         float timeElapsed = 0f;
 
-        while (timeElapsed < slowdownDuration) {
+        while (timeElapsed < slowdownDuration && isPause) {
             timeElapsed += Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Lerp(startScale, 0, timeElapsed / slowdownDuration);
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -54,7 +61,7 @@ public class InputManager : MonoBehaviour
         float startScale = Time.timeScale; // should be 0 when resuming
         float timeElapsed = 0f;
 
-        while (timeElapsed < duration)
+        while (timeElapsed < duration && !isPause)
         {
             timeElapsed += Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Lerp(startScale, 1, timeElapsed / duration);
