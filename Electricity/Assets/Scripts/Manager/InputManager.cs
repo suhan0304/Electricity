@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
             }
             isPause = !isPause;
         }
-        if (Input.GetKey("R")) 
+        if (Input.GetKey("r")) 
         {
             pauseMenu.GetComponent<PauseMenu>().OnClickRetryButton();
         }
