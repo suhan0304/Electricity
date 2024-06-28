@@ -104,7 +104,6 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
             CameraTarget.transform.position = Vector3.Lerp(startPosition, endPosition, smoothT);
             elapsedTime += Time.deltaTime;
             yield return null;
-
         }
         CameraTarget.transform.position = endPosition;
     }
