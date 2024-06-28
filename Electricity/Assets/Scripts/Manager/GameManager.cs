@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Clear");
         gameState = GameState.CLEAR; // game Clear
+        if (mapLevel > CurrentLevel.unrockLevel) {
+            PlayerPrefs.SetInt("unrockLevel", mapLevel+1);
+        }
 
         float delayTime = 1.0f;
         float finishDuration = 2.0f;
