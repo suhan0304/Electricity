@@ -92,7 +92,7 @@ public class CMmainFreeLookCameraSetting : MonoBehaviour
     IEnumerator MoveTargetToPosition(Transform endPoint, float duration)
     {
         Vector3 startPosition = CameraTarget.transform.position;
-        Vector3 endPosition = new Vector3(endPoint.position.x, startPosition.y, endPoint.position.z);
+        Vector3 endPosition = endPoint.position;
         
         float elapsedTime = 0f;
 
