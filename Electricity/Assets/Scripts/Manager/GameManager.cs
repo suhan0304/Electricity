@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Clear");
         gameState = GameState.CLEAR; // game Clear
-        if (mapLevel > CurrentLevel.unrockLevel) {
+        if (mapLevel >= CurrentLevel.unrockLevel) {
             PlayerPrefs.SetInt("unrockLevel", mapLevel+1);
         }
 

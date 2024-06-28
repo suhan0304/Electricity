@@ -6,7 +6,7 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public static string RetryToLoad = "Play";
-    public static string LevelToLoad = "MainLevel";
+    public static string MenuToLoad = "MainMenu";
     public SceneFader sceneFader;
 
     public void OnClickRetryButton() {
@@ -16,6 +16,6 @@ public class PauseMenu : MonoBehaviour
 
     public void OnClickMainMenuButton() {
         Debug.Log($"{this.name} - OnClickMainMenuButton");
-        sceneFader.FadeTo(LevelToLoad);
+        sceneFader.FadeTo(MenuToLoad);
     }
 }
