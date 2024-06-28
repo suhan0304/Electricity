@@ -14,6 +14,9 @@ public class LevelButton : MonoBehaviour
     public void Initialize(int mapLevel) {
         levelText.text = mapLevel.ToString();
         transform.GetComponent<Button>().onClick.AddListener(() => OnLevelButtonClick(mapLevel));
+        if (mapLevel > CurrentLevel.unrockLevel) {
+            this.GetComponent<Button>().interactable = false;
+        }
     }
 
     private void OnLevelButtonClick(int mapLevel) {

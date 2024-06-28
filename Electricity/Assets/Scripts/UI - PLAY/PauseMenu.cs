@@ -10,10 +10,12 @@ public class PauseMenu : MonoBehaviour
     public SceneFader sceneFader;
 
     public void OnClickRetryButton() {
+        Debug.Log($"{this.name} - OnClickRetryButton");
         sceneFader.FadeTo(RetryToLoad);
     }
 
     public void OnClickMainMenuButton() {
+        Debug.Log($"{this.name} - OnClickMainMenuButton");
         sceneFader.FadeTo(LevelToLoad);
     }
 }

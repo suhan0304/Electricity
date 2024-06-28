@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
     public Transform buttonContents;
 
     void Start() {
+        CurrentLevel.unrockLevel = 1;
         buttonRrefab = Resources.Load<GameObject>("LevelButton");
         if (buttonRrefab == null) {
             Debug.LogWarning("No Level Button Prefab in Resources/");
